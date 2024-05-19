@@ -1,0 +1,26 @@
+# For htlm page
+---
+title: "Quarto Basics"
+date: ""
+author: ""
+format:
+  html:
+    code-fold: true
+jupyter: python3
+----
+
+# Custom options
+---
+output-file: "pcrlll" # For custom page name
+search: prevents this document from being included in searches
+categories:
+  - news
+  - code
+  - analysis
+draft: true
+---
+
+# helper
+- Fig cap
+#| label: fig-polar
+#| fig-cap: "A line plot on a polar axis"
