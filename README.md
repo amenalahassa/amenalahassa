@@ -20,6 +20,11 @@ Fast forward to today, and you'll find me geeking out over AI at ULaval. Machine
 
 I'm eager to broaden my horizons and am constantly on the lookout for open projects where I can contribute and sharpen my skills. Learning is a lifelong journey, and I'm here for the ride!
 
+### What I've Done
+Now that you know what drives me and what I'm up to, let me give you a glimpse into what I've done so far. You can find all my projects on my GitHub profile, some of them pinned 👇 for easy access. Besides that, I also share detailed write-ups and insights on my [blog](https://amenalahassa.github.io/amenalahassa). 
+
+[//]: # (But for now, here’s a quick rundown of some of my noteworthy projects:)
+
 ### When I'm Not Coding...
 
 Beyond the digital universe, I'm just your average human with a few quirks:
