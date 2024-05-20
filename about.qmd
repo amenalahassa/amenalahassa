@@ -1,38 +1,60 @@
 ---
-title: "Finley Malloc"
+title: "Konrad Tagnon Amen ALAHASSA"
 about:
-    id: hero-heading
-    template: jolla
-    image: profile.jpg
+    template: solana
     links:
-      - icon: twitter
-        text: twitter
-        href: https://twitter.com
+      - icon: linkedin
+        text: LinkedIn
+        href: https://www.linkedin.com/in/alkonrad/
       - icon: github
         text: Github
-        href: https://github.com
+        href: https://github.com/amenalahassa/amenalahassa
+      - icon: email
+        text: Say 👋!
+        href: email:am.konrad21@gmail.com
 ---
 
-### This content appears above the formatted about page content.
+AI Developer Fluent in Machine Learning and Web Technologies, À vos services... :)
 
-:::{#hero-heading}
+## Experiences
 
-Finley Malloc is the Chief Data Scientist at Wengo Analytics. When not innovating on data platforms, Finley enjoys spending time unicycling and playing with her pet iguana.
+#### Lead Developer | Sept 2022 - Jul 2023
+###### AgroSfer | Cotonou, Bénin
+Lead development teams in creating a dynamic data aggregation system for enhanced dashboard analytics. Utilized Angular, Laravel, and MongoDB technologies.
+
+#### Front-end Developer | Jun 2021 - Sept 2022
+###### AgroSfer | Cotonou, Bénin
+Studied advanced software systems, focusing on practical and theoretical aspects of software engineering in Benin.
+
+#### Internship in Web Development	 | Mars 2021 - Mai 2021
+###### La Vedette Media Digital |  Cotonou, Bénin
+Working on the development of a web platform for project management.
+
+#### Internship in Web Development	 | June 2020 - June 2018
+###### NAUTILUS TECHNOLOGY  |  Cotonou, Bénin
+Internship role focusing on web development using JavaScript, Angular, Laravel, and Git, solidifying foundational web development skills.
 
 ## Education
 
-University of California, San Diego | San Diego, CA
-PhD in Mathematics | Sept 2011 - June 2015
+#### Maîtrise en informatique - Intelligence Artificielle | Since Sept 2023
+###### Université Laval  | Québec, CA
+Pursuing a Master's degree focusing on Artificial Intelligence, enhancing skills in complex AI systems and machine learning implementations.
 
-Macalester College | St. Paul MA
-B.A in Economics | Sept 2007 - June 2011
 
-## Experience
+#### Systèmes informatiques et Logiciels | Oct 2018 - Jul 2021
+###### Les COURS SONOU | Abomey-Calavi, Bénin
+Studied advanced software systems, focusing on practical and theoretical aspects of software engineering in Benin.
 
-Wengo Analytics | Head Data Scientist | April 2018 - present
 
-GeoScynce | Chief Analyst | Sept 2012 - April 2018
+#### Baccalauréat Science Maths | Août 2018
+###### CEG Application  | Porto-Novo, Bénin
+Graduated with a focus on Mathematics and Science, forming a strong analytical foundation.
 
-:::
+## Skills
 
-### This content appears below the formatted about page content.
+Python, Matplotlib, Seaborn, Numpy, Pandas, Pytorch, Tensorflow, Keras, timm, fastai, fastcore, torchvision, Poutyne, SPSS Modeler, RStudio, PHP, Javascript, C, C++, SQL, Mysql, Firebase, MongoDB, Web Services, APIs Rest, Git, DevOps, CI/CD, and more...
+
+## Online courses
+
+#### From Engineer to Technical Manager: A Survival Guide, Sundog Education
+###### Udemy - 2023
