@@ -18,37 +18,37 @@ AI Developer Fluent in Machine Learning and Web Technologies, À vos services...
 
 ## Experiences
 
-#### Lead Developer | Sept 2022 - Jul 2023
-###### AgroSfer | Cotonou, Bénin
+##### Lead Developer | Sept 2022 - Jul 2023
+| *AgroSfer | Cotonou, Bénin*
 Lead development teams in creating a dynamic data aggregation system for enhanced dashboard analytics. Utilized Angular, Laravel, and MongoDB technologies.
 
-#### Front-end Developer | Jun 2021 - Sept 2022
-###### AgroSfer | Cotonou, Bénin
+##### Front-end Developer | Jun 2021 - Sept 2022
+| *AgroSfer | Cotonou, Bénin*
 Studied advanced software systems, focusing on practical and theoretical aspects of software engineering in Benin.
 
-#### Internship in Web Development	 | Mars 2021 - Mai 2021
-###### La Vedette Media Digital |  Cotonou, Bénin
+##### Internship in Web Development	 | Mars 2021 - Mai 2021
+| *La Vedette Media Digital |  Cotonou, Bénin*
 Working on the development of a web platform for project management.
 
-#### Internship in Web Development	 | June 2020 - June 2018
-###### NAUTILUS TECHNOLOGY  |  Cotonou, Bénin
+##### Internship in Web Development	 | June 2020 - June 2018
+| *NAUTILUS TECHNOLOGY  |  Cotonou, Bénin*
 Internship role focusing on web development using JavaScript, Angular, Laravel, and Git, solidifying foundational web development skills.
 
 ## Education
 
-#### Maîtrise en informatique - Intelligence Artificielle | Since Sept 2023
-###### Université Laval  | Québec, CA
+##### Maîtrise en informatique - Intelligence Artificielle | Since Sept 2023
+| *Université Laval  | Québec, CA*
 Pursuing a Master's degree focusing on Artificial Intelligence, enhancing skills in complex AI systems and machine learning implementations.
 
 
-#### Systèmes informatiques et Logiciels | Oct 2018 - Jul 2021
-###### Les COURS SONOU | Abomey-Calavi, Bénin
+##### Systèmes informatiques et Logiciels | Oct 2018 - Jul 2021
+| *Les COURS SONOU | Abomey-Calavi, Bénin*
 Studied advanced software systems, focusing on practical and theoretical aspects of software engineering in Benin.
 
 
-#### Baccalauréat Science Maths | Août 2018
-###### CEG Application  | Porto-Novo, Bénin
-Graduated with a focus on Mathematics and Science, forming a strong analytical foundation.
+##### Baccalauréat Science Maths | Août 2018
+| *CEG Application  | Porto-Novo, Bénin*
+| Graduated with a focus on Mathematics and Science, forming a strong analytical foundation.
 
 ## Skills
 
@@ -56,5 +56,5 @@ Python, Matplotlib, Seaborn, Numpy, Pandas, Pytorch, Tensorflow, Keras, timm, fa
 
 ## Online courses
 
-#### From Engineer to Technical Manager: A Survival Guide, Sundog Education
-###### Udemy - 2023
+##### From Engineer to Technical Manager: A Survival Guide, Sundog Education
+| *Udemy - 2023*
