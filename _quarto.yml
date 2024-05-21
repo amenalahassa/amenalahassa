@@ -5,8 +5,11 @@ project:
 website:
   title: "tagnon"
   reader-mode: true
+  open-graph: true
   back-to-top-navigation: true
-  repo-url: https://github.com/amenalahassa/amenalahassa
+  description: "A small space where I share the insights and knowledge I've gathered from my journey in AI and software development."
+  site-url: "https://amenalahassa.github.io/amenalahassa/"
+  repo-url: "https://github.com/amenalahassa/amenalahassa"
   repo-actions: [issue]
   sidebar:
     style: "floating"
@@ -18,13 +21,25 @@ website:
         text: L'auteur
     tools:
       - icon: linkedin
-        href: https://www.linkedin.com/in/alkonrad/
+        href: "https://www.linkedin.com/in/alkonrad/"
   page-footer:
     center: "Copyright 2024"
+  twitter-card:
+    creator: "@amenalahassa"
+  cookie-consent:
+    type: implied
+    style: simple
+    palette: light
+  google-analytics:
+    tracking-id: "G-X5E8KFGB6H"
+    anonymize-ip: true
+
+
+
 
 format:
   html:
-    theme: morph
+    theme: solar
     toc: true
     anchor-sections: true
     smooth-scroll: true
