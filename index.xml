@@ -5,10 +5,10 @@
       xmlns:dc="http://purl.org/dc/elements/1.1/" 
       version="2.0">
 <channel>
-<title>tagnon</title>
+<title>multiverse</title>
 <link>https://amenalahassa.github.io/amenalahassa/</link>
 <atom:link href="https://amenalahassa.github.io/amenalahassa/index.xml" rel="self" type="application/rss+xml"/>
-<description>A small space where I share the insights and knowledge I&#39;ve gathered from my journey in AI and software development.</description>
+<description>A small space in the vast universe of the Internet where I share the ideas and knowledge I&#39;ve gained on my journey into AI and software development.</description>
 <generator>quarto-1.5.37</generator>
 <lastBuildDate>Tue, 21 May 2024 00:00:00 GMT</lastBuildDate>
 <item>

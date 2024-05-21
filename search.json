@@ -16,7 +16,7 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "tagnon",
+    "title": "multiverse",
     "section": "",
     "text": "Predicting reply under comment with LLM\n\n\n\n\n\n\nLLM\n\n\nClassification\n\n\nUnbalanced Dataset\n\n\n\nFinetuning of Camembert on predicting, using a Le Soleil Facebook post comment as input, whether it will receive a response or not.\n\n\n\n\n\n21 mai 2024\n\n\nKonrad ALAHASSA\n\n\n\n\n\n\nAucun article correspondant\n\n Retour au sommet",
     "crumbs": [
