@@ -14,7 +14,7 @@ about:
         href: email:am.konrad21@gmail.com
 ---
 
-AI Developer Fluent in Machine Learning and Web Technologies, À vos services... :)
+AI Developer fluent in machine learning and web technologies, I'm passionate about leveraging AI to tackle real-world problems and create a tangible impact. My primary interests lie in revolutionizing industries such as food production and finance through innovative technological solutions. With a deep commitment to sharing knowledge and fostering collaboration, I actively contribute to open-source projects and engage with the tech community.
 
 ## Experiences
 
@@ -28,9 +28,9 @@ Studied advanced software systems, focusing on practical and theoretical aspects
 
 ##### Internship in Web Development	 | Mars 2021 - Mai 2021
 | *La Vedette Media Digital |  Cotonou, Bénin*
-Working on the development of a web platform for project management.
+Design and development of the architecture for an intranet-based project management web platform for La Vedette Media.
 
-##### Internship in Web Development	 | June 2020 - June 2018
+##### Internship in Web Development	 | June 2020 - Sept 2020
 | *NAUTILUS TECHNOLOGY  |  Cotonou, Bénin*
 Internship role focusing on web development using JavaScript, Angular, Laravel, and Git, solidifying foundational web development skills.
 
@@ -48,11 +48,23 @@ Studied advanced software systems, focusing on practical and theoretical aspects
 
 ##### Baccalauréat Science Maths | Août 2018
 | *CEG Application  | Porto-Novo, Bénin*
-| Graduated with a focus on Mathematics and Science, forming a strong analytical foundation.
+Graduated with a focus on Mathematics and Science, forming a strong analytical foundation.
 
 ## Skills
 
-Python, Matplotlib, Seaborn, Numpy, Pandas, Pytorch, Tensorflow, Keras, timm, fastai, fastcore, torchvision, Poutyne, SPSS Modeler, RStudio, PHP, Javascript, C, C++, SQL, Mysql, Firebase, MongoDB, Web Services, APIs Rest, Git, DevOps, CI/CD, and more...
+##### Artificial Intelligence
+| Python, Pytorch, Tensorflow, Keras
+| Matplotlib, Seaborn, Numpy, Pandas, timm, fastai, fastcore, torchvision, Poutyne,
+SPSS Modeler, RStudio
+
+##### Software engineering
+| PHP, Javascript, C, C++, Java
+| Angular, ReactJs, VueJs, Cypress, Web API
+SQL, Mysql, Firebase, MongoDB, Web Services, APIs Rest
+
+##### Others
+Git, DevOps, CI/CD, UX Design, Scrum, Agile
+
 
 ## Online courses
 
