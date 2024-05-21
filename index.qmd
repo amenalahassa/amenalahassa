@@ -1,6 +1,7 @@
 ---
 title: "tagnon"
 subtitle: "Welcome to my blog, a small space where I share the insights and knowledge I've gathered from my journey in AI and software development."
+search: true
 listing:
     contents: posts
     sort: "date desc"

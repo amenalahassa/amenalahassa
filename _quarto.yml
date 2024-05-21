@@ -10,7 +10,7 @@ website:
   repo-actions: [issue]
   sidebar:
     style: "floating"
-    search: false
+    search: true
     contents:
       - href: index.qmd
         text: Blog
@@ -28,6 +28,8 @@ format:
     toc: true
     anchor-sections: true
     smooth-scroll: true
+    css: assets/styles.css
+    fig-cap-location: margin
 
 format-links: [ipynb]
 lang: fr
