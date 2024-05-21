@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Konrad ALAHASSA">
-<meta name="description" content="notebook">
+<meta name="description" content="Finetuning of Camembert on predicting, using a Le Soleil Facebook post comment as input, whether it will receive a response or not.">
 
-<title>tagnon – Predicting Reply under Comment with LLM</title>
+<title>tagnon – Predicting reply under comment with LLM</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -105,9 +105,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <style>html{ scroll-behavior: smooth; }</style>
 
 
+<link rel="stylesheet" href="../assets/styles.css">
 </head>
 
-<body class="nav-sidebar floating">
+<body class="nav-sidebar floating slimcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -121,6 +122,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       </li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Basculer la barre latérale" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Recherche" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
     </div>
   </nav>
 </header>
@@ -141,6 +145,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
     </div>
       </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Recherche"></div>
+        </div>
+        </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
@@ -167,36 +176,34 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#context" id="toc-context" class="nav-link active" data-scroll-target="#context">Context</a></li>
   <li><a href="#dependence" id="toc-dependence" class="nav-link" data-scroll-target="#dependence">Dependence</a></li>
-  <li><a href="#about-the-datasets" id="toc-about-the-datasets" class="nav-link" data-scroll-target="#about-the-datasets">About the datasets</a>
-  <ul class="collapse">
-  <li><a href="#datasets" id="toc-datasets" class="nav-link" data-scroll-target="#datasets">Datasets</a></li>
-  <li><a href="#keep-in-mind" id="toc-keep-in-mind" class="nav-link" data-scroll-target="#keep-in-mind">Keep in mind</a></li>
-  </ul></li>
-  <li><a href="#classes-and-functions" id="toc-classes-and-functions" class="nav-link" data-scroll-target="#classes-and-functions">Classes and functions</a></li>
+  <li><a href="#about-our-datasets" id="toc-about-our-datasets" class="nav-link" data-scroll-target="#about-our-datasets">About our datasets</a></li>
+  <li><a href="#class-and-functions" id="toc-class-and-functions" class="nav-link" data-scroll-target="#class-and-functions">Class and functions</a></li>
   <li><a href="#training" id="toc-training" class="nav-link" data-scroll-target="#training">Training</a>
   <ul class="collapse">
   <li><a href="#evaluations" id="toc-evaluations" class="nav-link" data-scroll-target="#evaluations">Evaluations</a></li>
-  <li><a href="#the-right-model" id="toc-the-right-model" class="nav-link" data-scroll-target="#the-right-model">The right model</a></li>
+  <li><a href="#modeling" id="toc-modeling" class="nav-link" data-scroll-target="#modeling">Modeling</a></li>
   <li><a href="#fine-tuning" id="toc-fine-tuning" class="nav-link" data-scroll-target="#fine-tuning">Fine tuning</a></li>
   </ul></li>
+  <li><a href="#takeaways" id="toc-takeaways" class="nav-link" data-scroll-target="#takeaways">Takeaways</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/amenalahassa/amenalahassa/issues/new" class="toc-action"><i class="bi bi-github"></i>Faire part d'un problème</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content page-columns page-full" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Predicting Reply under Comment with LLM</h1>
+<h1 class="title">Predicting reply under comment with LLM</h1>
   <div class="quarto-categories">
     <div class="quarto-category">LLM</div>
     <div class="quarto-category">Classification</div>
+    <div class="quarto-category">Unbalanced Dataset</div>
   </div>
   </div>
 
 <div>
   <div class="description">
-    notebook
+    Finetuning of Camembert on predicting, using a Le Soleil Facebook post comment as input, whether it will receive a response or not.
   </div>
 </div>
 
@@ -213,7 +220,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Date de publication</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">18 mai 2024</p>
+      <p class="date">21 mai 2024</p>
     </div>
   </div>
   
@@ -227,68 +234,65 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="context" class="level2">
 <h2 class="anchored" data-anchor-id="context">Context</h2>
-<p>This notebook is about predicting if a comment will have a reply base or not using LLM. I use here, a dataset constituate of a comment under posts of Le Soleil Page on Facebook. You will find a complete description and analyse of this dataset here. I use a prepared version of the original dataset, which contains news features about each comment.</p>
+<p>This project originally started as a school assignment for Big Data class. The notebook presented here demonstrates the use of a large language model (LLM) to tackle a binary classification problem. Specifically, our objective is to predict whether a comment will receive a response or not.</p>
+<p>To achieve this, we use an enriched dataset compiled from comments on Le Soleil’s Facebook posts. I will also share a separate notebook detailing the process of building this dataset. Additionally, I plan to publish another post explaining how to utilize simple feedforward neural networks or statistical models based on various comment features or the comment text itself.</p>
+<p>Let’s dive in!</p>
 </section>
 <section id="dependence" class="level2">
 <h2 class="anchored" data-anchor-id="dependence">Dependence</h2>
-<div id="cell-3" class="cell" data-execution="{&quot;iopub.status.busy&quot;:&quot;2024-05-16T22:47:58.621291Z&quot;,&quot;iopub.execute_input&quot;:&quot;2024-05-16T22:47:58.621693Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-05-16T22:48:24.158787Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-05-16T22:47:58.621662Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-05-16T22:48:24.157602Z&quot;}" data-trusted="true">
+<p>I prefer to set aside the cell that install system dependency. It always produces a lot of useless gx3di3ce… You get it, right ?</p>
+<div id="cell-4" class="cell" data-execution="{&quot;iopub.status.busy&quot;:&quot;2024-05-16T22:47:58.621291Z&quot;,&quot;iopub.execute_input&quot;:&quot;2024-05-16T22:47:58.621693Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-05-16T22:48:24.158787Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-05-16T22:47:58.621662Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-05-16T22:48:24.157602Z&quot;}" data-trusted="true">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>pip install torchsampler</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>pip install sacremoses</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="cell-4" class="cell" data-execution="{&quot;iopub.status.busy&quot;:&quot;2024-05-16T22:48:24.161082Z&quot;,&quot;iopub.execute_input&quot;:&quot;2024-05-16T22:48:24.161438Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-05-16T22:48:24.487077Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-05-16T22:48:24.161404Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-05-16T22:48:24.486273Z&quot;}" data-trusted="true" data-execution_count="2">
+<p>Now, let’s import some packages to have fun !</p>
+<div id="cell-6" class="cell" data-execution="{&quot;iopub.status.busy&quot;:&quot;2024-05-16T22:48:24.161082Z&quot;,&quot;iopub.execute_input&quot;:&quot;2024-05-16T22:48:24.161438Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-05-16T22:48:24.487077Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-05-16T22:48:24.161404Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-05-16T22:48:24.486273Z&quot;}" data-trusted="true" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> transformers, torch</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> transformers <span class="im">import</span> AutoModelForSequenceClassification, AutoTokenizer</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> torch.utils.data <span class="im">import</span> Dataset</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> accuracy_score, precision_score, recall_score, confusion_matrix</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> torchsampler <span class="im">import</span> ImbalancedDatasetSampler</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> tqdm <span class="im">import</span> tqdm</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> torch.optim.lr_scheduler <span class="im">import</span> ReduceLROnPlateau</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.display <span class="im">import</span> clear_output</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> multiprocessing <span class="im">as</span> mp</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="co"># warnings.filterwarnings('ignore')</span></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>device <span class="op">=</span> <span class="st">'cuda'</span> <span class="cf">if</span> torch.cuda.is_available() <span class="cf">else</span> <span class="st">'cpu'</span></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>mp.cpu_count()</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> multiprocessing <span class="im">as</span> mp</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> transformers <span class="im">import</span> AutoModelForSequenceClassification, AutoTokenizer</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> torch.utils.data <span class="im">import</span> Dataset</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> accuracy_score, precision_score, recall_score, confusion_matrix</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> torchsampler <span class="im">import</span> ImbalancedDatasetSampler</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> tqdm <span class="im">import</span> tqdm</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> torch.optim.lr_scheduler <span class="im">import</span> ReduceLROnPlateau</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.display <span class="im">import</span> clear_output</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="co"># warnings.filterwarnings('ignore')</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>device <span class="op">=</span> <span class="st">'cuda'</span> <span class="cf">if</span> torch.cuda.is_available() <span class="cf">else</span> <span class="st">'cpu'</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>mp.cpu_count() <span class="co"># used to set the number of num_worker for Dataloader, usually the half of it </span></span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="cell-5" class="cell" data-outputid="aac39525-ff34-4217-825e-b73595c599ff" data-execution_count="3">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> google.colab <span class="im">import</span> drive</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>drive.mount(<span class="st">'/content/drive'</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
+<p>And since I use Google colab, I mount my drive to load the datasets later.</p>
+<div id="cell-8" class="cell" data-outputid="aac39525-ff34-4217-825e-b73595c599ff" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># only if you are using Google colab of course...</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> google.colab <span class="im">import</span> drive</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>drive.mount(<span class="st">'/content/drive'</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Mounted at /content/drive</code></pre>
 </div>
 </div>
 </section>
-<section id="about-the-datasets" class="level2">
-<h2 class="anchored" data-anchor-id="about-the-datasets">About the datasets</h2>
-<section id="datasets" class="level3">
-<h3 class="anchored" data-anchor-id="datasets">Datasets</h3>
-<div id="cell-8" class="cell">
-<details class="code-fold">
-<summary>Code</summary>
+<section id="about-our-datasets" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="about-our-datasets">About our datasets</h2>
+<p>In this section, we will explore the dataset used for our binary classification problem. The dataset has been divided into training and testing sets, with 70% of the data allocated for training and the remaining 30% for testing. This split ensures that we have a robust training set to build our model while retaining a sufficient portion of the data for evaluating the model’s performance.</p>
+<p>Let’s load the train and the test sets.</p>
+<div id="cell-11" class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>dirpath <span class="op">=</span> <span class="st">'/content/drive/MyDrive/DataSets/big_data/datasets'</span> <span class="co"># specify here the path to the dataset</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>train <span class="op">=</span> pd.read_csv(dirpath <span class="op">+</span> <span class="st">'/split/train_dataset.csv'</span>, index_col<span class="op">=</span><span class="dv">0</span>)</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>test <span class="op">=</span> pd.read_csv(dirpath <span class="op">+</span> <span class="st">'/split/valid_dataset.csv'</span>, index_col<span class="op">=</span><span class="dv">0</span>)</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>valid <span class="op">=</span> pd.read_csv(dirpath <span class="op">+</span> <span class="st">'/valid_dataset.csv'</span>, index_col<span class="op">=</span><span class="dv">0</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>test <span class="op">=</span> pd.read_csv(dirpath <span class="op">+</span> <span class="st">'/split/valid_dataset.csv'</span>, index_col<span class="op">=</span><span class="dv">0</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section>
-<section id="keep-in-mind" class="level3">
-<h3 class="anchored" data-anchor-id="keep-in-mind">Keep in mind</h3>
-<p>Some litle notes about the dataset I use. First, it contains almost millions lines</p>
-<div id="cell-11" class="cell" data-outputid="5e429f03-52cb-4fd3-8666-97f14baf1375" data-execution_count="5">
+<p>A few statistics about our dataset. First of all, it contains almost a million rows.</p>
+<div id="cell-13" class="cell" data-outputid="5e429f03-52cb-4fd3-8666-97f14baf1375" data-execution_count="5">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>dataset <span class="op">=</span> pd.concat([train, test])</span>
@@ -298,8 +302,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>Dataset shape: (935698, 68)</code></pre>
 </div>
 </div>
-<p>Next, it important to note that our dataset is heavy unbalanced. The following plot show that there are only ~13% of comment with reply.</p>
-<div id="cell-13" class="cell" data-outputid="18b63c43-03e4-4e3b-f0e5-7ed81288739d" data-execution_count="6">
+<p>Secondly, the dataset is highly unbalanced. The following graph shows that there are only ~13% of comments with replies, by which I mean that these comments have received at least one comment.</p>
+<div id="cell-15" class="cell" data-outputid="18b63c43-03e4-4e3b-f0e5-7ed81288739d" data-execution_count="6">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>dataset[<span class="st">'target'</span>].value_counts(normalize<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -311,26 +315,31 @@ True     0.123964
 Name: proportion, dtype: float64</code></pre>
 </div>
 </div>
-<div id="cell-14" class="cell" data-outputid="85557c40-d918-45eb-f3f8-813cf72c9a94" data-execution_count="7">
+<div id="cell-fig-cap-margin0" class="cell page-columns page-full" data-outputid="85557c40-d918-45eb-f3f8-813cf72c9a94" data-execution_count="7">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>dataset[<span class="st">'target'</span>].value_counts().plot(kind<span class="op">=</span><span class="st">'bar'</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="predicting_comment_reply_llm_files/figure-html/cell-8-output-1.png" class="img-fluid figure-img"></p>
+<div class="cell-output cell-output-display page-columns page-full">
+<div id="fig-cap-margin0" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-cap-margin0-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="predicting_comment_reply_llm_files/figure-html/fig-cap-margin0-output-1.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-cap-margin0-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Barchart of the count of each class
+</figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>It is important to find a way to mitigate those two problems. For the first one, we can only use undersamplig. It offers the advantage to control the amount of data that we will use in finetuning step.</p>
-<p>The undersampling also help to solve the second problem. At first time, having so much data to train our model could have be an advantage. But on limited ressource, it will take a lot of time to run only one epoch of that. And, we are also limited on quantity of items in our batch. This one is limited by the capacity of our RAM. So, for my modest experience, I will only train and test on a small subset of the whole dataset. I use equal sampling, to sample the same amout of the items for each class.</p>
+<p>We have then two significant issues. Firstly, running the training on the entire dataset would be extremely time-consuming, even with substantial computational resources. Secondly, our dataset is unbalanced, which presents a challenge for accurate model training.</p>
+<p>To address these issues, I opted for undersampling, ensuring an equal number of items from each class. This approach allows us to run our experiments more efficiently and mitigates the problem of data imbalance. Later in the notebook, we will explore the impact of the amount of data used on the model’s performance.</p>
 </section>
-</section>
-<section id="classes-and-functions" class="level2">
-<h2 class="anchored" data-anchor-id="classes-and-functions">Classes and functions</h2>
-<div id="cell-17" class="cell" data-execution="{&quot;iopub.status.busy&quot;:&quot;2024-05-16T22:48:47.461504Z&quot;,&quot;iopub.execute_input&quot;:&quot;2024-05-16T22:48:47.461808Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-05-16T22:48:47.470522Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-05-16T22:48:47.461784Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-05-16T22:48:47.469657Z&quot;}" data-trusted="true" data-execution_count="8">
+<section id="class-and-functions" class="level2">
+<h2 class="anchored" data-anchor-id="class-and-functions">Class and functions</h2>
+<p>I write the CommentDataset class as a custom dataset designed for handling text data. It inherits from the Dataset class provided by PyTorch. This class is specifically tailored for tokenizing and preparing text data along with their corresponding labels for use in a model.</p>
+<div id="cell-20" class="cell" data-execution="{&quot;iopub.status.busy&quot;:&quot;2024-05-16T22:48:47.461504Z&quot;,&quot;iopub.execute_input&quot;:&quot;2024-05-16T22:48:47.461808Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-05-16T22:48:47.470522Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-05-16T22:48:47.461784Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-05-16T22:48:47.469657Z&quot;}" data-trusted="true" data-execution_count="8">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> CommentDataset(Dataset):</span>
@@ -356,11 +365,11 @@ Name: proportion, dtype: float64</code></pre>
 <span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>            <span class="st">'attention_mask'</span>: torch.tensor(inputs[<span class="st">'attention_mask'</span>], dtype<span class="op">=</span>torch.<span class="bu">long</span>),</span>
 <span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a>            <span class="st">'token_type_ids'</span>: torch.tensor(inputs[<span class="st">"token_type_ids"</span>], dtype<span class="op">=</span>torch.<span class="bu">long</span>),</span>
 <span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a>            <span class="st">'labels'</span>: torch.tensor(label, dtype<span class="op">=</span>torch.<span class="bu">float</span>)</span>
-<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a>        }</span>
-<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a>        }</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="cell-18" class="cell" data-execution="{&quot;iopub.status.busy&quot;:&quot;2024-05-16T22:48:47.471853Z&quot;,&quot;iopub.execute_input&quot;:&quot;2024-05-16T22:48:47.472149Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-05-16T22:48:47.496708Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-05-16T22:48:47.472105Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-05-16T22:48:47.495859Z&quot;}" data-trusted="true" data-execution_count="19">
+<p>The <code>train_model</code> method is designed to train a machine learning model using a provided training and testing dataloader, while tracking various performance metrics such as loss, accuracy, precision, recall, and a custom F2 score across multiple epochs, and implementing early stopping based on validation performance. The <code>test_model</code> method evaluates the trained model on a validation dataset, computing and printing evaluation metrics to assess the model’s performance.</p>
+<div id="cell-22" class="cell" data-execution="{&quot;iopub.status.busy&quot;:&quot;2024-05-16T22:48:47.471853Z&quot;,&quot;iopub.execute_input&quot;:&quot;2024-05-16T22:48:47.472149Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-05-16T22:48:47.496708Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-05-16T22:48:47.472105Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-05-16T22:48:47.495859Z&quot;}" data-trusted="true" data-execution_count="19">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> train_model(model, train_dataloader, test_dataloader, history<span class="op">=</span>{}, num_epochs<span class="op">=</span><span class="dv">5</span>, lr<span class="op">=</span><span class="fl">5e-5</span>, early_stopping_patience<span class="op">=</span><span class="dv">3</span>, weight_decay<span class="op">=</span><span class="fl">0.01</span>):</span>
@@ -518,7 +527,8 @@ Name: proportion, dtype: float64</code></pre>
 <span id="cb12-153"><a href="#cb12-153" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"  Eval F2: </span><span class="sc">{</span>history[<span class="st">'valid_score'</span>]<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="cell-19" class="cell" data-execution="{&quot;iopub.status.busy&quot;:&quot;2024-05-17T00:15:24.440839Z&quot;,&quot;iopub.execute_input&quot;:&quot;2024-05-17T00:15:24.441301Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-05-17T00:15:24.453534Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-05-17T00:15:24.441258Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-05-17T00:15:24.452391Z&quot;}" data-trusted="true" data-execution_count="13">
+<p>The <code>plot_history</code> method visualizes the training and testing metrics (loss, accuracy, precision, recall, and F2 score) over epochs using matplotlib. The <code>evaluate_model</code> function assesses the model by optionally plotting the training history and running the <code>test_model</code> function for evaluation metrics. The <code>get_loader</code> function prepares the data loaders for training and testing datasets, including optional under-sampling, and sets up the tokenizer and model for sequence classification tasks. The <code>equal_class_sampling</code> method ensures balanced class distribution by sampling an equal number of instances from each class in the dataset.</p>
+<div id="cell-24" class="cell" data-execution="{&quot;iopub.status.busy&quot;:&quot;2024-05-17T00:15:24.440839Z&quot;,&quot;iopub.execute_input&quot;:&quot;2024-05-17T00:15:24.441301Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-05-17T00:15:24.453534Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-05-17T00:15:24.441258Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-05-17T00:15:24.452391Z&quot;}" data-trusted="true" data-execution_count="13">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot_history(history):</span>
@@ -619,84 +629,101 @@ Name: proportion, dtype: float64</code></pre>
 </details>
 </div>
 </section>
-<section id="training" class="level2">
+<section id="training" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="training">Training</h2>
 <section id="evaluations" class="level3">
 <h3 class="anchored" data-anchor-id="evaluations">Evaluations</h3>
-<p>To evaluate our model, we will use mainly use recall and a custom metrics, that we will call F2, and equal TP/(TP+FN+FP). The later help evaluate the capacity of the model to detect the positive class correctly, with no errors on both positive and negative instances.</p>
+<p>To evaluate our model, we will primarily use recall and a custom metric that we will call F2. Recall measures the ability of the model to correctly identify all relevant instances (true positives) from the dataset and is calculated as TP/(TP + FN), where TP stands for true positives and FN stands for false negatives.</p>
+<p>The custom metric, F2, is designed to provide a more comprehensive evaluation of the model’s performance by balancing the detection of the positive class and minimizing errors. The F2 score is calculated as TP/(TP + FN + FP), where FP stands for false positives. This metric helps evaluate the model’s capacity to detect the positive class correctly while accounting for both false negatives and false positives. By considering both types of errors, the F2 metric ensures that the model is not only identifying positive instances accurately but also minimizing the incorrect classification of negative instances as positive. This balanced approach provides a more nuanced assessment of the model’s overall effectiveness.</p>
+<hr>
 </section>
-<section id="the-right-model" class="level3">
-<h3 class="anchored" data-anchor-id="the-right-model">The right model</h3>
-<p>Here, for simplicity, I will use the Camembert base model, but you are a free to use any model below. From my experience, Camembert was the best, with small training (~50% of F2 on first three epochs when finetuning)</p>
-<div id="cell-24" class="cell" data-execution="{&quot;iopub.status.busy&quot;:&quot;2024-05-16T22:48:47.588511Z&quot;,&quot;iopub.execute_input&quot;:&quot;2024-05-16T22:48:47.588779Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-05-16T22:48:47.597717Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-05-16T22:48:47.588757Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-05-16T22:48:47.596859Z&quot;}" data-trusted="true" data-execution_count="15">
-<details class="code-fold">
-<summary>Code</summary>
+<section id="modeling" class="level3">
+<h3 class="anchored" data-anchor-id="modeling">Modeling</h3>
+<p>For simplicity’s sake, I’ll use the distill version of Camembert model here, but you’re free to use any of the models below.</p>
+<div id="cell-29" class="cell" data-execution="{&quot;iopub.status.busy&quot;:&quot;2024-05-16T22:48:47.588511Z&quot;,&quot;iopub.execute_input&quot;:&quot;2024-05-16T22:48:47.588779Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-05-16T22:48:47.597717Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-05-16T22:48:47.588757Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-05-16T22:48:47.596859Z&quot;}" data-trusted="true" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>models <span class="op">=</span> {</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">'bert'</span>: <span class="st">"bert-base-uncased"</span>,</span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'gpt'</span>: <span class="st">"distilgpt2"</span>,</span>
 <span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">'flau'</span>: <span class="st">"flaubert/flaubert_base_uncased"</span>,</span>
 <span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">'cmb'</span>: <span class="st">"cmarkea/distilcamembert-base"</span>,</span>
 <span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 </div>
 </section>
-<section id="fine-tuning" class="level3">
+<section id="fine-tuning" class="level3 page-columns page-full">
 <h3 class="anchored" data-anchor-id="fine-tuning">Fine tuning</h3>
-<div id="cell-26" class="cell" data-execution_count="16">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>X_valid_sample, X_valid, y_valid_sample, y_valid <span class="op">=</span> train_test_split(test[<span class="st">'message'</span>], test[<span class="st">'target'</span>], test_size<span class="op">=</span><span class="fl">0.95</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>X_valid_sample.shape, X_valid.shape, y_valid_sample.shape, y_valid.shape</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
+<p>The next code might look a bit confusing at first, but let’s break it down step by step.</p>
+<p>What we’re doing here is creating smaller subsets from our original training and test sets to build training, validation and test samples.</p>
+<div id="cell-32" class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Grab the 'message' and 'target' columns from the training set and store them in X_train and y_train</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>X_train, y_train <span class="op">=</span> train[<span class="st">'message'</span>], train[<span class="st">'target'</span>]</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Next, we split off a small portion of the original test set to use as our validation set. This is like keeping a small piece of pie aside before sharing the rest.</p>
+<div id="cell-34" class="cell" data-execution_count="16">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>X_valid_sample, X_valid, y_valid_sample, y_valid <span class="op">=</span> train_test_split(test[<span class="st">'message'</span>], test[<span class="st">'target'</span>], test_size<span class="op">=</span><span class="fl">0.95</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>X_valid_sample.shape, X_valid.shape, y_valid_sample.shape, y_valid.shape</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="16">
 <pre><code>((9357,), (177783,), (9357,), (177783,))</code></pre>
 </div>
 </div>
-<div id="cell-27" class="cell" data-outputid="936648c1-d053-418c-9b07-db17a7070612" data-execution_count="27">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>X_train, y_train <span class="op">=</span> train[<span class="st">'message'</span>], train[<span class="st">'target'</span>]</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>X_train_sample, y_train_sample <span class="op">=</span> equal_class_sampling(X_train, y_train, <span class="dv">6000</span>)</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>_, X_test_sample, _, y_test_sample <span class="op">=</span> train_test_split(X_valid, y_valid, test_size<span class="op">=</span><span class="fl">0.02</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>X_test_sample.shape</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
+<p>Then, we balance our training data. Imagine we have 6000 rows, and we want to make sure we have an equal number of positive and negative samples—3000 of each.</p>
+<div id="cell-36" class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>X_train_sample, y_train_sample <span class="op">=</span> equal_class_sampling(X_train, y_train, <span class="dv">6000</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Finally, we take another small slice of the test set to build our final test sample. Think of this as taking a tiny bit more of that pie for a taste test.</p>
+<div id="cell-38" class="cell" data-outputid="936648c1-d053-418c-9b07-db17a7070612" data-execution_count="27">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Split the remaining validation set to create a small test sample (2% of X_valid and y_valid)</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>_, X_test_sample, _, y_test_sample <span class="op">=</span> train_test_split(X_valid, y_valid, test_size<span class="op">=</span><span class="fl">0.02</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>X_test_sample.shape</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="27">
 <pre><code>(3556,)</code></pre>
 </div>
 </div>
-<div id="cell-28" class="cell" data-outputid="04235890-1b1e-407a-ea6c-50bea8b53f85" data-execution_count="28">
+<p>By doing this, we ensure our model has balanced and representative data for training, validation, and final testing.</p>
+<p>Now, we train, we validate and evaluate the model on the test set.</p>
+<div id="cell-fig-cap-margin" class="cell page-columns page-full" data-outputid="04235890-1b1e-407a-ea6c-50bea8b53f85" data-execution_count="28">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>history <span class="op">=</span> {}</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>BATCH_SIZE <span class="op">=</span> <span class="dv">16</span></span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>LEARNING_RATE <span class="op">=</span> <span class="fl">1e-4</span></span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>weight_decay <span class="op">=</span> <span class="fl">1e-2</span></span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>EPOCHS <span class="op">=</span> <span class="dv">10</span></span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> {<span class="st">'X_train'</span>: X_train_sample, <span class="st">'y_train'</span>: y_train_sample, <span class="st">'X_test'</span>: X_test_sample, <span class="st">'y_test'</span>: y_test_sample}</span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>model, tokz, train_loader, test_loader <span class="op">=</span> get_loader(models[<span class="st">'cmb'</span>], data, bs<span class="op">=</span>BATCH_SIZE, use_special_pad_token<span class="op">=</span><span class="va">True</span>, num_workers<span class="op">=</span><span class="dv">8</span>)</span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>model.to(device)</span>
-<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>start_time <span class="op">=</span> time.time()</span>
-<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>train_model(model, train_loader, test_loader, history, num_epochs<span class="op">=</span>EPOCHS, lr<span class="op">=</span>LEARNING_RATE, early_stopping_patience<span class="op">=</span><span class="dv">2</span>, weight_decay<span class="op">=</span>weight_decay)</span>
-<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>end_time <span class="op">=</span> time.time()</span>
-<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>execution_time <span class="op">=</span> end_time <span class="op">-</span> start_time</span>
-<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>clear_output()</span>
-<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Execution time:"</span>, execution_time, <span class="st">"seconds"</span>)</span>
-<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a>start_time <span class="op">=</span> time.time()</span>
-<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a>evaluate_model(tokz, model, (X_valid_sample, y_valid_sample), history, device, bs <span class="op">=</span> BATCH_SIZE <span class="op">*</span> <span class="dv">2</span>, plot_train<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a>end_time <span class="op">=</span> time.time()</span>
-<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a>execution_time <span class="op">=</span> end_time <span class="op">-</span> start_time</span>
-<span id="cb19-22"><a href="#cb19-22" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Execution time:"</span>, execution_time, <span class="st">"seconds"</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>history <span class="op">=</span> {}  <span class="co"># Initialize an empty dictionary to store training and evaluation history.</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>BATCH_SIZE <span class="op">=</span> <span class="dv">16</span>  <span class="co"># Define the batch size for data loaders.</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>LEARNING_RATE <span class="op">=</span> <span class="fl">1e-4</span>  <span class="co"># Set the learning rate for the optimizer.</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>weight_decay <span class="op">=</span> <span class="fl">1e-2</span>  <span class="co"># Set the weight decay (L2 regularization) for the optimizer.</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>EPOCHS <span class="op">=</span> <span class="dv">10</span>  <span class="co"># Set the number of epochs for training.</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Prepare the dataset dictionary with training and testing samples.</span></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> {<span class="st">'X_train'</span>: X_train_sample, <span class="st">'y_train'</span>: y_train_sample, <span class="st">'X_test'</span>: X_test_sample, <span class="st">'y_test'</span>: y_test_sample}</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Get the model, tokenizer, training data loader, and testing data loader.</span></span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>model, tokz, train_loader, test_loader <span class="op">=</span> get_loader(models[<span class="st">'cmb'</span>], data, bs<span class="op">=</span>BATCH_SIZE, use_special_pad_token<span class="op">=</span><span class="va">True</span>, num_workers<span class="op">=</span><span class="dv">8</span>)</span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>model.to(device)  <span class="co"># Move the model to the specified device (CPU or GPU).</span></span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>start_time <span class="op">=</span> time.time()  <span class="co"># Record the start time for training.</span></span>
+<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>train_model(model, train_loader, test_loader, history, num_epochs<span class="op">=</span>EPOCHS, lr<span class="op">=</span>LEARNING_RATE, early_stopping_patience<span class="op">=</span><span class="dv">2</span>, weight_decay<span class="op">=</span>weight_decay)  <span class="co"># Train the model.</span></span>
+<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a>end_time <span class="op">=</span> time.time()  <span class="co"># Record the end time for training.</span></span>
+<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a>execution_time <span class="op">=</span> end_time <span class="op">-</span> start_time  <span class="co"># Calculate the execution time for training.</span></span>
+<span id="cb21-19"><a href="#cb21-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-20"><a href="#cb21-20" aria-hidden="true" tabindex="-1"></a>clear_output()  <span class="co"># Clear the output (useful in Jupyter notebooks to clear previous outputs).</span></span>
+<span id="cb21-21"><a href="#cb21-21" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Execution time:"</span>, execution_time, <span class="st">"seconds"</span>)  <span class="co"># Print the execution time for training.</span></span>
+<span id="cb21-22"><a href="#cb21-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-23"><a href="#cb21-23" aria-hidden="true" tabindex="-1"></a>start_time <span class="op">=</span> time.time()  <span class="co"># Record the start time for evaluation.</span></span>
+<span id="cb21-24"><a href="#cb21-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Evaluate the model on the validation dataset and optionally plot the training history.</span></span>
+<span id="cb21-25"><a href="#cb21-25" aria-hidden="true" tabindex="-1"></a>evaluate_model(tokz, model, (X_valid_sample, y_valid_sample), history, device, bs <span class="op">=</span> BATCH_SIZE <span class="op">*</span> <span class="dv">2</span>, plot_train<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb21-26"><a href="#cb21-26" aria-hidden="true" tabindex="-1"></a>end_time <span class="op">=</span> time.time()  <span class="co"># Record the end time for evaluation.</span></span>
+<span id="cb21-27"><a href="#cb21-27" aria-hidden="true" tabindex="-1"></a>execution_time <span class="op">=</span> end_time <span class="op">-</span> start_time  <span class="co"># Calculate the execution time for evaluation.</span></span>
+<span id="cb21-28"><a href="#cb21-28" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Execution time:"</span>, execution_time, <span class="st">"seconds"</span>)  <span class="co"># Print the execution time for evaluation.</span></span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Execution time: 363.3319444656372 seconds</code></pre>
 </div>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="predicting_comment_reply_llm_files/figure-html/cell-15-output-2.png" class="img-fluid figure-img"></p>
+<div class="cell-output cell-output-display page-columns page-full">
+<div id="fig-cap-margin" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-cap-margin-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="predicting_comment_reply_llm_files/figure-html/fig-cap-margin-output-2.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-cap-margin-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Series of graphs depicting the performance metrics of the model. The metrics include Training Loss, Accuracy, Precision, Recall, and F2 score for both training and testing data.
+</figcaption>
 </figure>
 </div>
 </div>
@@ -709,47 +736,89 @@ Name: proportion, dtype: float64</code></pre>
 Execution time: 84.7105667591095 seconds</code></pre>
 </div>
 </div>
-<div id="cell-29" class="cell" data-outputid="af75dd9b-263b-4e8b-c489-9a39062f9e47">
+<p>Based on the performance of the model on two epochs, we can make the following analysis:</p>
+<ol type="1">
+<li><strong>Training Loss</strong>: Decreases from approximately 0.55 to 0.45, indicating improved performance during training.</li>
+<li><strong>Accuracy</strong>: Shows a significant increase for training accuracy from about 0.70 to 0.78, while test accuracy slightly improves from around 0.62 to 0.64.</li>
+<li><strong>Precision</strong>: Training precision rises from about 0.75 to 0.80, whereas test precision remains almost constant at around 0.21.</li>
+<li><strong>Recall</strong>: Training recall increases from 0.60 to 0.75, while test recall decreases from 0.85 to 0.70, suggesting potential overfitting.</li>
+<li><strong>F2</strong>: Indicates a decline in the F2 score from approximately 21.2 to 20.2, which means that the model is not generalizing from the training data to the test data.</li>
+</ol>
+<section id="test-metrics" class="level6">
+<h6 class="anchored" data-anchor-id="test-metrics">Test Metrics:</h6>
+<ol type="1">
+<li><strong>Eval Accuracy</strong>: 0.6475, which indicates the model’s ability to correctly predict test data is moderate but lower compared to training accuracy.</li>
+<li><strong>Eval Precision</strong>: 0.2331, which is significantly lower than the training precision, suggesting the model struggles with false positives on the test set.</li>
+<li><strong>Eval Recall</strong>: 0.7606, which is relatively high and close to the training recall, showing the model still performs well in identifying most positive instances on the test set.</li>
+<li><strong>Eval F2</strong>: 21.7185, which remains high, indicating that despite high recall, the model struggles with false positives.</li>
+</ol>
+</section>
+<section id="conclusion" class="level6">
+<h6 class="anchored" data-anchor-id="conclusion">Conclusion:</h6>
+<ul>
+<li><strong>Overfitting</strong>: The discrepancy between training and test precision suggests overfitting. The model performs well on the training data but struggles with generalization, leading to lower performance on unseen data.</li>
+<li><strong>F2 score</strong>: The model prioritizes recall over precision. This is evident from the high recall but low precision on the test set. This behavior is further reflected in the F2 score, which is low, indicating many false positives.</li>
+</ul>
+<p>This analysis suggest that there is a problem with our model, because we need a model that should perform well on unseen data with low errors.</p>
+</section>
+<section id="why-is-this-important" class="level6">
+<h6 class="anchored" data-anchor-id="why-is-this-important">Why is this important?</h6>
+<p>Well, imagine that we will deploy our model in a real-world application. We don’t want to miss comments that might receive a response because we could use them to increase traffic on our site or social media. In that case, a model that detects positive instances well with minimal false positives is acceptable. However, our model currently has many false positives, which can be problematic.</p>
+</section>
+<section id="practical-implications" class="level6 page-columns page-full">
+<h6 class="anchored" data-anchor-id="practical-implications">Practical Implications:</h6>
+<ul>
+<li>Business Impact: If the model is used in an application like content moderation or customer feedback analysis, high false positives mean that many irrelevant comments would be flagged for response. This can lead to inefficient use of resources and missed opportunities to engage with truly relevant comments.</li>
+<li>User Experience: In applications like spam detection, a high number of false positives can frustrate users, as legitimate messages may be incorrectly flagged as spam.</li>
+<li>Operational Efficiency: For customer service applications, responding to false positives wastes time and effort that could be better spent addressing genuine issues.</li>
+</ul>
+<p>But, let’s try with more data in our training set to see the impact on the model performance. We will initialise a new model and train it on 10000 comments.</p>
+<div id="cell-43" class="cell" data-outputid="af75dd9b-263b-4e8b-c489-9a39062f9e47">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>X_train, y_train <span class="op">=</span> train[<span class="st">'message'</span>], train[<span class="st">'target'</span>]</span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>X_train_sample, y_train_sample <span class="op">=</span> equal_class_sampling(X_train, y_train, <span class="dv">10000</span>)</span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>_, X_test_sample, _, y_test_sample <span class="op">=</span> train_test_split(X_valid, y_valid, test_size<span class="op">=</span><span class="fl">0.02</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>X_train, y_train <span class="op">=</span> train[<span class="st">'message'</span>], train[<span class="st">'target'</span>]</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>X_train_sample, y_train_sample <span class="op">=</span> equal_class_sampling(X_train, y_train, <span class="dv">10000</span>)</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>_, X_test_sample, _, y_test_sample <span class="op">=</span> train_test_split(X_valid, y_valid, test_size<span class="op">=</span><span class="fl">0.02</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="cell-30" class="cell" data-outputid="ded74fd0-2a4a-42d1-e16d-ec39b5198250" data-execution_count="30">
+<div id="cell-fig-cap-margin2" class="cell page-columns page-full" data-outputid="ded74fd0-2a4a-42d1-e16d-ec39b5198250" data-execution_count="30">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>history <span class="op">=</span> {}</span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>BATCH_SIZE <span class="op">=</span> <span class="dv">16</span></span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>LEARNING_RATE <span class="op">=</span> <span class="fl">1e-4</span></span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>weight_decay <span class="op">=</span> <span class="fl">1e-2</span></span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>EPOCHS <span class="op">=</span> <span class="dv">10</span></span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> {<span class="st">'X_train'</span>: X_train_sample, <span class="st">'y_train'</span>: y_train_sample, <span class="st">'X_test'</span>: X_test_sample, <span class="st">'y_test'</span>: y_test_sample}</span>
-<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>model, tokz, train_loader, test_loader <span class="op">=</span> get_loader(models[<span class="st">'cmb'</span>], data, bs<span class="op">=</span>BATCH_SIZE, use_special_pad_token<span class="op">=</span><span class="va">True</span>, num_workers<span class="op">=</span><span class="dv">8</span>)</span>
-<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>model.to(device)</span>
-<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>start_time <span class="op">=</span> time.time()</span>
-<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>train_model(model, train_loader, test_loader, history, num_epochs<span class="op">=</span>EPOCHS, lr<span class="op">=</span>LEARNING_RATE, early_stopping_patience<span class="op">=</span><span class="dv">2</span>, weight_decay<span class="op">=</span>weight_decay)</span>
-<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>end_time <span class="op">=</span> time.time()</span>
-<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>execution_time <span class="op">=</span> end_time <span class="op">-</span> start_time</span>
-<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>clear_output()</span>
-<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Execution time:"</span>, execution_time, <span class="st">"seconds"</span>)</span>
-<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a>start_time <span class="op">=</span> time.time()</span>
-<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a>evaluate_model(tokz, model, (X_valid_sample, y_valid_sample), history, device, bs <span class="op">=</span> BATCH_SIZE <span class="op">*</span> <span class="dv">2</span>, plot_train<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb23-20"><a href="#cb23-20" aria-hidden="true" tabindex="-1"></a>end_time <span class="op">=</span> time.time()</span>
-<span id="cb23-21"><a href="#cb23-21" aria-hidden="true" tabindex="-1"></a>execution_time <span class="op">=</span> end_time <span class="op">-</span> start_time</span>
-<span id="cb23-22"><a href="#cb23-22" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Execution time:"</span>, execution_time, <span class="st">"seconds"</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>history <span class="op">=</span> {}</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>BATCH_SIZE <span class="op">=</span> <span class="dv">16</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>LEARNING_RATE <span class="op">=</span> <span class="fl">1e-4</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>weight_decay <span class="op">=</span> <span class="fl">1e-2</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>EPOCHS <span class="op">=</span> <span class="dv">10</span></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> {<span class="st">'X_train'</span>: X_train_sample, <span class="st">'y_train'</span>: y_train_sample, <span class="st">'X_test'</span>: X_test_sample, <span class="st">'y_test'</span>: y_test_sample}</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>model, tokz, train_loader, test_loader <span class="op">=</span> get_loader(models[<span class="st">'cmb'</span>], data, bs<span class="op">=</span>BATCH_SIZE, use_special_pad_token<span class="op">=</span><span class="va">True</span>, num_workers<span class="op">=</span><span class="dv">8</span>)</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>model.to(device)</span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>start_time <span class="op">=</span> time.time()</span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>train_model(model, train_loader, test_loader, history, num_epochs<span class="op">=</span>EPOCHS, lr<span class="op">=</span>LEARNING_RATE, early_stopping_patience<span class="op">=</span><span class="dv">2</span>, weight_decay<span class="op">=</span>weight_decay)</span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>end_time <span class="op">=</span> time.time()</span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>execution_time <span class="op">=</span> end_time <span class="op">-</span> start_time</span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a>clear_output()</span>
+<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Execution time:"</span>, execution_time, <span class="st">"seconds"</span>)</span>
+<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a>start_time <span class="op">=</span> time.time()</span>
+<span id="cb25-19"><a href="#cb25-19" aria-hidden="true" tabindex="-1"></a>evaluate_model(tokz, model, (X_valid_sample, y_valid_sample), history, device, bs <span class="op">=</span> BATCH_SIZE <span class="op">*</span> <span class="dv">2</span>, plot_train<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb25-20"><a href="#cb25-20" aria-hidden="true" tabindex="-1"></a>end_time <span class="op">=</span> time.time()</span>
+<span id="cb25-21"><a href="#cb25-21" aria-hidden="true" tabindex="-1"></a>execution_time <span class="op">=</span> end_time <span class="op">-</span> start_time</span>
+<span id="cb25-22"><a href="#cb25-22" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Execution time:"</span>, execution_time, <span class="st">"seconds"</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Execution time: 1122.6102643013 seconds</code></pre>
 </div>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="predicting_comment_reply_llm_files/figure-html/cell-17-output-2.png" class="img-fluid figure-img"></p>
+<div class="cell-output cell-output-display page-columns page-full">
+<div id="fig-cap-margin2" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-cap-margin2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="predicting_comment_reply_llm_files/figure-html/fig-cap-margin2-output-2.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-cap-margin2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: Series of graphs depicting the performance metrics of the model. The metrics include Training Loss, Accuracy, Precision, Recall, and F2 score for both training and testing data.
+</figcaption>
 </figure>
 </div>
 </div>
@@ -762,47 +831,54 @@ Execution time: 84.7105667591095 seconds</code></pre>
 Execution time: 84.70709776878357 seconds</code></pre>
 </div>
 </div>
-<div id="cell-31" class="cell" data-outputid="2c81ea7b-c84f-4e90-aed8-3d1922e1fefe">
+<p>The F2 score improved from 21% to 23%. But can we conclude that it’s the increased training set that induces these results?</p>
+<p>Let’s try it with a larger training set.</p>
+<div id="cell-46" class="cell" data-outputid="2c81ea7b-c84f-4e90-aed8-3d1922e1fefe">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>X_train, y_train <span class="op">=</span> train[<span class="st">'message'</span>], train[<span class="st">'target'</span>]</span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>X_train_sample, y_train_sample <span class="op">=</span> equal_class_sampling(X_train, y_train, <span class="dv">15000</span>)</span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>_, X_test_sample, _, y_test_sample <span class="op">=</span> train_test_split(X_valid, y_valid, test_size<span class="op">=</span><span class="fl">0.02</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>X_train, y_train <span class="op">=</span> train[<span class="st">'message'</span>], train[<span class="st">'target'</span>]</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>X_train_sample, y_train_sample <span class="op">=</span> equal_class_sampling(X_train, y_train, <span class="dv">15000</span>)</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>_, X_test_sample, _, y_test_sample <span class="op">=</span> train_test_split(X_valid, y_valid, test_size<span class="op">=</span><span class="fl">0.02</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="cell-32" class="cell" data-outputid="76cc62cb-0659-475d-a63c-fe92852e4214" data-execution_count="35">
+<div id="cell-fig-cap-margin3" class="cell page-columns page-full" data-outputid="76cc62cb-0659-475d-a63c-fe92852e4214" data-execution_count="35">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>history <span class="op">=</span> {}</span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>BATCH_SIZE <span class="op">=</span> <span class="dv">32</span></span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>LEARNING_RATE <span class="op">=</span> <span class="fl">1e-4</span></span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>weight_decay <span class="op">=</span> <span class="fl">1e-2</span></span>
-<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>EPOCHS <span class="op">=</span> <span class="dv">10</span></span>
-<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> {<span class="st">'X_train'</span>: X_train_sample, <span class="st">'y_train'</span>: y_train_sample, <span class="st">'X_test'</span>: X_test_sample, <span class="st">'y_test'</span>: y_test_sample}</span>
-<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>model, tokz, train_loader, test_loader <span class="op">=</span> get_loader(models[<span class="st">'cmb'</span>], data, bs<span class="op">=</span>BATCH_SIZE, use_special_pad_token<span class="op">=</span><span class="va">True</span>, num_workers<span class="op">=</span><span class="dv">8</span>)</span>
-<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>model.to(device)</span>
-<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>start_time <span class="op">=</span> time.time()</span>
-<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>train_model(model, train_loader, test_loader, history, num_epochs<span class="op">=</span>EPOCHS, lr<span class="op">=</span>LEARNING_RATE, early_stopping_patience<span class="op">=</span><span class="dv">2</span>, weight_decay<span class="op">=</span>weight_decay)</span>
-<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>end_time <span class="op">=</span> time.time()</span>
-<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a>execution_time <span class="op">=</span> end_time <span class="op">-</span> start_time</span>
-<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a>clear_output()</span>
-<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Execution time:"</span>, execution_time, <span class="st">"seconds"</span>)</span>
-<span id="cb27-17"><a href="#cb27-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-18"><a href="#cb27-18" aria-hidden="true" tabindex="-1"></a>start_time <span class="op">=</span> time.time()</span>
-<span id="cb27-19"><a href="#cb27-19" aria-hidden="true" tabindex="-1"></a>evaluate_model(tokz, model, (X_valid_sample, y_valid_sample), history, device, bs <span class="op">=</span> BATCH_SIZE <span class="op">*</span> <span class="dv">2</span>, plot_train<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb27-20"><a href="#cb27-20" aria-hidden="true" tabindex="-1"></a>end_time <span class="op">=</span> time.time()</span>
-<span id="cb27-21"><a href="#cb27-21" aria-hidden="true" tabindex="-1"></a>execution_time <span class="op">=</span> end_time <span class="op">-</span> start_time</span>
-<span id="cb27-22"><a href="#cb27-22" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Execution time:"</span>, execution_time, <span class="st">"seconds"</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>history <span class="op">=</span> {}</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>BATCH_SIZE <span class="op">=</span> <span class="dv">32</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>LEARNING_RATE <span class="op">=</span> <span class="fl">1e-4</span></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>weight_decay <span class="op">=</span> <span class="fl">1e-2</span></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>EPOCHS <span class="op">=</span> <span class="dv">10</span></span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> {<span class="st">'X_train'</span>: X_train_sample, <span class="st">'y_train'</span>: y_train_sample, <span class="st">'X_test'</span>: X_test_sample, <span class="st">'y_test'</span>: y_test_sample}</span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>model, tokz, train_loader, test_loader <span class="op">=</span> get_loader(models[<span class="st">'cmb'</span>], data, bs<span class="op">=</span>BATCH_SIZE, use_special_pad_token<span class="op">=</span><span class="va">True</span>, num_workers<span class="op">=</span><span class="dv">8</span>)</span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>model.to(device)</span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a>start_time <span class="op">=</span> time.time()</span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a>train_model(model, train_loader, test_loader, history, num_epochs<span class="op">=</span>EPOCHS, lr<span class="op">=</span>LEARNING_RATE, early_stopping_patience<span class="op">=</span><span class="dv">2</span>, weight_decay<span class="op">=</span>weight_decay)</span>
+<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a>end_time <span class="op">=</span> time.time()</span>
+<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a>execution_time <span class="op">=</span> end_time <span class="op">-</span> start_time</span>
+<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-15"><a href="#cb29-15" aria-hidden="true" tabindex="-1"></a>clear_output()</span>
+<span id="cb29-16"><a href="#cb29-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Execution time:"</span>, execution_time, <span class="st">"seconds"</span>)</span>
+<span id="cb29-17"><a href="#cb29-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-18"><a href="#cb29-18" aria-hidden="true" tabindex="-1"></a>start_time <span class="op">=</span> time.time()</span>
+<span id="cb29-19"><a href="#cb29-19" aria-hidden="true" tabindex="-1"></a>evaluate_model(tokz, model, (X_valid_sample, y_valid_sample), history, device, bs <span class="op">=</span> BATCH_SIZE <span class="op">*</span> <span class="dv">2</span>, plot_train<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb29-20"><a href="#cb29-20" aria-hidden="true" tabindex="-1"></a>end_time <span class="op">=</span> time.time()</span>
+<span id="cb29-21"><a href="#cb29-21" aria-hidden="true" tabindex="-1"></a>execution_time <span class="op">=</span> end_time <span class="op">-</span> start_time</span>
+<span id="cb29-22"><a href="#cb29-22" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Execution time:"</span>, execution_time, <span class="st">"seconds"</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Execution time: 1914.5363965034485 seconds</code></pre>
 </div>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="predicting_comment_reply_llm_files/figure-html/cell-19-output-2.png" class="img-fluid figure-img"></p>
+<div class="cell-output cell-output-display page-columns page-full">
+<div id="fig-cap-margin3" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-cap-margin3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="predicting_comment_reply_llm_files/figure-html/fig-cap-margin3-output-2.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-cap-margin3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4: Series of graphs depicting the performance metrics of the model. The metrics include Training Loss, Accuracy, Precision, Recall, and F2 score for both training and testing data.
+</figcaption>
 </figure>
 </div>
 </div>
@@ -815,9 +891,29 @@ Execution time: 84.70709776878357 seconds</code></pre>
 Execution time: 85.33442664146423 seconds</code></pre>
 </div>
 </div>
-
-
+<p>On test set, the F2 score of the model improve again from 23% to 24%.</p>
 </section>
+<section id="conclusion-1" class="level6">
+<h6 class="anchored" data-anchor-id="conclusion-1">Conclusion:</h6>
+<p>The increase in the training set size helps the model generalize better to the test data, reducing overfitting and improving its ability to balance precision and recall effectively.</p>
+</section>
+</section>
+</section>
+<section id="takeaways" class="level2">
+<h2 class="anchored" data-anchor-id="takeaways">Takeaways</h2>
+<ol type="1">
+<li><p><strong>Dataset Analysis is Crucial</strong>: Always begin by analyzing your dataset. Understanding the distribution and characteristics of your data helps in making informed decisions about model training and evaluation. In scenarios with limited resources, generating more data for the underrepresented class might not be feasible. Instead, sampling equal numbers of comments from each class for the training set can help reduce bias towards the overrepresented class.</p></li>
+<li><p><strong>Balanced Training, Unbalanced Validation</strong>: While balancing the training set by equal sampling is important to reduce bias, the validation set should remain unbalanced. This approach ensures that the model’s performance is evaluated in a realistic manner, reflecting its ability to generalize to the true distribution of the data.</p></li>
+<li><p><strong>Resource-Based Training Strategy</strong>: Define your training strategy based on the available resources. When computational power or time is limited, working with a smaller, balanced sample of the dataset is a practical approach. This allows for iterative experimentation and tuning without the overhead of processing the entire dataset.</p></li>
+<li><p><strong>Problem-Specific Metrics</strong>: Choose evaluation metrics that align with your problem’s objectives. For instance, in this scenario, the F2 score (F2 = tp / (tp + 2 * fn + fp)) is used to evaluate model performance by balancing the detection of the positive class and minimizing errors.</p></li>
+<li><p><strong>Initial Model Performance</strong>: After the first round of training, the F2 score indicates that the model prioritizes recall over precision. This is evidenced by the high recall but low precision on the test set.</p></li>
+<li><p><strong>Impact of False Positives</strong>: High false positives can be problematic in real-world applications. They can lead to inefficient use of resources and missed opportunities to engage with truly relevant comments. This highlights the need for a balance between precision and recall.</p></li>
+<li><p><strong>Training Set Size and Generalization</strong>: Increasing the size of the training set helps the model generalize better to the test data. A larger training set reduces overfitting and enhances the model’s ability to balance precision and recall effectively. This results in improved overall performance and more reliable predictions.</p></li>
+<li><p><strong>Choosing the Right Model</strong>: Select a model that is suitable for your specific problem. For instance, since the dataset consists of French text, using CamemBERT, a model specifically designed for the French language, is an appropriate choice.</p></li>
+<li><p><strong>Hyperparameter Tuning</strong>: Finding the optimal hyperparameters for your model is crucial and often involves extensive experimentation. Before finalizing the model, numerous combinations were tested to identify the best-performing configuration. Hyperparameter tuning is more of an art than a strict recipe, requiring intuition and experience to achieve the best results.</p></li>
+</ol>
+
+
 </section>
 
 <a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Retour au sommet</a></main> <!-- /main -->

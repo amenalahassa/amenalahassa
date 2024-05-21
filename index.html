@@ -129,6 +129,7 @@ window.Quarto = {
 };
 </script>
 
+<link rel="stylesheet" href="assets/styles.css">
 </head>
 
 <body class="nav-sidebar floating">
@@ -143,6 +144,9 @@ window.Quarto = {
         <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Blog</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Basculer la barre latérale" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Recherche" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
     </div>
   </nav>
 </header>
@@ -163,6 +167,11 @@ window.Quarto = {
 </div>
     </div>
       </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Recherche"></div>
+        </div>
+        </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
@@ -184,13 +193,14 @@ window.Quarto = {
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         
-    <h5 class="quarto-listing-category-title">Catégories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">Tous <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Classification">Classification <span class="quarto-category-count">(1)</span></div><div class="category" data-category="LLM">LLM <span class="quarto-category-count">(1)</span></div></div></div>
+    <h5 class="quarto-listing-category-title">Catégories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">Tous <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Classification">Classification <span class="quarto-category-count">(1)</span></div><div class="category" data-category="LLM">LLM <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Unbalanced Dataset">Unbalanced Dataset <span class="quarto-category-count">(1)</span></div></div></div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">tagnon</h1>
+<p class="subtitle lead">Welcome to my blog, a small space where I share the insights and knowledge I’ve gathered from my journey in AI and software development.</p>
 </div>
 
 
@@ -213,15 +223,15 @@ window.Quarto = {
 
 <div class="quarto-listing quarto-listing-container-default" id="listing-listing">
 <div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="LLM,Classification" data-listing-date-sort="1715990400000" data-listing-file-modified-sort="1716170255098" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="334">
+<div class="quarto-post image-right" data-index="0" data-categories="LLM,Classification,Unbalanced Dataset" data-listing-date-sort="1716249600000" data-listing-file-modified-sort="1716291103386" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="10" data-listing-word-count-sort="1888">
 <div class="thumbnail">
 <p><a href="./posts/predicting_comment_reply_llm.html" class="no-external"></a></p><a href="./posts/predicting_comment_reply_llm.html" class="no-external">
-<p class="card-img-top"><img src="posts/predicting_comment_reply_llm_files/figure-html/cell-8-output-1.png"  class="thumbnail-image card-img"/></p>
+<p class="card-img-top"><img src="posts/predicting_comment_reply_llm_files/figure-html/fig-cap-margin0-output-1.png"  class="thumbnail-image card-img"/></p>
 </a><p><a href="./posts/predicting_comment_reply_llm.html" class="no-external"></a></p>
 </div>
 <div class="body">
 <h3 class="no-anchor listing-title">
-<a href="./posts/predicting_comment_reply_llm.html" class="no-external">Predicting Reply under Comment with LLM</a>
+<a href="./posts/predicting_comment_reply_llm.html" class="no-external">Predicting reply under comment with LLM</a>
 </h3>
 <div class="listing-subtitle">
 <a href="./posts/predicting_comment_reply_llm.html" class="no-external"></a>
@@ -233,15 +243,18 @@ LLM
 <div class="listing-category" onclick="window.quartoListingCategory('Classification'); return false;">
 Classification
 </div>
+<div class="listing-category" onclick="window.quartoListingCategory('Unbalanced Dataset'); return false;">
+Unbalanced Dataset
+</div>
 </div>
 <div class="listing-description">
-<a href="./posts/predicting_comment_reply_llm.html" class="no-external">notebook</a>
+<a href="./posts/predicting_comment_reply_llm.html" class="no-external">Finetuning of Camembert on predicting, using a Le Soleil Facebook post comment as input, whether it will receive a response or not.</a>
 </div>
 </div>
 <div class="metadata">
 <a href="./posts/predicting_comment_reply_llm.html" class="no-external">
 <div class="listing-date">
-18 mai 2024
+21 mai 2024
 </div>
 <div class="listing-author">
 Konrad ALAHASSA
