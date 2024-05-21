@@ -1,6 +1,6 @@
 ---
-title: "tagnon"
-subtitle: "Welcome to my blog, a small space where I share the insights and knowledge I've gathered from my journey in AI and software development."
+title: "multiverse"
+subtitle: "Welcome to my blog, a small space in the vast universe of the Internet where I share the ideas and knowledge I've gained on my journey into AI and software development."
 search: true
 listing:
     contents: posts

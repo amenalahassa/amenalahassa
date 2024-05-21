@@ -3,11 +3,11 @@ project:
   output-dir: docs
 
 website:
-  title: "tagnon"
+  title: "multiverse"
   reader-mode: true
   open-graph: true
   back-to-top-navigation: true
-  description: "A small space where I share the insights and knowledge I've gathered from my journey in AI and software development."
+  description: "A small space in the vast universe of the Internet where I share the ideas and knowledge I've gained on my journey into AI and software development."
   site-url: "https://amenalahassa.github.io/amenalahassa/"
   repo-url: "https://github.com/amenalahassa/amenalahassa"
   repo-actions: [issue]
