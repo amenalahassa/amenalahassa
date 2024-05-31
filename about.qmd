@@ -52,17 +52,17 @@ Graduated with a focus on Mathematics and Science, forming a strong analytical f
 
 ## Skills
 
-##### Artificial Intelligence
+##### *Artificial Intelligence*
 | Python, Pytorch, Tensorflow, Keras
 | Matplotlib, Seaborn, Numpy, Pandas, timm, fastai, fastcore, torchvision, Poutyne,
 SPSS Modeler, RStudio
 
-##### Software engineering
+##### *Software engineering*
 | PHP, Javascript, C, C++, Java
 | Angular, ReactJs, VueJs, Cypress, Web API
 SQL, Mysql, Firebase, MongoDB, Web Services, APIs Rest
 
-##### Others
+##### *Others*
 Git, DevOps, CI/CD, UX Design, Scrum, Agile
 
 
