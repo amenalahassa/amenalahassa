@@ -21,7 +21,7 @@
 
 <section id="de-quoi-sagit-il" class="level1">
 <h1>De quoi s’agit-il ?</h1>
-<p>Dans ce post, je montre comment convertir un dataset YOLO en format COCO en utilisant la bibliothèque Python globox, une solution pratique que j’ai récemment appliquée pour un projet de segmentation d’instance. Globox permet également de faire l’inverse, ainsi que de nombreuses autres conversions de formats de datasets. Je vous invite à explorer ce package pour découvrir toutes les possibilités qu’il offre.</p>
+<p>Dans ce post, je montre comment convertir un dataset YOLO en format COCO en utilisant la bibliothèque Python <code>globox</code>, une solution pratique que j’ai récemment appliquée pour un projet de segmentation d’instance. <code>globox</code> permet également de faire l’inverse, ainsi que de nombreuses autres conversions de formats de datasets. Je vous invite à explorer ce package pour découvrir toutes les possibilités qu’il offre.</p>
 </section>
 <section id="ok-ça-donne-quoi" class="level1">
 <h1>Ok, ça donne quoi ?</h1>
@@ -57,7 +57,7 @@ background-color: null;
 font-style: inherit;">as</span> np</span></code></pre></div>
 </details>
 </div>
-<p>Le code ci-dessous initialise trois chemins en utilisant la bibliothèque <code>Path</code> de Python. Les chemins <code>label_path</code> et <code>image_path</code> pointent respectivement vers les dossiers contenant les étiquettes et les images du dataset YOLO. Ensuite, le chemin <code>save_file</code> est défini pour sauvegarder le fichier de sortie au format COCO. Enfin, la commande <code>annotations = AnnotationSet.from_yolo_v7(label_path, image_folder=image_path)</code> crée un ensemble d’annotations à partir des étiquettes YOLO V7 et des images associées, prêt à être converti au format COCO.</p>
+<p>Le code ci-dessous initialise trois chemins en utilisant la bibliothèque <code>Path</code> de Python. Les chemins <code>label_path</code> et <code>image_path</code> pointent respectivement vers les dossiers contenant les étiquettes et les images du dataset YOLO. Ensuite, le chemin <code>save_file</code> est défini pour sauvegarder le fichier de sortie au format COCO. Enfin, la commande <code>annotations = AnnotationSet.from_yolo_v7(label_path, image_folder=image_path)</code> crée un ensemble d’annotations à partir des étiquettes YOLO et des images associées, prêt à être converti au format COCO.</p>
 <div id="cell-7" class="cell" data-execution="{&quot;iopub.status.busy&quot;:&quot;2024-05-31T01:59:02.484254Z&quot;,&quot;iopub.execute_input&quot;:&quot;2024-05-31T01:59:02.484793Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-05-31T01:59:36.773381Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-05-31T01:59:02.484759Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-05-31T01:59:36.772245Z&quot;}" data-trusted="true" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1">label_path <span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -126,7 +126,7 @@ font-style: inherit;">=</span>image_path)</span></code></pre></div>
 </pre>
 </div>
 </div>
-<p>C’est ici que la magie à lieu ! La commande <code>annotations.save_coco(save_file, auto_ids=True)</code> sauvegarde l’ensemble d’annotations dans un fichier au format COCO, en utilisant le chemin spécifié par <code>save_file</code>. L’option <code>auto_ids=True</code> indique que les identifiants pour les annotations et les images seront générés automatiquement si nécessaire. Cette étape est essentielle pour préparer les annotations dans un format standardisé, facilitant ainsi leur utilisation dans divers outils et frameworks de vision par ordinateur.</p>
+<p>C’est ici que la magie à lieu ! La commande <code>annotations.save_coco(save_file, auto_ids=True)</code> sauvegarde l’ensemble d’annotations dans un fichier au format COCO, en utilisant le chemin spécifié par <code>save_file</code>. L’option <code>auto_ids=True</code> indique que les identifiants pour les annotations et les images seront générés automatiquement si nécessaire.</p>
 <div id="cell-11" class="cell">
 <div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1">annotations.save_coco(save_file, auto_ids<span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -134,9 +134,9 @@ font-style: inherit;">=</span><span class="va" style="color: #111111;
 background-color: null;
 font-style: inherit;">True</span>)</span></code></pre></div>
 </div>
-<p>Visualisons ensuite le résultat, mais en chargeant les données au format CocoDetection. Le code ci-dessous charge les données d’entraînement en utilisant la classe <code>CocoDetection</code> de la bibliothèque PyTorch.</p>
+<p>Visualisons ensuite le résultat, mais en chargeant les données au format CocoDetection. Le code ci-dessous fait cela en utilisant la classe <code>CocoDetection</code> de la bibliothèque PyTorch.</p>
 <p>Le paramètre <code>root</code> est défini avec le chemin vers le dossier des images (<code>image_path</code>), tandis que <code>annFile</code> spécifie le chemin du fichier d’annotations au format COCO (<code>save_file</code>).</p>
-<p>Le paramètre <code>transform</code> est mis à <code>None</code>, indiquant qu’aucune transformation supplémentaire n’est appliquée aux images pour le moment. Enfin, <code>train_data[0][0]</code> accède à la première image du dataset, afin ainsi de le visualiser.</p>
+<p>Enfin, <code>train_data[0][0]</code> accède à la première image du dataset, afin ainsi de le visualiser.</p>
 <div id="cell-13" class="cell" data-execution="{&quot;iopub.status.busy&quot;:&quot;2024-05-31T02:00:43.044327Z&quot;,&quot;iopub.execute_input&quot;:&quot;2024-05-31T02:00:43.044769Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-05-31T02:00:43.221923Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-05-31T02:00:43.044735Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-05-31T02:00:43.220768Z&quot;}" data-trusted="true" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1">train_data <span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -162,7 +162,7 @@ font-style: inherit;">0</span>]</span></code></pre></div>
 </div>
 </div>
 </div>
-<p>Profitons pour visualiser une image du dataset d’entraînement avec ses annotations (bbox) superposées sur l’image.</p>
+<p>Profitons pour visualiser une image du dataset avec ses annotations (bbox) superposées sur l’image.</p>
 <div id="cell-15" class="cell" data-execution="{&quot;iopub.status.busy&quot;:&quot;2024-05-31T02:04:51.070855Z&quot;,&quot;iopub.execute_input&quot;:&quot;2024-05-31T02:04:51.071241Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-05-31T02:04:51.522270Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-05-31T02:04:51.071213Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-05-31T02:04:51.520708Z&quot;}" data-trusted="true" data-execution_count="15">
 <details class="code-fold">
 <summary>Code</summary>
