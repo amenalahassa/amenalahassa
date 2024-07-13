@@ -267,16 +267,24 @@ cookieconsent.run({
 </section>
 <section id="ok-ça-donne-quoi" class="level1">
 <h1>Ok, ça donne quoi ?</h1>
-<div id="cell-4" class="cell" data-trusted="true">
+<div id="cell-4" class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>pip install globox<span class="op">!</span>pip install pycocotools</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>pip install globox</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>pip install pycocotools</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="cell-5" class="cell" data-execution="{&quot;iopub.status.busy&quot;:&quot;2024-05-31T02:24:21.015275Z&quot;,&quot;iopub.execute_input&quot;:&quot;2024-05-31T02:24:21.015826Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-05-31T02:24:21.024047Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-05-31T02:24:21.015782Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-05-31T02:24:21.022705Z&quot;}" data-trusted="true" data-execution_count="16">
+<div id="cell-5" class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Pathfrom PIL <span class="im">import</span> Imagefrom torchvision.datasets <span class="im">import</span> CocoDetectionfrom globox <span class="im">import</span> AnnotationSetimport matplotlib.pyplot <span class="im">as</span> pltimport matplotlib.patches <span class="im">as</span> patchesimport numpy <span class="im">as</span> np</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> PIL <span class="im">import</span> Image</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> torchvision.datasets <span class="im">import</span> CocoDetection</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> globox <span class="im">import</span> AnnotationSet</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.patches <span class="im">as</span> patches</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <p>Le code ci-dessous initialise trois chemins en utilisant la bibliothèque <code>Path</code> de Python. Les chemins <code>label_path</code> et <code>image_path</code> pointent respectivement vers les dossiers contenant les étiquettes et les images du dataset YOLO. Ensuite, le chemin <code>save_file</code> est défini pour sauvegarder le fichier de sortie au format COCO. Enfin, la commande <code>annotations = AnnotationSet.from_yolo_v7(label_path, image_folder=image_path)</code> crée un ensemble d’annotations à partir des étiquettes YOLO et des images associées, prêt à être converti au format COCO.</p>
@@ -354,7 +362,25 @@ cookieconsent.run({
 <div id="cell-15" class="cell" data-execution="{&quot;iopub.status.busy&quot;:&quot;2024-05-31T02:04:51.070855Z&quot;,&quot;iopub.execute_input&quot;:&quot;2024-05-31T02:04:51.071241Z&quot;,&quot;iopub.status.idle&quot;:&quot;2024-05-31T02:04:51.522270Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2024-05-31T02:04:51.071213Z&quot;,&quot;shell.execute_reply&quot;:&quot;2024-05-31T02:04:51.520708Z&quot;}" data-trusted="true" data-execution_count="15">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Obtenir la première image et ses annotationsimage, annotations = train_data[0]# Convertir l'image PIL en tableau numpy pour l'affichageimage_np = np.array(image)# Créer un graphiquefig, ax = plt.subplots(1)ax.imshow(image_np)# Tracer chaque boîte englobantefor ann in annotations:    bbox = ann['bbox']    # Le format de boîte englobante COCO est [x, y, largeur, hauteur]    rect = patches.Rectangle((bbox[0], bbox[1]), bbox[2], bbox[3], linewidth=2, edgecolor='r', facecolor='none')    ax.add_patch(rect)# Afficher le graphiqueplt.show()</span></span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Obtenir la première image et ses annotations</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>image, annotations <span class="op">=</span> train_data[<span class="dv">0</span>]</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Convertir l'image PIL en tableau numpy pour l'affichage</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>image_np <span class="op">=</span> np.array(image)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Créer un graphique</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(<span class="dv">1</span>)</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>ax.imshow(image_np)</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Tracer chaque boîte englobante</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> ann <span class="kw">in</span> annotations:</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>    bbox <span class="op">=</span> ann[<span class="st">'bbox'</span>]</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Le format de boîte englobante COCO est [x, y, largeur, hauteur]</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>    rect <span class="op">=</span> patches.Rectangle((bbox[<span class="dv">0</span>], bbox[<span class="dv">1</span>]), bbox[<span class="dv">2</span>], bbox[<span class="dv">3</span>], linewidth<span class="op">=</span><span class="dv">2</span>, edgecolor<span class="op">=</span><span class="st">'r'</span>, facecolor<span class="op">=</span><span class="st">'none'</span>)</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>    ax.add_patch(rect)</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Afficher le graphique</span></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
