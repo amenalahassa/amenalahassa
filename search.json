@@ -1,13 +1,59 @@
 [
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "multiverse",
+    "objectID": "posts/for_you.html",
+    "href": "posts/for_you.html",
+    "title": "This words are for you….",
     "section": "",
-    "text": "Passer de Yolo à CocoDetection, c’est possible !\n\n\n\n\n\n\nYOLO\n\n\nCocoDetection\n\n\nDataset\n\n\n\nJe partage dans cet article une méthode simple pour convertir un dataset YOLO au format COCO, ou à un autre, une solution que j’ai trouvée essentielle lors d’un récent projet de segmentation d’instance.\n\n\n\n\n\n30 mai 2024\n\n\n\n\n\n\n\n\n\n\n\n\nPredicting reply under comment with LLM\n\n\n\n\n\n\nLLM\n\n\nClassification\n\n\nUnbalanced Dataset\n\n\n\nFinetuning of Camembert on predicting, using a Le Soleil Facebook post comment as input, whether it will receive a response or not.\n\n\n\n\n\n21 mai 2024\n\n\n\n\n\n\nAucun article correspondant\n\n Retour au sommet",
-    "crumbs": [
-      "Blog"
-    ]
+    "text": "Alright, let’s be real. Life happened, right? 😅 I took some time to wrap up a few things in my life and, honestly, to kickstart a new chapter. You know that feeling when you finish one thing and feel like a whole new world opens up? Yeah, that’s where I’m at! 🌟\nPlus, it was the end of the school session, and I needed some well-deserved downtime. Relaxing, de-stressing, and just enjoying life for a bit. But guess what? Now I’m back, energized, and ready to take on the world! 🌍✨\nI’ve realized how much I’ve already accomplished, and let me tell you, I’m super grateful for all of it. 🙏 But I also see how much more there is to do. My blog, my job, my personal life – they all need my attention, and I’m ready to dive in.\nThe possibilities ahead? Endless. I’m seizing every opportunity coming my way, and I can’t wait to share the journey with you! 🚀"
+  },
+  {
+    "objectID": "posts/for_you.html#what-happened-indeed",
+    "href": "posts/for_you.html#what-happened-indeed",
+    "title": "This words are for you….",
+    "section": "",
+    "text": "Alright, let’s be real. Life happened, right? 😅 I took some time to wrap up a few things in my life and, honestly, to kickstart a new chapter. You know that feeling when you finish one thing and feel like a whole new world opens up? Yeah, that’s where I’m at! 🌟\nPlus, it was the end of the school session, and I needed some well-deserved downtime. Relaxing, de-stressing, and just enjoying life for a bit. But guess what? Now I’m back, energized, and ready to take on the world! 🌍✨\nI’ve realized how much I’ve already accomplished, and let me tell you, I’m super grateful for all of it. 🙏 But I also see how much more there is to do. My blog, my job, my personal life – they all need my attention, and I’m ready to dive in.\nThe possibilities ahead? Endless. I’m seizing every opportunity coming my way, and I can’t wait to share the journey with you! 🚀"
+  },
+  {
+    "objectID": "posts/for_you.html#whats-next",
+    "href": "posts/for_you.html#whats-next",
+    "title": "This words are for you….",
+    "section": "What’s Next? 🎉",
+    "text": "What’s Next? 🎉\nFirst off, a huge shoutout to my brothers and my family. Without them, I wouldn’t be here doing what I love. You guys are the real MVPs! 💪\nNow, onto me. I’m committed to working on myself, becoming the best version of me. I’m just getting started on my journey, my career, my dreams – and I’m 100% ready to make them a reality. Let’s do this! 🙌"
+  },
+  {
+    "objectID": "posts/for_you.html#the-reason-behind-this-blog",
+    "href": "posts/for_you.html#the-reason-behind-this-blog",
+    "title": "This words are for you….",
+    "section": "The Reason Behind This Blog 💻",
+    "text": "The Reason Behind This Blog 💻\nSo, why this blog? Well, it’s simple. I want to share what I’ve accomplished in my career, in AI, in software engineering – and maybe some other areas too. 🚀\nBut here’s the thing: this isn’t going to be a blog where I show you how to do things or preach about the future of AI (though, who knows, maybe a little bit of that 😉). Instead, it’s going to be a place where I share what I’m learning, what I’m building, and who I’m building it with. And hey, I’d love to hear your thoughts, comments, and recommendations along the way. Don’t hesitate! 😊"
+  },
+  {
+    "objectID": "posts/for_you.html#why-now",
+    "href": "posts/for_you.html#why-now",
+    "title": "This words are for you….",
+    "section": "Why Now? 🤷",
+    "text": "Why Now? 🤷\nYou know, I just realized that I never really took the time to properly introduce this blog or explain what it’s all about. Better late than never, right? 😁 So, here it is! 🎉"
+  },
+  {
+    "objectID": "posts/for_you.html#how-its-built",
+    "href": "posts/for_you.html#how-its-built",
+    "title": "This words are for you….",
+    "section": "How It’s Built 🛠️",
+    "text": "How It’s Built 🛠️\nFor all the techies out there, I’m using Quarto, and it’s deployed with GitHub Pages. I wanted to keep things simple but also have the flexibility to share code. Quarto’s been perfect for that – super interesting and easy to get the hang of. 👍"
+  },
+  {
+    "objectID": "posts/for_you.html#what-else",
+    "href": "posts/for_you.html#what-else",
+    "title": "This words are for you….",
+    "section": "What Else? 🧐",
+    "text": "What Else? 🧐\nOh, and one more thing – I’ve added a page to showcase all the projects I’m working on, both finished and in progress. I’ll be publishing articles explaining them, sharing why I find them interesting, and how they’re coming along. Stay tuned! 🚧\nGot any comments or ideas on how I can improve? I’m all ears! 👂 I’ll be updating regularly on my progress and any news, so keep an eye out for more.\nAnd hey, I speak French too! Je peux bien parler en français qu’en anglais, permettez-moi ce petit écart 😉."
+  },
+  {
+    "objectID": "posts/for_you.html#ok-time-to-say-goodbye",
+    "href": "posts/for_you.html#ok-time-to-say-goodbye",
+    "title": "This words are for you….",
+    "section": "Ok, Time to Say Goodbye 👋",
+    "text": "Ok, Time to Say Goodbye 👋\nThat’s all for now, folks! See you soon, and take care! Love you all! 💖"
   },
   {
     "objectID": "posts/dataset-converter.html",
@@ -15,6 +61,16 @@
     "title": "Passer de Yolo à CocoDetection, c’est possible !",
     "section": "",
     "text": "De quoi s’agit-il ?\nDans ce post, je montre comment convertir un dataset YOLO en format COCO en utilisant la bibliothèque Python globox, une solution pratique que j’ai récemment appliquée pour un projet de segmentation d’instance. globox permet également de faire l’inverse, ainsi que de nombreuses autres conversions de formats de datasets. Je vous invite à explorer ce package pour découvrir toutes les possibilités qu’il offre.\n\n\nOk, ça donne quoi ?\n\n\nCode\n!pip install globox\n!pip install pycocotools\n\n\n\n\nCode\nfrom pathlib import Path\nfrom PIL import Image\nfrom torchvision.datasets import CocoDetection\nfrom globox import AnnotationSet\n\nimport matplotlib.pyplot as plt\nimport matplotlib.patches as patches\nimport numpy as np\n\n\nLe code ci-dessous initialise trois chemins en utilisant la bibliothèque Path de Python. Les chemins label_path et image_path pointent respectivement vers les dossiers contenant les étiquettes et les images du dataset YOLO. Ensuite, le chemin save_file est défini pour sauvegarder le fichier de sortie au format COCO. Enfin, la commande annotations = AnnotationSet.from_yolo_v7(label_path, image_folder=image_path) crée un ensemble d’annotations à partir des étiquettes YOLO et des images associées, prêt à être converti au format COCO.\n\nlabel_path = Path(\"/kaggle/input/medleaves-medicinal-plant-leaves-dataset/MedLeaves/MedLeaves/train/labels\")\nimage_path = Path(\"/kaggle/input/medleaves-medicinal-plant-leaves-dataset/MedLeaves/MedLeaves/train/images\") \n\nsave_file = Path(\"/kaggle/working/medleaves-coco.json\")\n\nannotations = AnnotationSet.from_yolo_v7(label_path, image_folder=image_path)\n\nLa commande annotations.show_stats() est utilisée pour afficher des statistiques sur l’ensemble d’annotations créé précédemment. Cette méthode fournit un résumé utile des données annotées, comme le nombre total d’images, d’annotations, et la distribution des catégories d’objets. Cela permet de vérifier rapidement l’état et la qualité des annotations avant de procéder à des opérations de conversion ou d’entraînement de modèles.\n\nannotations.show_stats()\n\n      Database Stats      \n┏━━━━━━━┳━━━━━━━━┳━━━━━━━┓\n┃ Label ┃ Images ┃ Boxes ┃\n┡━━━━━━━╇━━━━━━━━╇━━━━━━━┩\n│ 0     │    415 │  2322 │\n│ 1     │    408 │   498 │\n│ 10    │    416 │   588 │\n│ 11    │    412 │   612 │\n│ 12    │    414 │  2401 │\n│ 13    │    410 │   810 │\n│ 14    │    412 │  2750 │\n│ 15    │    408 │  1605 │\n│ 16    │    411 │  2237 │\n│ 17    │    411 │  2662 │\n│ 18    │    409 │   682 │\n│ 19    │    413 │  5032 │\n│ 2     │    414 │  5830 │\n│ 20    │    405 │   882 │\n│ 21    │    415 │  2892 │\n│ 22    │    409 │   540 │\n│ 23    │    414 │  1275 │\n│ 24    │    411 │   727 │\n│ 25    │    407 │  4778 │\n│ 26    │    413 │  1255 │\n│ 27    │    406 │   997 │\n│ 28    │    411 │   618 │\n│ 29    │    409 │  1143 │\n│ 3     │    411 │  1584 │\n│ 4     │    405 │  3082 │\n│ 5     │    405 │  1275 │\n│ 6     │    416 │   769 │\n│ 7     │    403 │   570 │\n│ 8     │    409 │  1563 │\n│ 9     │    410 │  2475 │\n├───────┼────────┼───────┤\n│ Total │  12312 │ 54454 │\n└───────┴────────┴───────┘\n\n\n\nC’est ici que la magie à lieu ! La commande annotations.save_coco(save_file, auto_ids=True) sauvegarde l’ensemble d’annotations dans un fichier au format COCO, en utilisant le chemin spécifié par save_file. L’option auto_ids=True indique que les identifiants pour les annotations et les images seront générés automatiquement si nécessaire.\n\nannotations.save_coco(save_file, auto_ids=True)\n\nVisualisons ensuite le résultat, mais en chargeant les données au format CocoDetection. Le code ci-dessous fait cela en utilisant la classe CocoDetection de la bibliothèque PyTorch.\nLe paramètre root est défini avec le chemin vers le dossier des images (image_path), tandis que annFile spécifie le chemin du fichier d’annotations au format COCO (save_file).\nEnfin, train_data[0][0] accède à la première image du dataset, afin ainsi de le visualiser.\n\ntrain_data = CocoDetection(root = image_path, annFile = save_file, transform = None)\ntrain_data[0][0]\n\n\n\n\n\n\n\n\nProfitons pour visualiser une image du dataset avec ses annotations (bbox) superposées sur l’image.\n\n\nCode\n# Obtenir la première image et ses annotations\nimage, annotations = train_data[0]\n\n# Convertir l'image PIL en tableau numpy pour l'affichage\nimage_np = np.array(image)\n\n# Créer un graphique\nfig, ax = plt.subplots(1)\nax.imshow(image_np)\n\n# Tracer chaque boîte englobante\nfor ann in annotations:\n    bbox = ann['bbox']\n    # Le format de boîte englobante COCO est [x, y, largeur, hauteur]\n    rect = patches.Rectangle((bbox[0], bbox[1]), bbox[2], bbox[3], linewidth=2, edgecolor='r', facecolor='none')\n    ax.add_patch(rect)\n\n# Afficher le graphique\nplt.show()\n\n\n\n\n\n\n\n\n\nJ’espère que cela vous sera utile. N’hésitez pas à me contacter si vous avez des questions ou des recommendations. À la prochaine ! :-)\n\n\n\n\n Retour au sommet"
+  },
+  {
+    "objectID": "works.html",
+    "href": "works.html",
+    "title": "Personal works and other stuffs",
+    "section": "",
+    "text": "Retour au sommet",
+    "crumbs": [
+      "My works"
+    ]
   },
   {
     "objectID": "about.html",
@@ -67,6 +123,30 @@
     ]
   },
   {
+    "objectID": "hello.html",
+    "href": "hello.html",
+    "title": "Quarto Basics",
+    "section": "",
+    "text": "For a demonstration of a line plot on a polar axis, see Figure 1.\n\n\nCode\nimport numpy as np\nimport matplotlib.pyplot as plt\n\nr = np.arange(0, 2, 0.01)\ntheta = 2 * np.pi * r\nfig, ax = plt.subplots(\n  subplot_kw = {'projection': 'polar'} \n)\nax.plot(theta, r)\nax.set_rticks([0.5, 1, 1.5, 2])\nax.grid(True)\nplt.show()\n\n\n\n\n\n\n\n\nFigure 1: A line plot on a polar axis"
+  },
+  {
+    "objectID": "hello.html#polar-axis",
+    "href": "hello.html#polar-axis",
+    "title": "Quarto Basics",
+    "section": "",
+    "text": "For a demonstration of a line plot on a polar axis, see Figure 1.\n\n\nCode\nimport numpy as np\nimport matplotlib.pyplot as plt\n\nr = np.arange(0, 2, 0.01)\ntheta = 2 * np.pi * r\nfig, ax = plt.subplots(\n  subplot_kw = {'projection': 'polar'} \n)\nax.plot(theta, r)\nax.set_rticks([0.5, 1, 1.5, 2])\nax.grid(True)\nplt.show()\n\n\n\n\n\n\n\n\nFigure 1: A line plot on a polar axis"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "multiverse",
+    "section": "",
+    "text": "This words are for you….\n\n\n\n\n\nI want to properly introducing this blog and explaining why I haven’t published anything for a few months.\n\n\n\n\n\n23 août 2024\n\n\n\n\n\n\n\n\n\n\n\n\nPasser de Yolo à CocoDetection, c’est possible !\n\n\n\n\n\n\nYOLO\n\n\nCocoDetection\n\n\nDataset\n\n\n\nJe partage dans cet article une méthode simple pour convertir un dataset YOLO au format COCO, ou à un autre, une solution que j’ai trouvée essentielle lors d’un récent projet de segmentation d’instance.\n\n\n\n\n\n30 mai 2024\n\n\n\n\n\n\n\n\n\n\n\n\nPredicting reply under comment with LLM\n\n\n\n\n\n\nLLM\n\n\nClassification\n\n\nUnbalanced Dataset\n\n\n\nFinetuning of Camembert on predicting, using a Le Soleil Facebook post comment as input, whether it will receive a response or not.\n\n\n\n\n\n21 mai 2024\n\n\n\n\n\n\nAucun article correspondant\n\n Retour au sommet",
+    "crumbs": [
+      "Blog"
+    ]
+  },
+  {
     "objectID": "posts/predicting_comment_reply_llm.html",
     "href": "posts/predicting_comment_reply_llm.html",
     "title": "Predicting reply under comment with LLM",
@@ -114,19 +194,5 @@
     "title": "Predicting reply under comment with LLM",
     "section": "Takeaways",
     "text": "Takeaways\n\nDataset Analysis is Crucial: Always begin by analyzing your dataset. Understanding the distribution and characteristics of your data helps in making informed decisions about model training and evaluation. In scenarios with limited resources, generating more data for the underrepresented class might not be feasible. Instead, sampling equal numbers of comments from each class for the training set can help reduce bias towards the overrepresented class.\nBalanced Training, Unbalanced Validation: While balancing the training set by equal sampling is important to reduce bias, the validation set should remain unbalanced. This approach ensures that the model’s performance is evaluated in a realistic manner, reflecting its ability to generalize to the true distribution of the data.\nResource-Based Training Strategy: Define your training strategy based on the available resources. When computational power or time is limited, working with a smaller, balanced sample of the dataset is a practical approach. This allows for iterative experimentation and tuning without the overhead of processing the entire dataset.\nProblem-Specific Metrics: Choose evaluation metrics that align with your problem’s objectives. For instance, in this scenario, the F2 score (F2 = tp / (tp + 2 * fn + fp)) is used to evaluate model performance by balancing the detection of the positive class and minimizing errors.\nInitial Model Performance: After the first round of training, the F2 score indicates that the model prioritizes recall over precision. This is evidenced by the high recall but low precision on the test set.\nImpact of False Positives: High false positives can be problematic in real-world applications. They can lead to inefficient use of resources and missed opportunities to engage with truly relevant comments. This highlights the need for a balance between precision and recall.\nTraining Set Size and Generalization: Increasing the size of the training set helps the model generalize better to the test data. A larger training set reduces overfitting and enhances the model’s ability to balance precision and recall effectively. This results in improved overall performance and more reliable predictions.\nChoosing the Right Model: Select a model that is suitable for your specific problem. For instance, since the dataset consists of French text, using CamemBERT, a model specifically designed for the French language, is an appropriate choice.\nHyperparameter Tuning: Finding the optimal hyperparameters for your model is crucial and often involves extensive experimentation. Before finalizing the model, numerous combinations were tested to identify the best-performing configuration. Hyperparameter tuning is more of an art than a strict recipe, requiring intuition and experience to achieve the best results."
-  },
-  {
-    "objectID": "hello.html",
-    "href": "hello.html",
-    "title": "Quarto Basics",
-    "section": "",
-    "text": "For a demonstration of a line plot on a polar axis, see Figure 1.\n\n\nCode\nimport numpy as np\nimport matplotlib.pyplot as plt\n\nr = np.arange(0, 2, 0.01)\ntheta = 2 * np.pi * r\nfig, ax = plt.subplots(\n  subplot_kw = {'projection': 'polar'} \n)\nax.plot(theta, r)\nax.set_rticks([0.5, 1, 1.5, 2])\nax.grid(True)\nplt.show()\n\n\n\n\n\n\n\n\nFigure 1: A line plot on a polar axis"
-  },
-  {
-    "objectID": "hello.html#polar-axis",
-    "href": "hello.html#polar-axis",
-    "title": "Quarto Basics",
-    "section": "",
-    "text": "For a demonstration of a line plot on a polar axis, see Figure 1.\n\n\nCode\nimport numpy as np\nimport matplotlib.pyplot as plt\n\nr = np.arange(0, 2, 0.01)\ntheta = 2 * np.pi * r\nfig, ax = plt.subplots(\n  subplot_kw = {'projection': 'polar'} \n)\nax.plot(theta, r)\nax.set_rticks([0.5, 1, 1.5, 2])\nax.grid(True)\nplt.show()\n\n\n\n\n\n\n\n\nFigure 1: A line plot on a polar axis"
   }
 ]
