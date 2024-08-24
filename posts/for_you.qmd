@@ -1,0 +1,52 @@
+---
+title: "This words are for you...."
+date: 2024/08/23
+date-modified: 2024/08/23
+description: "I want to properly introducing this blog and explaining why I haven't published anything for a few months."
+format:
+  html:
+    code-fold: true
+---
+
+## What Happened Indeed? 🤔
+
+Alright, let's be real. Life happened, right? 😅 I took some time to wrap up a few things in my life and, honestly, to kickstart a new chapter. You know that feeling when you finish one thing and feel like a whole new world opens up? Yeah, that’s where I’m at! 🌟
+
+Plus, it was the end of the school session, and I needed some well-deserved downtime. Relaxing, de-stressing, and just enjoying life for a bit. But guess what? Now I’m back, energized, and ready to take on the world! 🌍✨
+
+I’ve realized how much I've already accomplished, and let me tell you, I’m super grateful for all of it. 🙏 But I also see how much more there is to do. My blog, my job, my personal life – they all need my attention, and I'm ready to dive in.
+
+The possibilities ahead? Endless. I’m seizing every opportunity coming my way, and I can’t wait to share the journey with you! 🚀
+
+## What’s Next? 🎉
+
+First off, a huge shoutout to my brothers and my family. Without them, I wouldn't be here doing what I love. You guys are the real MVPs! 💪
+
+Now, onto me. I’m committed to working on myself, becoming the best version of me. I’m just getting started on my journey, my career, my dreams – and I’m 100% ready to make them a reality. Let's do this! 🙌
+
+## The Reason Behind This Blog 💻
+
+So, why this blog? Well, it’s simple. I want to share what I’ve accomplished in my career, in AI, in software engineering – and maybe some other areas too. 🚀
+
+But here's the thing: this isn’t going to be a blog where I show you how to do things or preach about the future of AI (though, who knows, maybe a little bit of that 😉). Instead, it’s going to be a place where I share what I’m learning, what I’m building, and who I’m building it with. And hey, I’d love to hear your thoughts, comments, and recommendations along the way. Don’t hesitate! 😊
+
+## Why Now? 🤷
+
+You know, I just realized that I never really took the time to properly introduce this blog or explain what it’s all about. Better late than never, right? 😁 So, here it is! 🎉
+
+## How It’s Built 🛠️
+
+For all the techies out there, I’m using Quarto, and it's deployed with GitHub Pages. I wanted to keep things simple but also have the flexibility to share code. Quarto's been perfect for that – super interesting and easy to get the hang of. 👍
+
+## What Else? 🧐
+
+Oh, and one more thing – I’ve added a page to showcase all the projects I’m working on, both finished and in progress. I’ll be publishing articles explaining them, sharing why I find them interesting, and how they’re coming along. Stay tuned! 🚧
+
+Got any comments or ideas on how I can improve? I’m all ears! 👂 I’ll be updating regularly on my progress and any news, so keep an eye out for more.
+
+And hey, I speak French too! Je peux bien parler en français qu’en anglais, permettez-moi ce petit écart 😉.
+
+## Ok, Time to Say Goodbye 👋
+
+That’s all for now, folks! See you soon, and take care! Love you all! 💖
+
