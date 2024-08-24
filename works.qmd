@@ -1,0 +1,15 @@
+---
+title: "Personal works and other stuffs"
+about:
+    template: solana
+    links:
+      - icon: linkedin
+        text: LinkedIn
+        href: https://www.linkedin.com/in/alkonrad/
+      - icon: github
+        text: Github
+        href: https://github.com/amenalahassa/amenalahassa
+      - icon: email
+        text: Say 👋!
+        href: email:am.konrad21@gmail.com
+---

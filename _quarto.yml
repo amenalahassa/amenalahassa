@@ -17,6 +17,8 @@ website:
     contents:
       - href: index.qmd
         text: Blog
+      - href: works.qmd
+        text: My works
       - href: about.qmd
         text: L'auteur
     tools:
