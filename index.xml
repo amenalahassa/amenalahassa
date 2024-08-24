@@ -12,7 +12,101 @@
 <generator>quarto-1.5.37</generator>
 <lastBuildDate>Fri, 23 Aug 2024 00:00:00 GMT</lastBuildDate>
 <item>
-  <title>This words are for you….</title>
+  <title>How I Built a Tool to Anonymize Text for LLMs (and Why You Might Need It Too!)</title>
+  <link>https://amenalahassa.github.io/amenalahassa/posts/anonymizer_intro.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>Hey folks! 🙌</p>
+<p>Ever find yourself using those cool new LLMs like ChatGPT for pretty much everything—whether it’s writing emails, drafting cover letters, or even creating blog content (I know I do! 😅)? It’s like having your personal assistant right there in your browser, making life so much easier. But, wait…what happens when your prompts contain personal details? 😬</p>
+<p>You know, that awkward moment when you realize you’ve shared too much in a prompt? Yeah, been there, done that. So, I figured, why not build a tool that handles this issue and keeps things private? 💡</p>
+<section id="how-i-found-myself-working-on-this" class="level2">
+<h2 class="anchored" data-anchor-id="how-i-found-myself-working-on-this">How I Found Myself Working on This 🛠️</h2>
+<p>Recently, I noticed just how much I’ve been relying on LLMs for personal stuff—writing emails, tweaking my CV, crafting blogs, even coding! But every time I use them, I have to manually remove or anonymize personal info in my prompts. Talk about tedious! 😩</p>
+<p>It got to a point where I was doing this so often that I thought, “There’s got to be a better way!” And so, the idea of building a tool that runs entirely offline, right in your browser, was born. 🚀</p>
+</section>
+<section id="the-idea" class="level2">
+<h2 class="anchored" data-anchor-id="the-idea">The Idea 💡</h2>
+<p>It’s super simple! Just paste your text, and voila—it anonymizes it. Now, you can safely use it in your prompts without worrying about personal details leaking out. ✨</p>
+<section id="example-time" class="level3">
+<h3 class="anchored" data-anchor-id="example-time">Example Time! ✍️</h3>
+<p>Imagine you’ve have to send an email to a customer about an upcoming event at your coffee shop. Here’s what it might look like:</p>
+<blockquote class="blockquote">
+<p>Subject: Join us for the Grand Renovation of New York - Exciting Changes Await!</p>
+<p>Dear John Green,</p>
+<p>We hope this email finds you well and enjoying your favorite vanilla latte large and banana muffin at our coffee shop! As a valued and loyal customer, we are thrilled to share some exciting news with you.</p>
+<p>Mark your calendar for January 4, 2023, as we invite you to join us for the grand renovation of our coffee shop at New York! We are embarking on a journey to create an even better and cozier space for you to relax, indulge, and enjoy your favorite beverages and treats.</p>
+<p>You have been a cherished part of our coffee shop family for an incredible 5 years, and we cannot wait to show our appreciation by unveiling a fresh, modern look that will elevate your coffee shop experience. The renovation will bring about stylish and comfortable seating areas, captivating artwork, and state-of-the-art equipment to enhance the quality of our offerings.</p>
+<p>The grand reopening event promises to be a celebration filled with delightful surprises. As our special guest, you will be among the first to explore the redesigned space and sample our latest menu additions. Immerse yourself in the inviting ambiance, meet our talented baristas, and indulge in the aroma of freshly brewed coffee that is synonymous with our coffee shop. We value your opinion, John Green, and would be thrilled to hear your thoughts and feedback on our newly renovated space. As always, our commitment remains to provide you with exceptional customer service and the highest quality products that you know and love.</p>
+<p>Save the date: January 4, 2023! We cannot wait to welcome you to the grand renovation of our coffee shop at New York. Together, let’s embark on this exciting journey and create countless new memories over aromatic coffees and delectable treats.</p>
+<p>Thank you for being an integral part of our coffee shop’s success. We look forward to continuing to serve you and make your coffee experiences unforgettable.</p>
+<p>Warmest regards,</p>
+</blockquote>
+<p>You paste it into the tool, and <em>poof</em>—it replaces those details with anonymous IDs. 🕵️‍♀️</p>
+<blockquote class="blockquote">
+<p>Subject: Join us for the Grand Renovation of aLOCATION_524a - Exciting Changes Await!</p>
+<p>Dear aPEOPLE_872a,</p>
+<p>We hope this email finds you well and enjoying your favorite vanilla latte large and banana muffin at our coffee shop! As a valued and loyal customer, we are thrilled to share some exciting news with you.</p>
+<p>Mark your calendar for aDATE_988a, as we invite you to join us for the grand renovation of our coffee shop at aLOCATION_524a! We are embarking on a journey to create an even better and cozier space for you to relax, indulge, and enjoy your favorite beverages and treats.</p>
+<p>You have been a cherished part of our coffee shop family for an incredible 5 years, and we cannot wait to show our appreciation by unveiling a fresh, modern look that will elevate your coffee shop experience. The renovation will bring about stylish and comfortable seating areas, captivating artwork, and state-of-the-art equipment to enhance the quality of our offerings.</p>
+<p>The grand reopening event promises to be a celebration filled with delightful surprises. As our special guest, you will be among the first to explore the redesigned space and sample our latest menu additions. Immerse yourself in the inviting ambiance, meet our talented baristas, and indulge in the aroma of freshly brewed coffee that is synonymous with our coffee shop. We value your opinion, aPEOPLE_872a, and would be thrilled to hear your thoughts and feedback on our newly renovated space. As always, our commitment remains to provide you with exceptional customer service and the highest quality products that you know and love.</p>
+<p>Save the date: aDATE_988a! We cannot wait to welcome you to the grand renovation of our coffee shop at aLOCATION_524a. Together, let’s embark on this exciting journey and create countless new memories over aromatic coffees and delectable treats.</p>
+<p>Thank you for being an integral part of our coffee shop’s success. We look forward to continuing to serve you and make your coffee experiences unforgettable.</p>
+<p>Warmest regards,</p>
+</blockquote>
+<p>Then, you can use that anonymized text in your LLM prompt. Once you get the LLM’s response, you paste it back into the tool, and it replaces the IDs with your original info. As simple as that! 😎</p>
+</section>
+</section>
+<section id="how-to-try-it" class="level2">
+<h2 class="anchored" data-anchor-id="how-to-try-it">How to Try It? 🤔</h2>
+<p>Excited to give it a spin? You can check it out <a href="https://amenalahassa.github.io/web-anonymiser/">here</a>. It’s still a work in progress (so don’t judge me too harshly! 😜), but the full offline version is coming soon.</p>
+<p>For now, you can test it out and share your thoughts with me. Your feedback means the world! 🌍</p>
+</section>
+<section id="next-steps" class="level2">
+<h2 class="anchored" data-anchor-id="next-steps">Next Steps 🚀</h2>
+<p>Here’s what I’ve got cooking for the future:</p>
+<ul>
+<li>Turning it into a browser extension that automatically catches text you paste into input boxes, helping protect your identity on the fly.</li>
+<li>Extending the tool to handle PII (Personally Identifiable Information) with customizable options for what to anonymize.</li>
+<li>And so much more! 🎉</li>
+</ul>
+</section>
+<section id="but-why" class="level2">
+<h2 class="anchored" data-anchor-id="but-why">But Why? 🤷‍♂️</h2>
+<p>Good question! There are already some awesome tools out there, like <a href="https://www.pontus.so/blog">this one</a> and <a href="https://github.com/AI-LLM/AnonymizedGPT?tab=readme-ov-file">this GitHub repo</a>. But none of them are quite what I was looking for—so I decided to share mine! 😄</p>
+<p>If you’ve got any comments, feel free to reach out or open an issue. I’m all ears! 👂</p>
+</section>
+<section id="it-was-fun-and-educational" class="level2">
+<h2 class="anchored" data-anchor-id="it-was-fun-and-educational">It Was Fun and Educational! 🎓</h2>
+<p>Building this tool was such a learning experience. I dove into ONNX, WebGPU, WebAssembly, Transformer.js, Hugging Face Inference, Angular 18, and so much more. And, boy, did I learn a lot! 💻</p>
+<section id="also-a-few-things-i-noticed" class="level3">
+<h3 class="anchored" data-anchor-id="also-a-few-things-i-noticed">Also, a Few Things I Noticed… 🧐</h3>
+<ul>
+<li>Running an LLM in the browser without a GPU can be <strong>super slow</strong>. 🐢</li>
+<li>Not all browsers support WebGPU, so that’s a challenge.</li>
+<li>To run a model in the browser, you need a <strong>really light model</strong>, preferably quantized and optimized for the web (like with Olive, for example). Ideally, it should run on WebGPU for the best performance.</li>
+</ul>
+</section>
+</section>
+<section id="final-thoughts" class="level2">
+<h2 class="anchored" data-anchor-id="final-thoughts">Final Thoughts… 🎉</h2>
+<p>Overall, it’s been a fantastic experience. Version 2 is already in the works, so stay tuned! 😎</p>
+<p>Thanks so much for reading, and don’t hesitate to reach out with your thoughts.</p>
+<p>Cheers! 🥂</p>
+
+
+</section>
+
+<a onclick="window.scrollTo(0, 0); return false;" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Retour au sommet</a> ]]></description>
+  <category>LLM</category>
+  <category>Anonymization</category>
+  <guid>https://amenalahassa.github.io/amenalahassa/posts/anonymizer_intro.html</guid>
+  <pubDate>Fri, 23 Aug 2024 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Finally, An Introduction: The Story Behind This Blog and What’s Next</title>
   <link>https://amenalahassa.github.io/amenalahassa/posts/for_you.html</link>
   <description><![CDATA[ 
 

@@ -6,8 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="description" content="Discover a handy tool that anonymizes your text before using it in LLMs, keeping your personal information safe and sound!">
 
-<title>multiverse</title>
+<title>multiverse – How I Built a Tool to Anonymize Text for LLMs (and Why You Might Need It Too!)</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,26 +24,24 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="site_libs/cookie-consent/cookie-consent.js"></script>
-<link href="site_libs/cookie-consent/cookie-consent.css" rel="stylesheet">
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="dark">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/cookie-consent/cookie-consent.js"></script>
+<link href="../site_libs/cookie-consent/cookie-consent.css" rel="stylesheet">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -70,35 +69,6 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Recherche"
   }
 }</script>
-<script>
-
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
-
-    const options = {
-      valueNames: ['listing-date','listing-title','listing-author','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
-      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description","listing-categories"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
 <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-X5E8KFGB6H"></script>
 
 <script type="text/plain" cookie-consent="tracking">
@@ -128,42 +98,13 @@ cookieconsent.run({
   
 <style>html{ scroll-behavior: smooth; }</style>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
-
-<link rel="stylesheet" href="assets/styles.css">
-<link rel="alternate" type="application/rss+xml" title="multiverse" href="index.xml" data-external="1"><meta property="og:title" content="multiverse">
-<meta property="og:description" content="Welcome to my blog, a small space in the vast universe of the Internet where I share the ideas and knowledge I’ve gained on my journey into AI and software development.">
+<link rel="stylesheet" href="../assets/styles.css">
+<meta property="og:title" content="multiverse - How I Built a Tool to Anonymize Text for LLMs (and Why You Might Need It Too!)">
+<meta property="og:description" content="Discover a handy tool that anonymizes your text before using it in LLMs, keeping your personal information safe and sound!">
 <meta property="og:site_name" content="multiverse">
-<meta name="twitter:title" content="multiverse">
-<meta name="twitter:description" content="Welcome to my blog, a small space in the vast universe of the Internet where I share the ideas and knowledge I’ve gained on my journey into AI and software development.">
+<meta name="twitter:title" content="multiverse - How I Built a Tool to Anonymize Text for LLMs (and Why You Might Need It Too!)">
+<meta name="twitter:description" content="Discover a handy tool that anonymizes your text before using it in LLMs, keeping your personal information safe and sound!">
 <meta name="twitter:creator" content="@amenalahassa">
 <meta name="twitter:card" content="summary">
 </head>
@@ -177,7 +118,9 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Basculer la barre latérale" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Blog</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">
+      multiverse
+      </li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Basculer la barre latérale" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Recherche" onclick="window.quartoOpenSearch();">
@@ -192,7 +135,7 @@ window.Quarto = {
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">multiverse</a> 
+      <a href="../">multiverse</a> 
         <div class="sidebar-tools-main">
     <a href="https://www.linkedin.com/in/alkonrad/" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-linkedin"></i></a>
   <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Basculer en mode lecteur">
@@ -212,19 +155,19 @@ window.Quarto = {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Blog</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./works.html" class="sidebar-item-text sidebar-link">
+  <a href="../works.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">My works</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./about.html" class="sidebar-item-text sidebar-link">
+  <a href="../about.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">L’auteur</span></a>
   </div>
 </li>
@@ -234,23 +177,61 @@ window.Quarto = {
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
-    <h5 class="quarto-listing-category-title">Catégories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">Tous <span class="quarto-category-count">(4)</span></div><div class="category" data-category="Anonymization">Anonymization <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Classification">Classification <span class="quarto-category-count">(1)</span></div><div class="category" data-category="CocoDetection">CocoDetection <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Dataset">Dataset <span class="quarto-category-count">(1)</span></div><div class="category" data-category="LLM">LLM <span class="quarto-category-count">(2)</span></div><div class="category" data-category="Unbalanced Dataset">Unbalanced Dataset <span class="quarto-category-count">(1)</span></div><div class="category" data-category="YOLO">YOLO <span class="quarto-category-count">(1)</span></div></div></div>
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Sur cette page</h2>
+   
+  <ul>
+  <li><a href="#how-i-found-myself-working-on-this" id="toc-how-i-found-myself-working-on-this" class="nav-link active" data-scroll-target="#how-i-found-myself-working-on-this">How I Found Myself Working on This 🛠️</a></li>
+  <li><a href="#the-idea" id="toc-the-idea" class="nav-link" data-scroll-target="#the-idea">The Idea 💡</a>
+  <ul class="collapse">
+  <li><a href="#example-time" id="toc-example-time" class="nav-link" data-scroll-target="#example-time">Example Time! ✍️</a></li>
+  </ul></li>
+  <li><a href="#how-to-try-it" id="toc-how-to-try-it" class="nav-link" data-scroll-target="#how-to-try-it">How to Try It? 🤔</a></li>
+  <li><a href="#next-steps" id="toc-next-steps" class="nav-link" data-scroll-target="#next-steps">Next Steps 🚀</a></li>
+  <li><a href="#but-why" id="toc-but-why" class="nav-link" data-scroll-target="#but-why">But Why? 🤷‍♂️</a></li>
+  <li><a href="#it-was-fun-and-educational" id="toc-it-was-fun-and-educational" class="nav-link" data-scroll-target="#it-was-fun-and-educational">It Was Fun and Educational! 🎓</a>
+  <ul class="collapse">
+  <li><a href="#also-a-few-things-i-noticed" id="toc-also-a-few-things-i-noticed" class="nav-link" data-scroll-target="#also-a-few-things-i-noticed">Also, a Few Things I Noticed… 🧐</a></li>
+  </ul></li>
+  <li><a href="#final-thoughts" id="toc-final-thoughts" class="nav-link" data-scroll-target="#final-thoughts">Final Thoughts… 🎉</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/amenalahassa/amenalahassa/issues/new" class="toc-action"><i class="bi bi-github"></i>Faire part d'un problème</a></li></ul></div></nav>
+    </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">multiverse</h1>
-<p class="subtitle lead">Welcome to my blog, a small space in the vast universe of the Internet where I share the ideas and knowledge I’ve gained on my journey into AI and software development.</p>
-</div>
+<h1 class="title">How I Built a Tool to Anonymize Text for LLMs (and Why You Might Need It Too!)</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">LLM</div>
+    <div class="quarto-category">Anonymization</div>
+  </div>
+  </div>
 
+<div>
+  <div class="description">
+    Discover a handy tool that anonymizes your text before using it in LLMs, keeping your personal information safe and sound!
+  </div>
+</div>
 
 
 <div class="quarto-title-meta">
 
     
+    <div>
+    <div class="quarto-title-meta-heading">Date de publication</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">23 août 2024</p>
+    </div>
+  </div>
   
+    <div>
+    <div class="quarto-title-meta-heading">Modifié</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date-modified">23 août 2024</p>
+    </div>
+  </div>
     
   </div>
   
@@ -259,147 +240,87 @@ window.Quarto = {
 </header>
 
 
+<p>Hey folks! 🙌</p>
+<p>Ever find yourself using those cool new LLMs like ChatGPT for pretty much everything—whether it’s writing emails, drafting cover letters, or even creating blog content (I know I do! 😅)? It’s like having your personal assistant right there in your browser, making life so much easier. But, wait…what happens when your prompts contain personal details? 😬</p>
+<p>You know, that awkward moment when you realize you’ve shared too much in a prompt? Yeah, been there, done that. So, I figured, why not build a tool that handles this issue and keeps things private? 💡</p>
+<section id="how-i-found-myself-working-on-this" class="level2">
+<h2 class="anchored" data-anchor-id="how-i-found-myself-working-on-this">How I Found Myself Working on This 🛠️</h2>
+<p>Recently, I noticed just how much I’ve been relying on LLMs for personal stuff—writing emails, tweaking my CV, crafting blogs, even coding! But every time I use them, I have to manually remove or anonymize personal info in my prompts. Talk about tedious! 😩</p>
+<p>It got to a point where I was doing this so often that I thought, “There’s got to be a better way!” And so, the idea of building a tool that runs entirely offline, right in your browser, was born. 🚀</p>
+</section>
+<section id="the-idea" class="level2">
+<h2 class="anchored" data-anchor-id="the-idea">The Idea 💡</h2>
+<p>It’s super simple! Just paste your text, and voila—it anonymizes it. Now, you can safely use it in your prompts without worrying about personal details leaking out. ✨</p>
+<section id="example-time" class="level3">
+<h3 class="anchored" data-anchor-id="example-time">Example Time! ✍️</h3>
+<p>Imagine you’ve have to send an email to a customer about an upcoming event at your coffee shop. Here’s what it might look like:</p>
+<blockquote class="blockquote">
+<p>Subject: Join us for the Grand Renovation of New York - Exciting Changes Await!</p>
+<p>Dear John Green,</p>
+<p>We hope this email finds you well and enjoying your favorite vanilla latte large and banana muffin at our coffee shop! As a valued and loyal customer, we are thrilled to share some exciting news with you.</p>
+<p>Mark your calendar for January 4, 2023, as we invite you to join us for the grand renovation of our coffee shop at New York! We are embarking on a journey to create an even better and cozier space for you to relax, indulge, and enjoy your favorite beverages and treats.</p>
+<p>You have been a cherished part of our coffee shop family for an incredible 5 years, and we cannot wait to show our appreciation by unveiling a fresh, modern look that will elevate your coffee shop experience. The renovation will bring about stylish and comfortable seating areas, captivating artwork, and state-of-the-art equipment to enhance the quality of our offerings.</p>
+<p>The grand reopening event promises to be a celebration filled with delightful surprises. As our special guest, you will be among the first to explore the redesigned space and sample our latest menu additions. Immerse yourself in the inviting ambiance, meet our talented baristas, and indulge in the aroma of freshly brewed coffee that is synonymous with our coffee shop. We value your opinion, John Green, and would be thrilled to hear your thoughts and feedback on our newly renovated space. As always, our commitment remains to provide you with exceptional customer service and the highest quality products that you know and love.</p>
+<p>Save the date: January 4, 2023! We cannot wait to welcome you to the grand renovation of our coffee shop at New York. Together, let’s embark on this exciting journey and create countless new memories over aromatic coffees and delectable treats.</p>
+<p>Thank you for being an integral part of our coffee shop’s success. We look forward to continuing to serve you and make your coffee experiences unforgettable.</p>
+<p>Warmest regards,</p>
+</blockquote>
+<p>You paste it into the tool, and <em>poof</em>—it replaces those details with anonymous IDs. 🕵️‍♀️</p>
+<blockquote class="blockquote">
+<p>Subject: Join us for the Grand Renovation of aLOCATION_524a - Exciting Changes Await!</p>
+<p>Dear aPEOPLE_872a,</p>
+<p>We hope this email finds you well and enjoying your favorite vanilla latte large and banana muffin at our coffee shop! As a valued and loyal customer, we are thrilled to share some exciting news with you.</p>
+<p>Mark your calendar for aDATE_988a, as we invite you to join us for the grand renovation of our coffee shop at aLOCATION_524a! We are embarking on a journey to create an even better and cozier space for you to relax, indulge, and enjoy your favorite beverages and treats.</p>
+<p>You have been a cherished part of our coffee shop family for an incredible 5 years, and we cannot wait to show our appreciation by unveiling a fresh, modern look that will elevate your coffee shop experience. The renovation will bring about stylish and comfortable seating areas, captivating artwork, and state-of-the-art equipment to enhance the quality of our offerings.</p>
+<p>The grand reopening event promises to be a celebration filled with delightful surprises. As our special guest, you will be among the first to explore the redesigned space and sample our latest menu additions. Immerse yourself in the inviting ambiance, meet our talented baristas, and indulge in the aroma of freshly brewed coffee that is synonymous with our coffee shop. We value your opinion, aPEOPLE_872a, and would be thrilled to hear your thoughts and feedback on our newly renovated space. As always, our commitment remains to provide you with exceptional customer service and the highest quality products that you know and love.</p>
+<p>Save the date: aDATE_988a! We cannot wait to welcome you to the grand renovation of our coffee shop at aLOCATION_524a. Together, let’s embark on this exciting journey and create countless new memories over aromatic coffees and delectable treats.</p>
+<p>Thank you for being an integral part of our coffee shop’s success. We look forward to continuing to serve you and make your coffee experiences unforgettable.</p>
+<p>Warmest regards,</p>
+</blockquote>
+<p>Then, you can use that anonymized text in your LLM prompt. Once you get the LLM’s response, you paste it back into the tool, and it replaces the IDs with your original info. As simple as that! 😎</p>
+</section>
+</section>
+<section id="how-to-try-it" class="level2">
+<h2 class="anchored" data-anchor-id="how-to-try-it">How to Try It? 🤔</h2>
+<p>Excited to give it a spin? You can check it out <a href="https://amenalahassa.github.io/web-anonymiser/">here</a>. It’s still a work in progress (so don’t judge me too harshly! 😜), but the full offline version is coming soon.</p>
+<p>For now, you can test it out and share your thoughts with me. Your feedback means the world! 🌍</p>
+</section>
+<section id="next-steps" class="level2">
+<h2 class="anchored" data-anchor-id="next-steps">Next Steps 🚀</h2>
+<p>Here’s what I’ve got cooking for the future:</p>
+<ul>
+<li>Turning it into a browser extension that automatically catches text you paste into input boxes, helping protect your identity on the fly.</li>
+<li>Extending the tool to handle PII (Personally Identifiable Information) with customizable options for what to anonymize.</li>
+<li>And so much more! 🎉</li>
+</ul>
+</section>
+<section id="but-why" class="level2">
+<h2 class="anchored" data-anchor-id="but-why">But Why? 🤷‍♂️</h2>
+<p>Good question! There are already some awesome tools out there, like <a href="https://www.pontus.so/blog">this one</a> and <a href="https://github.com/AI-LLM/AnonymizedGPT?tab=readme-ov-file">this GitHub repo</a>. But none of them are quite what I was looking for—so I decided to share mine! 😄</p>
+<p>If you’ve got any comments, feel free to reach out or open an issue. I’m all ears! 👂</p>
+</section>
+<section id="it-was-fun-and-educational" class="level2">
+<h2 class="anchored" data-anchor-id="it-was-fun-and-educational">It Was Fun and Educational! 🎓</h2>
+<p>Building this tool was such a learning experience. I dove into ONNX, WebGPU, WebAssembly, Transformer.js, Hugging Face Inference, Angular 18, and so much more. And, boy, did I learn a lot! 💻</p>
+<section id="also-a-few-things-i-noticed" class="level3">
+<h3 class="anchored" data-anchor-id="also-a-few-things-i-noticed">Also, a Few Things I Noticed… 🧐</h3>
+<ul>
+<li>Running an LLM in the browser without a GPU can be <strong>super slow</strong>. 🐢</li>
+<li>Not all browsers support WebGPU, so that’s a challenge.</li>
+<li>To run a model in the browser, you need a <strong>really light model</strong>, preferably quantized and optimized for the web (like with Olive, for example). Ideally, it should run on WebGPU for the best performance.</li>
+</ul>
+</section>
+</section>
+<section id="final-thoughts" class="level2">
+<h2 class="anchored" data-anchor-id="final-thoughts">Final Thoughts… 🎉</h2>
+<p>Overall, it’s been a fantastic experience. Version 2 is already in the works, so stay tuned! 😎</p>
+<p>Thanks so much for reading, and don’t hesitate to reach out with your thoughts.</p>
+<p>Cheers! 🥂</p>
 
 
+</section>
 
-
-<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
-<div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="LLM,Anonymization" data-listing-date-sort="1724371200000" data-listing-file-modified-sort="1724472040932" data-listing-date-modified-sort="1724371200000" data-listing-reading-time-sort="7" data-listing-word-count-sort="1263">
-<div class="thumbnail">
-<p><a href="./posts/anonymizer_intro.html" class="no-external"></a></p><a href="./posts/anonymizer_intro.html" class="no-external">
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./posts/anonymizer_intro.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/anonymizer_intro.html" class="no-external">How I Built a Tool to Anonymize Text for LLMs (and Why You Might Need It Too!)</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/anonymizer_intro.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('LLM'); return false;">
-LLM
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('Anonymization'); return false;">
-Anonymization
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/anonymizer_intro.html" class="no-external">Discover a handy tool that anonymizes your text before using it in LLMs, keeping your personal information safe and sound!</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/anonymizer_intro.html" class="no-external">
-<div class="listing-date">
-23 août 2024
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="1" data-listing-date-sort="1724371200000" data-listing-file-modified-sort="1724472040944" data-listing-date-modified-sort="1724371200000" data-listing-reading-time-sort="3" data-listing-word-count-sort="535">
-<div class="thumbnail">
-<p><a href="./posts/for_you.html" class="no-external"></a></p><a href="./posts/for_you.html" class="no-external">
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./posts/for_you.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/for_you.html" class="no-external">Finally, An Introduction: The Story Behind This Blog and What’s Next</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/for_you.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./posts/for_you.html" class="no-external">In this post, I finally take the time to properly introduce my blog, explain its purpose, and share why I’ve been away for the past few months. It’s a fresh start and an exciting journey ahead!</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/for_you.html" class="no-external">
-<div class="listing-date">
-23 août 2024
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="2" data-categories="YOLO,CocoDetection,Dataset" data-listing-date-sort="1717027200000" data-listing-file-modified-sort="1724472040944" data-listing-date-modified-sort="1717027200000" data-listing-reading-time-sort="2" data-listing-word-count-sort="344">
-<div class="thumbnail">
-<p><a href="./posts/dataset-converter.html" class="no-external"></a></p><a href="./posts/dataset-converter.html" class="no-external">
-<p class="card-img-top"><img src="posts/dataset-converter_files/figure-html/cell-7-output-1.png"  class="thumbnail-image card-img"/></p>
-</a><p><a href="./posts/dataset-converter.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/dataset-converter.html" class="no-external">Passer de Yolo à CocoDetection, c’est possible !</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/dataset-converter.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('YOLO'); return false;">
-YOLO
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('CocoDetection'); return false;">
-CocoDetection
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('Dataset'); return false;">
-Dataset
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/dataset-converter.html" class="no-external">Je partage dans cet article une méthode simple pour convertir un dataset YOLO au format COCO, ou à un autre, une solution que j’ai trouvée essentielle lors d’un récent projet de segmentation d’instance.</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/dataset-converter.html" class="no-external">
-<div class="listing-date">
-30 mai 2024
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="3" data-categories="LLM,Classification,Unbalanced Dataset" data-listing-date-sort="1716249600000" data-listing-file-modified-sort="1724472040948" data-listing-date-modified-sort="1717027200000" data-listing-reading-time-sort="10" data-listing-word-count-sort="1888">
-<div class="thumbnail">
-<p><a href="./posts/predicting_comment_reply_llm.html" class="no-external"></a></p><a href="./posts/predicting_comment_reply_llm.html" class="no-external">
-<p class="card-img-top"><img src="posts/predicting_comment_reply_llm_files/figure-html/fig-cap-margin0-output-1.png"  class="thumbnail-image card-img"/></p>
-</a><p><a href="./posts/predicting_comment_reply_llm.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/predicting_comment_reply_llm.html" class="no-external">Predicting reply under comment with LLM</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/predicting_comment_reply_llm.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('LLM'); return false;">
-LLM
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('Classification'); return false;">
-Classification
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('Unbalanced Dataset'); return false;">
-Unbalanced Dataset
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/predicting_comment_reply_llm.html" class="no-external">Finetuning of Camembert on predicting, using a Le Soleil Facebook post comment as input, whether it will receive a response or not.</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/predicting_comment_reply_llm.html" class="no-external">
-<div class="listing-date">
-21 mai 2024
-</div>
-</a>
-</div>
-</div>
-</div>
-<div class="listing-no-matching d-none">
-Aucun article correspondant
-</div>
-</div><a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Retour au sommet</a></main> <!-- /main -->
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Retour au sommet</a></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -828,7 +749,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>   
     <div class="nav-footer-center">
 <p>Copyright 2024</p>
-<div class="toc-actions"><ul><li><a href="https://github.com/amenalahassa/amenalahassa/issues/new" class="toc-action"><i class="bi bi-github"></i>Faire part d'un problème</a></li></ul></div><div class="cookie-consent-footer"><a href="#" id="open_preferences_center">Cookie Preferences</a></div></div>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/amenalahassa/amenalahassa/issues/new" class="toc-action"><i class="bi bi-github"></i>Faire part d'un problème</a></li></ul></div><div class="cookie-consent-footer"><a href="#" id="open_preferences_center">Cookie Preferences</a></div></div>
     <div class="nav-footer-right">
       &nbsp;
     </div>
@@ -838,5 +759,5 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
-<script src="site_libs/quarto-html/zenscroll-min.js"></script>
+<script src="../site_libs/quarto-html/zenscroll-min.js"></script>
 </body></html>
