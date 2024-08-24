@@ -1,8 +1,8 @@
 ---
-title: "This words are for you...."
+title: "Finally, An Introduction: The Story Behind This Blog and What’s Next"
 date: 2024/08/23
 date-modified: 2024/08/23
-description: "I want to properly introducing this blog and explaining why I haven't published anything for a few months."
+description: "In this post, I finally take the time to properly introduce my blog, explain its purpose, and share why I've been away for the past few months. It's a fresh start and an exciting journey ahead!"
 format:
   html:
     code-fold: true

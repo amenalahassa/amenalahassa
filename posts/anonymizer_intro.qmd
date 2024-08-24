@@ -1,0 +1,116 @@
+---
+title: "How I Built a Tool to Anonymize Text for LLMs (and Why You Might Need It Too!)"
+date: 2024/08/23
+date-modified: 2024/08/23
+description: "Discover a handy tool that anonymizes your text before using it in LLMs, keeping your personal information safe and sound!"
+categories:
+  - LLM
+  - Anonymization
+format:
+  html:
+    code-fold: true
+---
+
+Hey folks! 🙌
+
+Ever find yourself using those cool new LLMs like ChatGPT for pretty much everything—whether it's writing emails, drafting cover letters, or even creating blog content (I know I do! 😅)? It's like having your personal assistant right there in your browser, making life so much easier. But, wait...what happens when your prompts contain personal details? 😬
+
+You know, that awkward moment when you realize you've shared too much in a prompt? Yeah, been there, done that. So, I figured, why not build a tool that handles this issue and keeps things private? 💡
+
+## How I Found Myself Working on This 🛠️
+
+Recently, I noticed just how much I've been relying on LLMs for personal stuff—writing emails, tweaking my CV, crafting blogs, even coding! But every time I use them, I have to manually remove or anonymize personal info in my prompts. Talk about tedious! 😩
+
+It got to a point where I was doing this so often that I thought, "There’s got to be a better way!" And so, the idea of building a tool that runs entirely offline, right in your browser, was born. 🚀
+
+## The Idea 💡
+
+It’s super simple! Just paste your text, and voila—it anonymizes it. Now, you can safely use it in your prompts without worrying about personal details leaking out. ✨
+
+### Example Time! ✍️
+
+Imagine you’ve have to send an email to a customer about an upcoming event at your coffee shop. Here’s what it might look like:
+
+> Subject: Join us for the Grand Renovation of New York - Exciting Changes Await!
+>
+>  Dear John Green,
+>
+>  We hope this email finds you well and enjoying your favorite vanilla latte large and banana muffin at our coffee shop!
+>  As a valued and loyal customer, we are thrilled to share some exciting news with you.
+>
+>  Mark your calendar for January 4, 2023, as we invite you to join us for the grand renovation of our coffee shop at New York!
+>  We are embarking on a journey to create an even better and cozier space for you to relax, indulge, and enjoy your favorite beverages and treats.
+>
+>  You have been a cherished part of our coffee shop family for an incredible 5 years, and we cannot wait to show our appreciation by unveiling a fresh, modern look that will elevate your coffee shop experience. The renovation will bring about stylish and comfortable seating areas, captivating artwork, and state-of-the-art equipment to enhance the quality of our offerings.
+>
+>  The grand reopening event promises to be a celebration filled with delightful surprises. As our special guest, you will be among the first to explore the redesigned space and sample our latest menu additions. Immerse yourself in the inviting ambiance, meet our talented baristas, and indulge in the aroma of freshly brewed coffee that is synonymous with our coffee shop. We value your opinion, John Green, and would be thrilled to hear your thoughts and feedback on our newly renovated space. As always, our commitment remains to provide you with exceptional customer service and the highest quality products that you know and love.
+>
+>  Save the date: January 4, 2023! We cannot wait to welcome you to the grand renovation of our coffee shop at New York. Together, let's embark on this exciting journey and create countless new memories over aromatic coffees and delectable treats.
+>
+>  Thank you for being an integral part of our coffee shop's success. We look forward to continuing to serve you and make your coffee experiences unforgettable.
+>
+>  Warmest regards,
+>
+
+You paste it into the tool, and *poof*—it replaces those details with anonymous IDs. 🕵️‍♀️
+
+> Subject: Join us for the Grand Renovation of aLOCATION_524a - Exciting Changes Await!
+>
+>  Dear aPEOPLE_872a,
+>
+>  We hope this email finds you well and enjoying your favorite vanilla latte large and banana muffin at our coffee shop!
+>  As a valued and loyal customer, we are thrilled to share some exciting news with you.
+>
+>  Mark your calendar for aDATE_988a, as we invite you to join us for the grand renovation of our coffee shop at aLOCATION_524a!
+>  We are embarking on a journey to create an even better and cozier space for you to relax, indulge, and enjoy your favorite beverages and treats.
+>
+>  You have been a cherished part of our coffee shop family for an incredible 5 years, and we cannot wait to show our appreciation by unveiling a fresh, modern look that will elevate your coffee shop experience. The renovation will bring about stylish and comfortable seating areas, captivating artwork, and state-of-the-art equipment to enhance the quality of our offerings.
+>
+>  The grand reopening event promises to be a celebration filled with delightful surprises. As our special guest, you will be among the first to explore the redesigned space and sample our latest menu additions. Immerse yourself in the inviting ambiance, meet our talented baristas, and indulge in the aroma of freshly brewed coffee that is synonymous with our coffee shop. We value your opinion, aPEOPLE_872a, and would be thrilled to hear your thoughts and feedback on our newly renovated space. As always, our commitment remains to provide you with exceptional customer service and the highest quality products that you know and love.
+>
+>  Save the date: aDATE_988a! We cannot wait to welcome you to the grand renovation of our coffee shop at aLOCATION_524a. Together, let's embark on this exciting journey and create countless new memories over aromatic coffees and delectable treats.
+>
+>  Thank you for being an integral part of our coffee shop's success. We look forward to continuing to serve you and make your coffee experiences unforgettable.
+>
+>  Warmest regards,
+>
+
+Then, you can use that anonymized text in your LLM prompt. Once you get the LLM’s response, you paste it back into the tool, and it replaces the IDs with your original info. As simple as that! 😎
+
+## How to Try It? 🤔
+
+Excited to give it a spin? You can check it out [here](https://amenalahassa.github.io/web-anonymiser/). It's still a work in progress (so don't judge me too harshly! 😜), but the full offline version is coming soon.
+
+For now, you can test it out and share your thoughts with me. Your feedback means the world! 🌍
+
+## Next Steps 🚀
+
+Here’s what I’ve got cooking for the future:
+
+- Turning it into a browser extension that automatically catches text you paste into input boxes, helping protect your identity on the fly.
+- Extending the tool to handle PII (Personally Identifiable Information) with customizable options for what to anonymize.
+- And so much more! 🎉
+
+## But Why? 🤷‍♂️
+
+Good question! There are already some awesome tools out there, like [this one](https://www.pontus.so/blog) and [this GitHub repo](https://github.com/AI-LLM/AnonymizedGPT?tab=readme-ov-file). But none of them are quite what I was looking for—so I decided to share mine! 😄
+
+If you’ve got any comments, feel free to reach out or open an issue. I’m all ears! 👂
+
+## It Was Fun and Educational! 🎓
+
+Building this tool was such a learning experience. I dove into ONNX, WebGPU, WebAssembly, Transformer.js, Hugging Face Inference, Angular 18, and so much more. And, boy, did I learn a lot! 💻
+
+### Also, a Few Things I Noticed... 🧐
+
+- Running an LLM in the browser without a GPU can be **super slow**. 🐢
+- Not all browsers support WebGPU, so that's a challenge.
+- To run a model in the browser, you need a **really light model**, preferably quantized and optimized for the web (like with Olive, for example). Ideally, it should run on WebGPU for the best performance.
+
+## Final Thoughts… 🎉
+
+Overall, it’s been a fantastic experience. Version 2 is already in the works, so stay tuned! 😎
+
+Thanks so much for reading, and don’t hesitate to reach out with your thoughts.
+
+Cheers! 🥂
