@@ -13,3 +13,22 @@ about:
         text: Say 👋!
         href: email:am.konrad21@gmail.com
 ---
+
+I want to share what I’ve accomplished as projects, in AI, in software engineering – and maybe some other areas too. 🚀
+I'm also working on a few projects I won't be able to share here but I will publish some articles explaining them as soon as possible. Stay tuned! 🚧
+
+## In Progress
+
+### [Project 1](#)
+
+## In AI
+
+### [Project 2](#)
+
+## In software engineering
+
+### [Project 3](#)
+
+## Found this interesting?
+Let me know if you have any comments or ideas on how I can improve. I’m all ears! 👂 I’ll be updating regularly on my progress and any news, so keep an eye out for more.
+Thank you for reading! 💖
