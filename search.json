@@ -67,7 +67,47 @@
     "href": "works.html",
     "title": "Personal works and other stuffs",
     "section": "",
-    "text": "Retour au sommet",
+    "text": "I want to share what I’ve accomplished as projects, in AI, in software engineering – and maybe some other areas too. 🚀 I’m also working on a few projects I won’t be able to share here but I will publish some articles explaining them as soon as possible. Stay tuned! 🚧",
+    "crumbs": [
+      "My works"
+    ]
+  },
+  {
+    "objectID": "works.html#in-progress",
+    "href": "works.html#in-progress",
+    "title": "Personal works and other stuffs",
+    "section": "In Progress",
+    "text": "In Progress\n\nProject 1",
+    "crumbs": [
+      "My works"
+    ]
+  },
+  {
+    "objectID": "works.html#in-ai",
+    "href": "works.html#in-ai",
+    "title": "Personal works and other stuffs",
+    "section": "In AI",
+    "text": "In AI\n\nProject 2",
+    "crumbs": [
+      "My works"
+    ]
+  },
+  {
+    "objectID": "works.html#in-software-engineering",
+    "href": "works.html#in-software-engineering",
+    "title": "Personal works and other stuffs",
+    "section": "In software engineering",
+    "text": "In software engineering\n\nProject 3",
+    "crumbs": [
+      "My works"
+    ]
+  },
+  {
+    "objectID": "works.html#found-this-interesting",
+    "href": "works.html#found-this-interesting",
+    "title": "Personal works and other stuffs",
+    "section": "Found this interesting?",
+    "text": "Found this interesting?\nLet me know if you have any comments or ideas on how I can improve. I’m all ears! 👂 I’ll be updating regularly on my progress and any news, so keep an eye out for more. Thank you for reading! 💖",
     "crumbs": [
       "My works"
     ]
