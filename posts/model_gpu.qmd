@@ -1,9 +1,9 @@
 ---
-title: "How I Built a Tool to Anonymize Text for LLMs (and Why You Might Need It Too!)"
+title: "How Much Memory Does Your Model Need on GPU? Let’s Find Out!"
 date: 2024/08/24
 date-modified: 2024/08/24
 draft: true
-description: ""
+description: "An exploration of GPU memory requirements for running models and how to estimate them with a handy tool."
 categories:
   - Tips & Tricks
   - Personal Projects
@@ -12,106 +12,71 @@ format:
     code-fold: true
 ---
 
-Hey folks! 🙌
+# A Tool to Estimate Model Memory Usage on GPU
 
-Ever find yourself using those cool new LLMs like ChatGPT for pretty much everything—whether it's writing emails, drafting cover letters, or even creating blog content (I know I do! 😅)? It's like having your personal assistant right there in your browser, making life so much easier. But, wait...what happens when your prompts contain personal details? 😬
+Hey there, fellow developers and curious minds! 🖖 Ever wondered how much juice you need to run a model on your GPU? Whether you're knee-deep in code or just dipping your toes into the tech waters, the question of resources has likely crossed your mind.
 
-You know, that awkward moment when you realize you've shared too much in a prompt? Yeah, been there, done that. So, I figured, why not build a tool that handles this issue and keeps things private? 💡
+### Building a Tool to Estimate GPU Memory Usage
 
-## How I Found Myself Working on This 🛠️
+Guess what? I built a tool for that! 🎉 But hold up, before you get too excited... it only estimates the memory required to load the model onto a GPU. Yep, just that—no more, no less. If you're itching to test it out, [here's the link](#).
 
-Recently, I noticed just how much I've been relying on LLMs for personal stuff—writing emails, tweaking my CV, crafting blogs, even coding! But every time I use them, I have to manually remove or anonymize personal info in my prompts. Talk about tedious! 😩
+### Why Only Estimate GPU Memory for Loading?
 
-It got to a point where I was doing this so often that I thought, "There’s got to be a better way!" And so, the idea of building a tool that runs entirely offline, right in your browser, was born. 🚀
+You might be asking, "Why just the memory for loading?" Good question! It's because to really figure out how much resources a model needs to run (whether training or inference), you actually need to run it. Yep, no shortcuts here.
 
-## The Idea 💡
+It all depends on things like the size of your input/batch, the quality of your data (low-res images vs. high-res), and a whole bunch of other factors. 🤯 Oh, and don’t forget the extra memory needed to store activations during the forward pass and gradients during the backward pass. The bigger the model, the more resources you'll need. It's a classic case of go big or go home!
 
-It’s super simple! Just paste your text, and voila—it anonymizes it. Now, you can safely use it in your prompts without worrying about personal details leaking out. ✨
+### So, How Do I Know How Much Memory My Model Needs?
 
-### Example Time! ✍️
+Here's the deal: The memory a model uses for training is not the same as it uses for inference. Training requires more memory because it needs to store activations and gradients for backpropagation. Unfortunately, there's no one-size-fits-all rule to tell you exactly how much memory you’ll need, but we can make an educated guess.
 
-Imagine you’ve have to send an email to a customer about an upcoming event at your coffee shop. Here’s what it might look like:
+You can start by using my tool to get a minimum memory estimate for loading the model. To estimate training memory, a rough approach is to multiply that number by 10, but keep in mind this is just a ballpark figure. The exact factor can vary depending on your model architecture and batch size. To be safe, always test with different configurations to find the sweet spot.
 
-> Subject: Join us for the Grand Renovation of New York - Exciting Changes Await!
->
->  Dear John Green,
->
->  We hope this email finds you well and enjoying your favorite vanilla latte large and banana muffin at our coffee shop!
->  As a valued and loyal customer, we are thrilled to share some exciting news with you.
->
->  Mark your calendar for January 4, 2023, as we invite you to join us for the grand renovation of our coffee shop at New York!
->  We are embarking on a journey to create an even better and cozier space for you to relax, indulge, and enjoy your favorite beverages and treats.
->
->  You have been a cherished part of our coffee shop family for an incredible 5 years, and we cannot wait to show our appreciation by unveiling a fresh, modern look that will elevate your coffee shop experience. The renovation will bring about stylish and comfortable seating areas, captivating artwork, and state-of-the-art equipment to enhance the quality of our offerings.
->
->  The grand reopening event promises to be a celebration filled with delightful surprises. As our special guest, you will be among the first to explore the redesigned space and sample our latest menu additions. Immerse yourself in the inviting ambiance, meet our talented baristas, and indulge in the aroma of freshly brewed coffee that is synonymous with our coffee shop. We value your opinion, John Green, and would be thrilled to hear your thoughts and feedback on our newly renovated space. As always, our commitment remains to provide you with exceptional customer service and the highest quality products that you know and love.
->
->  Save the date: January 4, 2023! We cannot wait to welcome you to the grand renovation of our coffee shop at New York. Together, let's embark on this exciting journey and create countless new memories over aromatic coffees and delectable treats.
->
->  Thank you for being an integral part of our coffee shop's success. We look forward to continuing to serve you and make your coffee experiences unforgettable.
->
->  Warmest regards,
->
+During inference, models generally require less memory and run faster compared to training, but there are exceptions. Monitoring tools like `nvidia-smi` can help you keep track of actual GPU usage and avoid surprises. 📊
 
-You paste it into the tool, and *poof*—it replaces those details with anonymous IDs. 🕵️‍♀️
+### Example Time! 🎮
 
-> Subject: Join us for the Grand Renovation of aLOCATION_524a - Exciting Changes Await!
->
->  Dear aPEOPLE_872a,
->
->  We hope this email finds you well and enjoying your favorite vanilla latte large and banana muffin at our coffee shop!
->  As a valued and loyal customer, we are thrilled to share some exciting news with you.
->
->  Mark your calendar for aDATE_988a, as we invite you to join us for the grand renovation of our coffee shop at aLOCATION_524a!
->  We are embarking on a journey to create an even better and cozier space for you to relax, indulge, and enjoy your favorite beverages and treats.
->
->  You have been a cherished part of our coffee shop family for an incredible 5 years, and we cannot wait to show our appreciation by unveiling a fresh, modern look that will elevate your coffee shop experience. The renovation will bring about stylish and comfortable seating areas, captivating artwork, and state-of-the-art equipment to enhance the quality of our offerings.
->
->  The grand reopening event promises to be a celebration filled with delightful surprises. As our special guest, you will be among the first to explore the redesigned space and sample our latest menu additions. Immerse yourself in the inviting ambiance, meet our talented baristas, and indulge in the aroma of freshly brewed coffee that is synonymous with our coffee shop. We value your opinion, aPEOPLE_872a, and would be thrilled to hear your thoughts and feedback on our newly renovated space. As always, our commitment remains to provide you with exceptional customer service and the highest quality products that you know and love.
->
->  Save the date: aDATE_988a! We cannot wait to welcome you to the grand renovation of our coffee shop at aLOCATION_524a. Together, let's embark on this exciting journey and create countless new memories over aromatic coffees and delectable treats.
->
->  Thank you for being an integral part of our coffee shop's success. We look forward to continuing to serve you and make your coffee experiences unforgettable.
->
->  Warmest regards,
->
+Let’s take a practical example. I want to fine-tune the Qwen 2 model (the smallest version) on a Nvidia 4090 GPU with 30GB of memory. When I load the model onto the GPU, it takes up around 2GB of memory. Not too bad, right? But when I run inference with the parameters you see in the image below, it maxes out all the resources. 🚀
 
-Then, you can use that anonymized text in your LLM prompt. Once you get the LLM’s response, you paste it back into the tool, and it replaces the IDs with your original info. As simple as that! 😎
+And when it’s time for evaluation (where the model only does inference, no training), it crashes due to a lack of memory. 🤦‍♂️ Moral of the story: Even if you have the best GPU on the market, if you don’t have enough memory, you’re done for!
 
-## How to Try It? 🤔
+In fact, if I increase the batch size or the number of tokens per input, the training won’t even start. So be mindful of those settings when working with large models!
 
-Excited to give it a spin? You can check it out [here](https://amenalahassa.github.io/web-anonymiser/). It's still a work in progress (so don't judge me too harshly! 😜), but the full offline version is coming soon.
+### V100 vs. A100 vs. Whatever GPU: What Difference Does It Make?
 
-For now, you can test it out and share your thoughts with me. Your feedback means the world! 🌍
+So, you might be wondering, "Does it really matter which GPU I use?" Well, the short answer is: Absolutely! 🏎️
 
-## Next Steps 🚀
+It’s like traveling from Canada to France. You could either fly or bike. Pretty obvious which one gets you there faster, right? The same logic applies to GPUs—more powerful ones will get the job done quicker, especially when running large models.
 
-Here’s what I’ve got cooking for the future:
+Let’s break it down:
 
-- Turning it into a browser extension that automatically catches text you paste into input boxes, helping protect your identity on the fly.
-- Extending the tool to handle PII (Personally Identifiable Information) with customizable options for what to anonymize.
-- And so much more! 🎉
+- **Powerful GPUs like the A100** not only handle large models better but also have extra features, like mixed-precision training, that can reduce memory usage and speed things up. They’re like the jet engines of the GPU world—fast, efficient, and capable of handling heavy workloads with ease.
 
-## But Why? 🤷‍♂️
+- **Older or less powerful GPUs like the V100** can still do the job, but they might struggle with bigger models or more complex tasks. It’s like taking a slower flight—still gets you there, but not as fast or smoothly.
 
-Good question! There are already some awesome tools out there, like [this one](https://www.pontus.so/blog) and [this GitHub repo](https://github.com/AI-LLM/AnonymizedGPT?tab=readme-ov-file). But none of them are quite what I was looking for—so I decided to share mine! 😄
+- **Whatever GPU you have**, just remember: You need both memory and raw power to make your model run efficiently. If your GPU isn’t powerful enough, your model might take longer to run or could even crash. And nobody wants that!
 
-If you’ve got any comments, feel free to reach out or open an issue. I’m all ears! 👂
+So, whether you’re eyeing the latest A100 or making do with what you’ve got, the takeaway is clear: A more powerful GPU means faster, more efficient model runs.
 
-## It Was Fun and Educational! 🎓
+### Alternatives If Your Model Is Too Big
 
-Building this tool was such a learning experience. I dove into ONNX, WebGPU, WebAssembly, Transformer.js, Hugging Face Inference, Angular 18, and so much more. And, boy, did I learn a lot! 💻
+Got a huge model with over a billion parameters? No worries, there are alternatives! You can try building a smaller model that uses fewer resources. Techniques like transfer learning, model quantization, or even using a smaller model altogether can help.
 
-### Also, a Few Things I Noticed... 🧐
+However, keep in mind that these approaches might impact accuracy. Sometimes the trade-off isn’t that significant, and you can even set up safeguards for uncertain predictions, allowing the user to choose the most appropriate response. 💡
 
-- Running an LLM in the browser without a GPU can be **super slow**. 🐢
-- Not all browsers support WebGPU, so that's a challenge.
-- To run a model in the browser, you need a **really light model**, preferably quantized and optimized for the web (like with Olive, for example). Ideally, it should run on WebGPU for the best performance.
+Fun fact: I’m working on a tool to anonymize text before feeding it to a large language model (LLM), and I use one of these techniques to run the model directly in the browser. Check it out [here](#)!
 
-## Final Thoughts… 🎉
+### Takeaways
 
-Overall, it’s been a fantastic experience. Version 2 is already in the works, so stay tuned! 😎
+Alright, let's wrap things up:
 
-Thanks so much for reading, and don’t hesitate to reach out with your thoughts.
+1. Estimating exact memory requirements for your model can be tricky, but my tool can give you a good starting point.
+2. The more powerful your GPU, the faster and smoother your model will run—so choose wisely!
+3. If your model is too big, consider alternatives like downsizing or using techniques that reduce resource demands, though be mindful of potential accuracy trade-offs.
 
-Cheers! 🥂
+### Goodbye and Thanks!
+
+Thanks for sticking with me through this post! I hope you found it helpful. If you have any thoughts, suggestions, or just want to say hi, feel free to reach out via email or drop an issue below. I’m always open to learning and would love to hear from you.
+
+Take care, and happy coding! 🚀
+

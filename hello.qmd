@@ -1,0 +1,65 @@
+I have a blog called multiverse. I want to write new article and need your help.
+I use Quarto as blog publish system, and the raw content should follow markdown format.
+The style of the text should be casual, enthusiastic, and personable.
+It should uses a friendly and approachable tone, light humor to make the reader feel at ease.
+The language is informal but should stay professional, with contractions and playful phrases that create a sense of relatability and authenticity.
+Here is the content of the new post:
+
+- I’m sure as developer or even no-connaisseur, you already wonder how many ressources you need to run a model and what ressources ?
+    - Then I build a tool for that
+    - But, wait ! It only estimates the size of memory it required to load this model on a GPU
+    - It is available here if you want to test
+- Hum…, why it only estimate the GPU memory to load the model ?
+    - It because, to actually evalute how much ressources a model need to run (training/inference) on a GPU, you need to run it :)
+    - It in fact, depend on the size of your input/batch, the quality of the data (image at faible resulution vs high) and many others parameters
+    - And add to that, we need to add the required memory to store the activation of forward pass and also the gradient value for the backward, and the number of those variable depend on the model paramaters
+    - So bigger you model, more it will required ressource !
+- But how to know finally how much ressources I need to run a model X ?
+    - Well, first, The memory a model used is not the same on training vs inference.
+    - There is not a rule then to know exactly how much the much the model will use on training/inference but we can at least do an estimation
+    - Then to anticipate, we can use the tool above to know the minimum it required
+    - And multiple it 10 times, at least to know how much it will required on training
+    - Often, the model need less memory and more fast to run on inference then when training but it is not alwayse the case
+- Exemple time:
+    - I want to finetune the model Qwen 2, the most ssmaller one on a Nvidia 4090 with 30GB if memory
+    - When I only load the memory on GPU, it use at least 2GB
+    - When I run inference, with the params as in the image here, it use all the ressource to run.
+    - But more, when if is time to run the evaluation of the model (where it only do inference, no training) the model crash because it miss memory !
+    - Conclusion: you can have the best GPU in the world, if you don’t have enough memory to run it, you are done !
+    - If I also increase the size of batch, or the number of token per input, it will not even start the training.
+- Hummm, but what difference it will make if I buy and V100 vs A100 GPU ?
+    - In fact, if the model only need memory to run, we can ask ourself that question
+    - But, the answer is sample. The more powerfull GPU you have, the quick the model will be
+    - It like going to France from Canada. You can choose to take a fly or make it using a velo. You can already understand which one will make it first
+    - So, to run a model, you actually need an amount of memory, and also a really powerfull GPU to make it run fast !
+- There are some althernative tho
+    - If your model is really bigger, like more than billion parameter, you can if possible of course, build a smaller one, that can run using less ressources
+    - There are some options like transfer learning, or model quantization or even sampler, use a smaller model :)
+    - But it will come at some cost in the accuracy of the result model
+    - But experience prouve, some time it doesn’t make big difference, and sometimes, you can also set up some guard in case, the model is incertain, ans let user choose a response he found appropriate
+    - Actually, I work on a tool to anonymize your text before using on a LLM, and I use one of this tecknique to run the model on brower. Check it here
+- Takeaways ?
+    - I still like you can say exactly how much memory I need to run a model X, but at least, I know now how to estimate that number
+    - The more powerfull GPU I have the quicker my model will run
+    - I can use some alternative if my model is too much bigger, at the cost of accuracy but It possible to use some guard to still use it
+- Time to end this
+    - Pretty long this post rigth ?
+    - I appreciate the time you take to read it
+    - Have any comment or suggestion, reach me out through email or open an issue below
+    - I open to loearn and I will be a pleasure to here from you
+- Take care of you and see y
+
+Use this content to complete this Quarto markdown page:
+---
+title: "How Much Memory Does Your Model Need on GPU? Let’s Find Out!"
+date: 2024/08/24
+date-modified: 2024/08/24
+draft: true
+description: ""
+categories:
+  - Tips & Tricks
+  - Personal Projects
+format:
+  html:
+    code-fold: true
+---
