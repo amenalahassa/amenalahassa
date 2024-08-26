@@ -1,8 +1,9 @@
 ---
 title: "How I Built a Tool to Anonymize Text for LLMs (and Why You Might Need It Too!)"
-date: 2024/08/23
-date-modified: 2024/08/23
-description: "Discover a handy tool that anonymizes your text before using it in LLMs, keeping your personal information safe and sound!"
+date: 2024/08/24
+date-modified: 2024/08/24
+draft: true
+description: ""
 categories:
   - Tips & Tricks
   - Personal Projects
