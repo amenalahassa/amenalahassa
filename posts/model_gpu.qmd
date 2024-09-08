@@ -1,8 +1,7 @@
 ---
 title: "How Much Memory Does Your Model Need on GPU? Let’s Find Out!"
 date: 2024/08/24
-date-modified: 2024/08/24
-draft: true
+date-modified: 2024/09/07
 description: "An exploration of GPU memory requirements for running models and how to estimate them with a handy tool."
 categories:
   - Tips & Tricks
@@ -24,7 +23,7 @@ Guess what? I built a tool for that! 🎉 But hold up, before you get too excite
 
 You might be asking, "Why just the memory for loading?" Good question! It's because to really figure out how much resources a model needs to run (whether training or inference), you actually need to run it. Yep, no shortcuts here.
 
-It all depends on things like the size of your input/batch, the quality of your data (low-res images vs. high-res), and a whole bunch of other factors. 🤯 Oh, and don’t forget the extra memory needed to store activations during the forward pass and gradients during the backward pass. The bigger the model, the more resources you'll need. It's a classic case of go big or go home!
+It all depends on things like the size of your input/batch, the quality of your data (low-res images vs. high-res by eg), and a whole bunch of other factors. 🤯 Oh, and don’t forget the extra memory needed to store activations during the forward pass and gradients during the backward pass. The bigger the model, the more resources you'll need. It's a classic case of go big or go home!
 
 ### So, How Do I Know How Much Memory My Model Needs?
 
@@ -36,7 +35,7 @@ During inference, models generally require less memory and run faster compared t
 
 ### Example Time! 🎮
 
-Let’s take a practical example. I want to fine-tune the Qwen 2 model (the smallest version) on a Nvidia 4090 GPU with 30GB of memory. When I load the model onto the GPU, it takes up around 2GB of memory. Not too bad, right? But when I run inference with the parameters you see in the image below, it maxes out all the resources. 🚀
+Let’s take a practical example. I want to fine-tune the Qwen 2 model (the smallest version) on a GPU P100 with 16GB of memory on Kaggle. When I load the model onto the GPU, it takes up around 2GB of memory. Not too bad, right? But when I try to train the model, you see in the image below, it maxes out all the resources. 🚀
 
 And when it’s time for evaluation (where the model only does inference, no training), it crashes due to a lack of memory. 🤦‍♂️ Moral of the story: Even if you have the best GPU on the market, if you don’t have enough memory, you’re done for!
 
@@ -56,7 +55,7 @@ Let’s break it down:
 
 - **Whatever GPU you have**, just remember: You need both memory and raw power to make your model run efficiently. If your GPU isn’t powerful enough, your model might take longer to run or could even crash. And nobody wants that!
 
-So, whether you’re eyeing the latest A100 or making do with what you’ve got, the takeaway is clear: A more powerful GPU means faster, more efficient model runs.
+So, whether you’re eyeing the latest A100 or making do with what you’ve got, the takeaway is clear: A more powerful GPU means faster, more efficient model runs. If you need to go deeper, you can read this [article](https://timdettmers.com/2023/01/30/which-gpu-for-deep-learning/) too.
 
 ### Alternatives If Your Model Is Too Big
 
