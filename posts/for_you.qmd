@@ -2,6 +2,7 @@
 title: "Finally, An Introduction: The Story Behind This Blog and What’s Next"
 date: 2024/08/23
 date-modified: 2024/08/23
+image: "assets/images/0_0.png"
 description: "In this post, I finally take the time to properly introduce my blog, explain its purpose, and share why I've been away for the past few months. It's a fresh start and an exciting journey ahead!"
 categories:
   - Personal Projects

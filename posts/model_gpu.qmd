@@ -3,6 +3,7 @@ title: "How Much Memory Does Your Model Need on GPU? Let’s Find Out!"
 date: 2024/08/24
 date-modified: 2024/09/07
 description: "An exploration of GPU memory requirements for running models and how to estimate them with a handy tool."
+image: "assets/images/0_1.png"
 categories:
   - Tips & Tricks
   - Personal Projects
@@ -35,11 +36,23 @@ During inference, models generally require less memory and run faster compared t
 
 ### Example Time! 🎮
 
-Let’s take a practical example. I want to fine-tune the Qwen 2 model (the smallest version) on a GPU P100 with 16GB of memory on Kaggle. When I load the model onto the GPU, it takes up around 2GB of memory. Not too bad, right? But when I try to train the model, you see in the image below, it maxes out all the resources. 🚀
+Let’s take a practical example. I want to fine-tune the Qwen 2 model (Qwen/Qwen2-0.5B-Instruct) on a GPU P100 with 16GB of memory on Kaggle. For this exemple, I was trying to fine-tune the model on a dataset of 10k samples with a batch size of 2 and a maximum of 800 tokens per input, on a NER task.
 
-And when it’s time for evaluation (where the model only does inference, no training), it crashes due to a lack of memory. 🤦‍♂️ Moral of the story: Even if you have the best GPU on the market, if you don’t have enough memory, you’re done for!
+When I load the model onto the GPU, it takes up around 2.6GB of memory. Not too bad, right? But when I try to train the model, you see in the image below, it maxes out all the resources. 🚀
 
-In fact, if I increase the batch size or the number of tokens per input, the training won’t even start. So be mindful of those settings when working with large models!
+![GPU Memory Usage](assets/images/4.png)
+
+And when it’s time for evaluation (where the model only does inference, no training), it crashes due to a lack of memory.
+
+![GPU Memory Usage](assets/images/2.png)
+
+🤦‍♂️ Moral of the story: Even if you have the best GPU on the market, if you don’t have enough memory, you’re done for!
+
+In fact, if I increase the batch size or the number of tokens per input, the training won’t even start. Here’s what happens when I try to train the model with a batch size of 2 and 1500 tokens per input:
+
+![GPU Memory Usage](assets/images/3.png)
+
+So be mindful of those settings when working with large models!
 
 ### V100 vs. A100 vs. Whatever GPU: What Difference Does It Make?
 
