@@ -18,7 +18,7 @@ Hey there, fellow developers and curious minds! 🖖 Ever wondered how much juic
 
 ### Building a Tool to Estimate GPU Memory Usage
 
-Guess what? I built a tool for that! 🎉 But hold up, before you get too excited... it only estimates the memory required to load the model onto a GPU. Yep, just that—no more, no less. If you're itching to test it out, [here's the link](#).
+Guess what? I built a tool for that! 🎉 But hold up, before you get too excited... it only estimates the memory required to load the model onto a GPU. Yep, just that—no more, no less. If you're itching to test it out, [here's the link](https://huggingface.co/spaces/konradhugging/model-gpu-estimator).
 
 ### Why Only Estimate GPU Memory for Loading?
 
