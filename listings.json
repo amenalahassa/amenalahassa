@@ -2,8 +2,9 @@
   {
     "listing": "/index.html",
     "items": [
-      "/posts/anonymizer_intro.html",
+      "/posts/model_gpu.html",
       "/posts/for_you.html",
+      "/posts/anonymizer_intro.html",
       "/posts/dataset-converter.html",
       "/posts/predicting_comment_reply_llm.html"
     ]
