@@ -99,17 +99,23 @@ cookieconsent.run({
 <style>html{ scroll-behavior: smooth; }</style>
 
 
-<link rel="stylesheet" href="../assets/styles.css">
+<link rel="stylesheet" href="assets/styles.css">
 <meta property="og:title" content="multiverse - How Much Memory Does Your Model Need on GPU? Let’s Find Out!">
 <meta property="og:description" content="An exploration of GPU memory requirements for running models and how to estimate them with a handy tool.">
+<meta property="og:image" content="https://amenalahassa.github.io/amenalahassa/posts/assets/images/0_1.png">
 <meta property="og:site_name" content="multiverse">
+<meta property="og:image:height" content="1024">
+<meta property="og:image:width" content="781">
 <meta name="twitter:title" content="multiverse - How Much Memory Does Your Model Need on GPU? Let’s Find Out!">
 <meta name="twitter:description" content="An exploration of GPU memory requirements for running models and how to estimate them with a handy tool.">
+<meta name="twitter:image" content="https://amenalahassa.github.io/amenalahassa/posts/assets/images/0_1.png">
 <meta name="twitter:creator" content="@amenalahassa">
-<meta name="twitter:card" content="summary">
+<meta name="twitter:image-height" content="1024">
+<meta name="twitter:image-width" content="781">
+<meta name="twitter:card" content="summary_large_image">
 </head>
 
-<body class="nav-sidebar floating">
+<body class="nav-sidebar floating slimcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -196,7 +202,7 @@ cookieconsent.run({
 <div class="toc-actions"><ul><li><a href="https://github.com/amenalahassa/amenalahassa/issues/new" class="toc-action"><i class="bi bi-github"></i>Faire part d'un problème</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content page-columns page-full" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
@@ -238,7 +244,7 @@ cookieconsent.run({
 </header>
 
 
-<section id="a-tool-to-estimate-model-memory-usage-on-gpu" class="level1">
+<section id="a-tool-to-estimate-model-memory-usage-on-gpu" class="level1 page-columns page-full">
 <h1>A Tool to Estimate Model Memory Usage on GPU</h1>
 <p>Hey there, fellow developers and curious minds! 🖖 Ever wondered how much juice you need to run a model on your GPU? Whether you’re knee-deep in code or just dipping your toes into the tech waters, the question of resources has likely crossed your mind.</p>
 <section id="building-a-tool-to-estimate-gpu-memory-usage" class="level3">
@@ -256,11 +262,32 @@ cookieconsent.run({
 <p>You can start by using my tool to get a minimum memory estimate for loading the model. To estimate training memory, a rough approach is to multiply that number by 10, but keep in mind this is just a ballpark figure. The exact factor can vary depending on your model architecture and batch size. To be safe, always test with different configurations to find the sweet spot.</p>
 <p>During inference, models generally require less memory and run faster compared to training, but there are exceptions. Monitoring tools like <code>nvidia-smi</code> can help you keep track of actual GPU usage and avoid surprises. 📊</p>
 </section>
-<section id="example-time" class="level3">
+<section id="example-time" class="level3 page-columns page-full">
 <h3 class="anchored" data-anchor-id="example-time">Example Time! 🎮</h3>
-<p>Let’s take a practical example. I want to fine-tune the Qwen 2 model (the smallest version) on a GPU P100 with 16GB of memory on Kaggle. When I load the model onto the GPU, it takes up around 2GB of memory. Not too bad, right? But when I try to train the model, you see in the image below, it maxes out all the resources. 🚀</p>
-<p>And when it’s time for evaluation (where the model only does inference, no training), it crashes due to a lack of memory. 🤦‍♂️ Moral of the story: Even if you have the best GPU on the market, if you don’t have enough memory, you’re done for!</p>
-<p>In fact, if I increase the batch size or the number of tokens per input, the training won’t even start. So be mindful of those settings when working with large models!</p>
+<p>Let’s take a practical example. I want to fine-tune the Qwen 2 model (Qwen/Qwen2-0.5B-Instruct) on a GPU P100 with 16GB of memory on Kaggle. For this exemple, I was trying to fine-tune the model on a dataset of 10k samples with a batch size of 2 and a maximum of 800 tokens per input, on a NER task.</p>
+<p>When I load the model onto the GPU, it takes up around 2.6GB of memory. Not too bad, right? But when I try to train the model, you see in the image below, it maxes out all the resources. 🚀</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="assets/images/4.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">GPU Memory Usage</figcaption>
+</figure>
+</div>
+<p>And when it’s time for evaluation (where the model only does inference, no training), it crashes due to a lack of memory.</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="assets/images/2.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">GPU Memory Usage</figcaption>
+</figure>
+</div>
+<p>🤦‍♂️ Moral of the story: Even if you have the best GPU on the market, if you don’t have enough memory, you’re done for!</p>
+<p>In fact, if I increase the batch size or the number of tokens per input, the training won’t even start. Here’s what happens when I try to train the model with a batch size of 2 and 1500 tokens per input:</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="assets/images/3.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">GPU Memory Usage</figcaption>
+</figure>
+</div>
+<p>So be mindful of those settings when working with large models!</p>
 </section>
 <section id="v100-vs.-a100-vs.-whatever-gpu-what-difference-does-it-make" class="level3">
 <h3 class="anchored" data-anchor-id="v100-vs.-a100-vs.-whatever-gpu-what-difference-does-it-make">V100 vs.&nbsp;A100 vs.&nbsp;Whatever GPU: What Difference Does It Make?</h3>
