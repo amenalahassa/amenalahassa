@@ -24,7 +24,7 @@
 <p>Hey there, fellow developers and curious minds! 🖖 Ever wondered how much juice you need to run a model on your GPU? Whether you’re knee-deep in code or just dipping your toes into the tech waters, the question of resources has likely crossed your mind.</p>
 <section id="building-a-tool-to-estimate-gpu-memory-usage" class="level3">
 <h3 class="anchored" data-anchor-id="building-a-tool-to-estimate-gpu-memory-usage">Building a Tool to Estimate GPU Memory Usage</h3>
-<p>Guess what? I built a tool for that! 🎉 But hold up, before you get too excited… it only estimates the memory required to load the model onto a GPU. Yep, just that—no more, no less. If you’re itching to test it out, here’s the link.</p>
+<p>Guess what? I built a tool for that! 🎉 But hold up, before you get too excited… it only estimates the memory required to load the model onto a GPU. Yep, just that—no more, no less. If you’re itching to test it out, <a href="https://huggingface.co/spaces/konradhugging/model-gpu-estimator">here’s the link</a>.</p>
 </section>
 <section id="why-only-estimate-gpu-memory-for-loading" class="level3">
 <h3 class="anchored" data-anchor-id="why-only-estimate-gpu-memory-for-loading">Why Only Estimate GPU Memory for Loading?</h3>
