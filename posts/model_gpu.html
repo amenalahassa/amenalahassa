@@ -272,22 +272,7 @@ cookieconsent.run({
 <figcaption class="margin-caption">GPU Memory Usage</figcaption>
 </figure>
 </div>
-<p>And when it’s time for evaluation (where the model only does inference, no training), it crashes due to a lack of memory.</p>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
-<p><img src="assets/images/2.png" class="img-fluid figure-img"></p>
-<figcaption class="margin-caption">GPU Memory Usage</figcaption>
-</figure>
-</div>
-<p>🤦‍♂️ Moral of the story: Even if you have the best GPU on the market, if you don’t have enough memory, you’re done for!</p>
-<p>In fact, if I increase the batch size or the number of tokens per input, the training won’t even start. Here’s what happens when I try to train the model with a batch size of 2 and 1500 tokens per input:</p>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
-<p><img src="assets/images/3.png" class="img-fluid figure-img"></p>
-<figcaption class="margin-caption">GPU Memory Usage</figcaption>
-</figure>
-</div>
-<p>So be mindful of those settings when working with large models!</p>
+<p>So, what’s the takeaway here? Even if your model loads fine, it might not run smoothly during training. Always keep an eye on your resources and adjust your model or batch size accordingly.</p>
 </section>
 <section id="v100-vs.-a100-vs.-whatever-gpu-what-difference-does-it-make" class="level3">
 <h3 class="anchored" data-anchor-id="v100-vs.-a100-vs.-whatever-gpu-what-difference-does-it-make">V100 vs.&nbsp;A100 vs.&nbsp;Whatever GPU: What Difference Does It Make?</h3>
