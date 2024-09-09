@@ -42,17 +42,7 @@ When I load the model onto the GPU, it takes up around 2.6GB of memory. Not too 
 
 ![GPU Memory Usage](assets/images/4.png)
 
-And when it’s time for evaluation (where the model only does inference, no training), it crashes due to a lack of memory.
-
-![GPU Memory Usage](assets/images/2.png)
-
-🤦‍♂️ Moral of the story: Even if you have the best GPU on the market, if you don’t have enough memory, you’re done for!
-
-In fact, if I increase the batch size or the number of tokens per input, the training won’t even start. Here’s what happens when I try to train the model with a batch size of 2 and 1500 tokens per input:
-
-![GPU Memory Usage](assets/images/3.png)
-
-So be mindful of those settings when working with large models!
+So, what’s the takeaway here? Even if your model loads fine, it might not run smoothly during training. Always keep an eye on your resources and adjust your model or batch size accordingly.
 
 ### V100 vs. A100 vs. Whatever GPU: What Difference Does It Make?
 
