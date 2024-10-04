@@ -6,8 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="description" content="An adventure through the land of data, model training, and calf faces 🐮">
 
-<title>multiverse</title>
+<title>multiverse – What I Learned from Calf Face</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,26 +24,24 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="site_libs/cookie-consent/cookie-consent.js"></script>
-<link href="site_libs/cookie-consent/cookie-consent.css" rel="stylesheet">
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="dark">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/cookie-consent/cookie-consent.js"></script>
+<link href="../site_libs/cookie-consent/cookie-consent.css" rel="stylesheet">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -70,35 +69,6 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Recherche"
   }
 }</script>
-<script>
-
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
-
-    const options = {
-      valueNames: ['listing-date','listing-title','listing-author','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
-      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description","listing-categories"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
 <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-X5E8KFGB6H"></script>
 
 <script type="text/plain" cookie-consent="tracking">
@@ -128,44 +98,21 @@ cookieconsent.run({
   
 <style>html{ scroll-behavior: smooth; }</style>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 <link rel="stylesheet" href="assets/styles.css">
-<link rel="alternate" type="application/rss+xml" title="multiverse" href="index.xml" data-external="1"><meta property="og:title" content="multiverse">
-<meta property="og:description" content="Welcome to my blog, a small space in the vast universe of the Internet where I share the ideas and knowledge I’ve gained on my journey into AI and software development.">
+<meta property="og:title" content="multiverse - What I Learned from Calf Face">
+<meta property="og:description" content="An adventure through the land of data, model training, and calf faces 🐮">
+<meta property="og:image" content="https://amenalahassa.github.io/amenalahassa/posts/assets/images/mean_face.png">
 <meta property="og:site_name" content="multiverse">
-<meta name="twitter:title" content="multiverse">
-<meta name="twitter:description" content="Welcome to my blog, a small space in the vast universe of the Internet where I share the ideas and knowledge I’ve gained on my journey into AI and software development.">
+<meta property="og:image:height" content="426">
+<meta property="og:image:width" content="1239">
+<meta name="twitter:title" content="multiverse - What I Learned from Calf Face">
+<meta name="twitter:description" content="An adventure through the land of data, model training, and calf faces 🐮">
+<meta name="twitter:image" content="https://amenalahassa.github.io/amenalahassa/posts/assets/images/mean_face.png">
 <meta name="twitter:creator" content="@amenalahassa">
-<meta name="twitter:card" content="summary">
+<meta name="twitter:image-height" content="426">
+<meta name="twitter:image-width" content="1239">
+<meta name="twitter:card" content="summary_large_image">
 </head>
 
 <body class="nav-sidebar floating">
@@ -177,7 +124,9 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Basculer la barre latérale" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Blog</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">
+      multiverse
+      </li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Basculer la barre latérale" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Recherche" onclick="window.quartoOpenSearch();">
@@ -192,7 +141,7 @@ window.Quarto = {
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">multiverse</a> 
+      <a href="../">multiverse</a> 
         <div class="sidebar-tools-main">
     <a href="https://www.linkedin.com/in/alkonrad/" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-linkedin"></i></a>
   <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Basculer en mode lecteur">
@@ -212,19 +161,19 @@ window.Quarto = {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Blog</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./works.html" class="sidebar-item-text sidebar-link">
+  <a href="../works.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">My works</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./about.html" class="sidebar-item-text sidebar-link">
+  <a href="../about.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">L’auteur</span></a>
   </div>
 </li>
@@ -234,23 +183,50 @@ window.Quarto = {
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
-    <h5 class="quarto-listing-category-title">Catégories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">Tous <span class="quarto-category-count">(6)</span></div><div class="category" data-category="Personal Projects">Personal Projects <span class="quarto-category-count">(3)</span></div><div class="category" data-category="Tips &amp; Tricks">Tips &amp; Tricks <span class="quarto-category-count">(4)</span></div><div class="category" data-category="Tutorial">Tutorial <span class="quarto-category-count">(2)</span></div><div class="category" data-category="Updates">Updates <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Work Projects">Work Projects <span class="quarto-category-count">(1)</span></div></div></div>
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Sur cette page</h2>
+   
+  <ul>
+  <li><a href="#coming." id="toc-coming." class="nav-link active" data-scroll-target="#coming.">Coming….</a></li>
+  <li><a href="#and-thats-a-wrap" id="toc-and-thats-a-wrap" class="nav-link" data-scroll-target="#and-thats-a-wrap">And That’s a Wrap! 🎬</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/amenalahassa/amenalahassa/issues/new" class="toc-action"><i class="bi bi-github"></i>Faire part d'un problème</a></li></ul></div></nav>
+    </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">multiverse</h1>
-<p class="subtitle lead">Welcome to my blog, a small space in the vast universe of the Internet where I share the ideas and knowledge I’ve gained on my journey into AI and software development.</p>
-</div>
+<h1 class="title">What I Learned from Calf Face</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">Work Projects</div>
+    <div class="quarto-category">Tips &amp; Tricks</div>
+  </div>
+  </div>
 
+<div>
+  <div class="description">
+    An adventure through the land of data, model training, and calf faces 🐮
+  </div>
+</div>
 
 
 <div class="quarto-title-meta">
 
     
+    <div>
+    <div class="quarto-title-meta-heading">Date de publication</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">4 octobre 2024</p>
+    </div>
+  </div>
   
+    <div>
+    <div class="quarto-title-meta-heading">Modifié</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date-modified">4 octobre 2024</p>
+    </div>
+  </div>
     
   </div>
   
@@ -259,212 +235,17 @@ window.Quarto = {
 </header>
 
 
+<section id="coming." class="level2">
+<h2 class="anchored" data-anchor-id="coming.">Coming….</h2>
+</section>
+<section id="and-thats-a-wrap" class="level2">
+<h2 class="anchored" data-anchor-id="and-thats-a-wrap">And That’s a Wrap! 🎬</h2>
+<p>Until next time, keep learning, keep growing, and keep exploring the world of AI. It’s a wild ride, but hey, someone’s gotta do it! 🚀</p>
 
 
+</section>
 
-
-<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
-<div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="Work Projects,Tips &amp; Tricks" data-listing-date-sort="1728000000000" data-listing-file-modified-sort="1728044568964" data-listing-date-modified-sort="1728000000000" data-listing-reading-time-sort="1" data-listing-word-count-sort="30">
-<div class="thumbnail">
-<p><a href="./posts/lessons_from_calf_face.html" class="no-external"></a></p><a href="./posts/lessons_from_calf_face.html" class="no-external">
-<p><img loading="lazy" src="./posts/assets/images/mean_face.png" class="thumbnail-image"></p>
-</a><p><a href="./posts/lessons_from_calf_face.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/lessons_from_calf_face.html" class="no-external">What I Learned from Calf Face</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/lessons_from_calf_face.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('Work Projects'); return false;">
-Work Projects
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('Tips &amp; Tricks'); return false;">
-Tips &amp; Tricks
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/lessons_from_calf_face.html" class="no-external">An adventure through the land of data, model training, and calf faces 🐮</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/lessons_from_calf_face.html" class="no-external">
-<div class="listing-date">
-4 oct. 2024
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="1" data-categories="Tips &amp; Tricks,Personal Projects" data-listing-date-sort="1724457600000" data-listing-file-modified-sort="1728044568965" data-listing-date-modified-sort="1725667200000" data-listing-reading-time-sort="5" data-listing-word-count-sort="985">
-<div class="thumbnail">
-<p><a href="./posts/model_gpu.html" class="no-external"></a></p><a href="./posts/model_gpu.html" class="no-external">
-<p><img loading="lazy" src="./posts/assets/images/0_1.png" class="thumbnail-image"></p>
-</a><p><a href="./posts/model_gpu.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/model_gpu.html" class="no-external">How Much Memory Does Your Model Need on GPU? Let’s Find Out!</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/model_gpu.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('Tips &amp; Tricks'); return false;">
-Tips &amp; Tricks
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('Personal Projects'); return false;">
-Personal Projects
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/model_gpu.html" class="no-external">An exploration of GPU memory requirements for running models and how to estimate them with a handy tool.</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/model_gpu.html" class="no-external">
-<div class="listing-date">
-24 août 2024
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="2" data-categories="Tips &amp; Tricks,Personal Projects" data-listing-date-sort="1724371200000" data-listing-file-modified-sort="1728044568912" data-listing-date-modified-sort="1724371200000" data-listing-reading-time-sort="7" data-listing-word-count-sort="1263">
-<div class="thumbnail">
-<p><a href="./posts/anonymizer_intro.html" class="no-external"></a></p><a href="./posts/anonymizer_intro.html" class="no-external">
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./posts/anonymizer_intro.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/anonymizer_intro.html" class="no-external">How I Built a Tool to Anonymize Text for LLMs (and Why You Might Need It Too!)</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/anonymizer_intro.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('Tips &amp; Tricks'); return false;">
-Tips &amp; Tricks
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('Personal Projects'); return false;">
-Personal Projects
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/anonymizer_intro.html" class="no-external">Discover a handy tool that anonymizes your text before using it in LLMs, keeping your personal information safe and sound!</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/anonymizer_intro.html" class="no-external">
-<div class="listing-date">
-23 août 2024
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="3" data-categories="Personal Projects,Updates" data-listing-date-sort="1724371200000" data-listing-file-modified-sort="1728044568964" data-listing-date-modified-sort="1724371200000" data-listing-reading-time-sort="3" data-listing-word-count-sort="535">
-<div class="thumbnail">
-<p><a href="./posts/for_you.html" class="no-external"></a></p><a href="./posts/for_you.html" class="no-external">
-<p><img loading="lazy" src="./posts/assets/images/0_0.png" class="thumbnail-image"></p>
-</a><p><a href="./posts/for_you.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/for_you.html" class="no-external">Finally, An Introduction: The Story Behind This Blog and What’s Next</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/for_you.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('Personal Projects'); return false;">
-Personal Projects
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('Updates'); return false;">
-Updates
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/for_you.html" class="no-external">In this post, I finally take the time to properly introduce my blog, explain its purpose, and share why I’ve been away for the past few months. It’s a fresh start and an exciting journey ahead!</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/for_you.html" class="no-external">
-<div class="listing-date">
-23 août 2024
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="4" data-categories="Tips &amp; Tricks,Tutorial" data-listing-date-sort="1717027200000" data-listing-file-modified-sort="1728044568964" data-listing-date-modified-sort="1724457600000" data-listing-reading-time-sort="2" data-listing-word-count-sort="344">
-<div class="thumbnail">
-<p><a href="./posts/dataset-converter.html" class="no-external"></a></p><a href="./posts/dataset-converter.html" class="no-external">
-<p class="card-img-top"><img src="posts/dataset-converter_files/figure-html/cell-7-output-1.png"  class="thumbnail-image card-img"/></p>
-</a><p><a href="./posts/dataset-converter.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/dataset-converter.html" class="no-external">Passer de Yolo à CocoDetection, c’est possible !</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/dataset-converter.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('Tips &amp; Tricks'); return false;">
-Tips &amp; Tricks
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('Tutorial'); return false;">
-Tutorial
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/dataset-converter.html" class="no-external">Je partage dans cet article une méthode simple pour convertir un dataset YOLO au format COCO, ou à un autre, une solution que j’ai trouvée essentielle lors d’un récent projet de segmentation d’instance.</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/dataset-converter.html" class="no-external">
-<div class="listing-date">
-30 mai 2024
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="5" data-categories="Tutorial" data-listing-date-sort="1716249600000" data-listing-file-modified-sort="1728044568967" data-listing-date-modified-sort="1724457600000" data-listing-reading-time-sort="10" data-listing-word-count-sort="1888">
-<div class="thumbnail">
-<p><a href="./posts/predicting_comment_reply_llm.html" class="no-external"></a></p><a href="./posts/predicting_comment_reply_llm.html" class="no-external">
-<p class="card-img-top"><img src="posts/predicting_comment_reply_llm_files/figure-html/fig-cap-margin0-output-1.png"  class="thumbnail-image card-img"/></p>
-</a><p><a href="./posts/predicting_comment_reply_llm.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/predicting_comment_reply_llm.html" class="no-external">Predicting reply under comment with LLM</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/predicting_comment_reply_llm.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('Tutorial'); return false;">
-Tutorial
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/predicting_comment_reply_llm.html" class="no-external">Finetuning of Camembert on predicting, using a Le Soleil Facebook post comment as input, whether it will receive a response or not.</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/predicting_comment_reply_llm.html" class="no-external">
-<div class="listing-date">
-21 mai 2024
-</div>
-</a>
-</div>
-</div>
-</div>
-<div class="listing-no-matching d-none">
-Aucun article correspondant
-</div>
-</div><a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Retour au sommet</a></main> <!-- /main -->
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Retour au sommet</a></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -893,7 +674,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>   
     <div class="nav-footer-center">
 <p>Copyright 2024</p>
-<div class="toc-actions"><ul><li><a href="https://github.com/amenalahassa/amenalahassa/issues/new" class="toc-action"><i class="bi bi-github"></i>Faire part d'un problème</a></li></ul></div><div class="cookie-consent-footer"><a href="#" id="open_preferences_center">Cookie Preferences</a></div></div>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/amenalahassa/amenalahassa/issues/new" class="toc-action"><i class="bi bi-github"></i>Faire part d'un problème</a></li></ul></div><div class="cookie-consent-footer"><a href="#" id="open_preferences_center">Cookie Preferences</a></div></div>
     <div class="nav-footer-right">
       &nbsp;
     </div>
@@ -903,5 +684,5 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
-<script src="site_libs/quarto-html/zenscroll-min.js"></script>
+<script src="../site_libs/quarto-html/zenscroll-min.js"></script>
 </body></html>

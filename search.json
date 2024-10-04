@@ -113,6 +113,23 @@
     "text": "Ok, Time to Say Goodbye 👋\nThat’s all for now, folks! See you soon, and take care! Love you all! 💖"
   },
   {
+    "objectID": "posts/lessons_from_calf_face.html#and-thats-a-wrap",
+    "href": "posts/lessons_from_calf_face.html#and-thats-a-wrap",
+    "title": "What I Learned from Calf Face",
+    "section": "And That’s a Wrap! 🎬",
+    "text": "And That’s a Wrap! 🎬\nUntil next time, keep learning, keep growing, and keep exploring the world of AI. It’s a wild ride, but hey, someone’s gotta do it! 🚀"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "multiverse",
+    "section": "",
+    "text": "What I Learned from Calf Face\n\n\n\n\n\n\nWork Projects\n\n\nTips & Tricks\n\n\n\nAn adventure through the land of data, model training, and calf faces 🐮\n\n\n\n\n\n4 oct. 2024\n\n\n\n\n\n\n\n\n\n\n\n\nHow Much Memory Does Your Model Need on GPU? Let’s Find Out!\n\n\n\n\n\n\nTips & Tricks\n\n\nPersonal Projects\n\n\n\nAn exploration of GPU memory requirements for running models and how to estimate them with a handy tool.\n\n\n\n\n\n24 août 2024\n\n\n\n\n\n\n\n\n\n\n\n\nHow I Built a Tool to Anonymize Text for LLMs (and Why You Might Need It Too!)\n\n\n\n\n\n\nTips & Tricks\n\n\nPersonal Projects\n\n\n\nDiscover a handy tool that anonymizes your text before using it in LLMs, keeping your personal information safe and sound!\n\n\n\n\n\n23 août 2024\n\n\n\n\n\n\n\n\n\n\n\n\nFinally, An Introduction: The Story Behind This Blog and What’s Next\n\n\n\n\n\n\nPersonal Projects\n\n\nUpdates\n\n\n\nIn this post, I finally take the time to properly introduce my blog, explain its purpose, and share why I’ve been away for the past few months. It’s a fresh start and an exciting journey ahead!\n\n\n\n\n\n23 août 2024\n\n\n\n\n\n\n\n\n\n\n\n\nPasser de Yolo à CocoDetection, c’est possible !\n\n\n\n\n\n\nTips & Tricks\n\n\nTutorial\n\n\n\nJe partage dans cet article une méthode simple pour convertir un dataset YOLO au format COCO, ou à un autre, une solution que j’ai trouvée essentielle lors d’un récent projet de segmentation d’instance.\n\n\n\n\n\n30 mai 2024\n\n\n\n\n\n\n\n\n\n\n\n\nPredicting reply under comment with LLM\n\n\n\n\n\n\nTutorial\n\n\n\nFinetuning of Camembert on predicting, using a Le Soleil Facebook post comment as input, whether it will receive a response or not.\n\n\n\n\n\n21 mai 2024\n\n\n\n\n\n\nAucun article correspondant\n\n Retour au sommet",
+    "crumbs": [
+      "Blog"
+    ]
+  },
+  {
     "objectID": "works.html",
     "href": "works.html",
     "title": "Personal works and other stuffs",
@@ -160,16 +177,6 @@
     "text": "Found this interesting?\nLet me know if you have any comments or ideas on how I can improve. I’m all ears! 👂 I’ll be updating regularly on my progress and any news, so keep an eye out for more. Thank you for reading! 💖",
     "crumbs": [
       "My works"
-    ]
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "multiverse",
-    "section": "",
-    "text": "How Much Memory Does Your Model Need on GPU? Let’s Find Out!\n\n\n\n\n\n\nTips & Tricks\n\n\nPersonal Projects\n\n\n\nAn exploration of GPU memory requirements for running models and how to estimate them with a handy tool.\n\n\n\n\n\n24 août 2024\n\n\n\n\n\n\n\n\n\n\n\n\nHow I Built a Tool to Anonymize Text for LLMs (and Why You Might Need It Too!)\n\n\n\n\n\n\nTips & Tricks\n\n\nPersonal Projects\n\n\n\nDiscover a handy tool that anonymizes your text before using it in LLMs, keeping your personal information safe and sound!\n\n\n\n\n\n23 août 2024\n\n\n\n\n\n\n\n\n\n\n\n\nFinally, An Introduction: The Story Behind This Blog and What’s Next\n\n\n\n\n\n\nPersonal Projects\n\n\nUpdates\n\n\n\nIn this post, I finally take the time to properly introduce my blog, explain its purpose, and share why I’ve been away for the past few months. It’s a fresh start and an exciting journey ahead!\n\n\n\n\n\n23 août 2024\n\n\n\n\n\n\n\n\n\n\n\n\nPasser de Yolo à CocoDetection, c’est possible !\n\n\n\n\n\n\nTips & Tricks\n\n\nTutorial\n\n\n\nJe partage dans cet article une méthode simple pour convertir un dataset YOLO au format COCO, ou à un autre, une solution que j’ai trouvée essentielle lors d’un récent projet de segmentation d’instance.\n\n\n\n\n\n30 mai 2024\n\n\n\n\n\n\n\n\n\n\n\n\nPredicting reply under comment with LLM\n\n\n\n\n\n\nTutorial\n\n\n\nFinetuning of Camembert on predicting, using a Le Soleil Facebook post comment as input, whether it will receive a response or not.\n\n\n\n\n\n21 mai 2024\n\n\n\n\n\n\nAucun article correspondant\n\n Retour au sommet",
-    "crumbs": [
-      "Blog"
     ]
   },
   {

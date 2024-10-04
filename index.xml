@@ -10,7 +10,32 @@
 <atom:link href="https://amenalahassa.github.io/amenalahassa/index.xml" rel="self" type="application/rss+xml"/>
 <description>A small space in the vast universe of the Internet where I share the ideas and knowledge I&#39;ve gained on my journey into AI and software development.</description>
 <generator>quarto-1.5.37</generator>
-<lastBuildDate>Sat, 24 Aug 2024 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Fri, 04 Oct 2024 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>What I Learned from Calf Face</title>
+  <link>https://amenalahassa.github.io/amenalahassa/posts/lessons_from_calf_face.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<section id="coming." class="level2">
+<h2 class="anchored" data-anchor-id="coming.">Coming….</h2>
+</section>
+<section id="and-thats-a-wrap" class="level2">
+<h2 class="anchored" data-anchor-id="and-thats-a-wrap">And That’s a Wrap! 🎬</h2>
+<p>Until next time, keep learning, keep growing, and keep exploring the world of AI. It’s a wild ride, but hey, someone’s gotta do it! 🚀</p>
+
+
+</section>
+
+<a onclick="window.scrollTo(0, 0); return false;" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Retour au sommet</a> ]]></description>
+  <category>Work Projects</category>
+  <category>Tips &amp; Tricks</category>
+  <guid>https://amenalahassa.github.io/amenalahassa/posts/lessons_from_calf_face.html</guid>
+  <pubDate>Fri, 04 Oct 2024 00:00:00 GMT</pubDate>
+  <media:content url="https://amenalahassa.github.io/amenalahassa/posts/assets/images/mean_face.png" medium="image" type="image/png" height="50" width="144"/>
+</item>
 <item>
   <title>How Much Memory Does Your Model Need on GPU? Let’s Find Out!</title>
   <link>https://amenalahassa.github.io/amenalahassa/posts/model_gpu.html</link>
