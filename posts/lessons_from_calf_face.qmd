@@ -1,0 +1,21 @@
+---
+title: "What I Learned from Calf Face"
+date: 2024/10/04
+date-modified: 2024/10/04
+image: "assets/images/mean_face.png"
+description: "An adventure through the land of data, model training, and calf faces 🐮"
+categories:
+  - Work Projects
+  - Tips & Tricks
+format:
+  html:
+    code-fold: true
+---
+
+## Coming....
+
+
+## And That’s a Wrap! 🎬
+
+Until next time, keep learning, keep growing, and keep exploring the world of AI. It’s a wild ride, but hey, someone’s gotta do it! 🚀
+
