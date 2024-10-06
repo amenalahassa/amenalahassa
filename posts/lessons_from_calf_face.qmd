@@ -1,9 +1,10 @@
 ---
-title: "What I Learned from Calf Face"
+title: "What I Learned from Calf Face :)"
 date: 2024/10/04
 date-modified: 2024/10/04
 image: "assets/images/mean_face.png"
 description: "An adventure through the land of data, model training, and calf faces 🐮"
+draft: true
 categories:
   - Work Projects
   - Tips & Tricks
