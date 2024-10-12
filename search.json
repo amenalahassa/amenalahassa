@@ -1,176 +1,10 @@
 [
   {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "Konrad Tagnon Amen ALAHASSA",
-    "section": "",
-    "text": "AI Developer fluent in machine learning and web technologies, I’m passionate about leveraging AI to tackle real-world problems and create a tangible impact. My primary interests lie in revolutionizing industries such as food production and finance through innovative technological solutions. With a deep commitment to sharing knowledge and fostering collaboration, I actively contribute to open-source projects and engage with the tech community.",
-    "crumbs": [
-      "L'auteur"
-    ]
-  },
-  {
-    "objectID": "about.html#experiences",
-    "href": "about.html#experiences",
-    "title": "Konrad Tagnon Amen ALAHASSA",
-    "section": "Experiences",
-    "text": "Experiences\n\nLead Developer | Sept 2022 - Jul 2023\nAgroSfer | Cotonou, Bénin\nLead development teams in creating a dynamic data aggregation system for enhanced dashboard analytics. Utilized Angular, Laravel, and MongoDB technologies.\n\n\nFront-end Developer | Jun 2021 - Sept 2022\nAgroSfer | Cotonou, Bénin\nStudied advanced software systems, focusing on practical and theoretical aspects of software engineering in Benin.\n\n\nInternship in Web Development | Mars 2021 - Mai 2021\nLa Vedette Media Digital | Cotonou, Bénin\nDesign and development of the architecture for an intranet-based project management web platform for La Vedette Media.\n\n\nInternship in Web Development | June 2020 - Sept 2020\nNAUTILUS TECHNOLOGY | Cotonou, Bénin\nInternship role focusing on web development using JavaScript, Angular, Laravel, and Git, solidifying foundational web development skills.",
-    "crumbs": [
-      "L'auteur"
-    ]
-  },
-  {
-    "objectID": "about.html#education",
-    "href": "about.html#education",
-    "title": "Konrad Tagnon Amen ALAHASSA",
-    "section": "Education",
-    "text": "Education\n\nMaîtrise en informatique - Intelligence Artificielle | Since Sept 2023\nUniversité Laval | Québec, CA\nPursuing a Master’s degree focusing on Artificial Intelligence, enhancing skills in complex AI systems and machine learning implementations.\n\n\nSystèmes informatiques et Logiciels | Oct 2018 - Jul 2021\nLes COURS SONOU | Abomey-Calavi, Bénin\nStudied advanced software systems, focusing on practical and theoretical aspects of software engineering in Benin.\n\n\nBaccalauréat Science Maths | Août 2018\nCEG Application | Porto-Novo, Bénin\nGraduated with a focus on Mathematics and Science, forming a strong analytical foundation.",
-    "crumbs": [
-      "L'auteur"
-    ]
-  },
-  {
-    "objectID": "about.html#skills",
-    "href": "about.html#skills",
-    "title": "Konrad Tagnon Amen ALAHASSA",
-    "section": "Skills",
-    "text": "Skills\n\nArtificial Intelligence\nPython, Pytorch, Tensorflow, Keras\nMatplotlib, Seaborn, Numpy, Pandas, timm, fastai, fastcore, torchvision, Poutyne,\nSPSS Modeler, RStudio\n\n\nSoftware engineering\nPHP, Javascript, C, C++, Java\nAngular, ReactJs, VueJs, Cypress, Web API\nSQL, Mysql, Firebase, MongoDB, Web Services, APIs Rest\n\n\nOthers\nGit, DevOps, CI/CD, UX Design, Scrum, Agile",
-    "crumbs": [
-      "L'auteur"
-    ]
-  },
-  {
-    "objectID": "about.html#online-courses",
-    "href": "about.html#online-courses",
-    "title": "Konrad Tagnon Amen ALAHASSA",
-    "section": "Online courses",
-    "text": "Online courses\n\nFrom Engineer to Technical Manager: A Survival Guide, Sundog Education\nUdemy - 2023",
-    "crumbs": [
-      "L'auteur"
-    ]
-  },
-  {
     "objectID": "posts/dataset-converter.html",
     "href": "posts/dataset-converter.html",
     "title": "Passer de Yolo à CocoDetection, c’est possible !",
     "section": "",
     "text": "De quoi s’agit-il ?\nDans ce post, je montre comment convertir un dataset YOLO en format COCO en utilisant la bibliothèque Python globox, une solution pratique que j’ai récemment appliquée pour un projet de segmentation d’instance. globox permet également de faire l’inverse, ainsi que de nombreuses autres conversions de formats de datasets. Je vous invite à explorer ce package pour découvrir toutes les possibilités qu’il offre.\n\n\nOk, ça donne quoi ?\n\n\nCode\n!pip install globox\n!pip install pycocotools\n\n\n\n\nCode\nfrom pathlib import Path\nfrom PIL import Image\nfrom torchvision.datasets import CocoDetection\nfrom globox import AnnotationSet\n\nimport matplotlib.pyplot as plt\nimport matplotlib.patches as patches\nimport numpy as np\n\n\nLe code ci-dessous initialise trois chemins en utilisant la bibliothèque Path de Python. Les chemins label_path et image_path pointent respectivement vers les dossiers contenant les étiquettes et les images du dataset YOLO. Ensuite, le chemin save_file est défini pour sauvegarder le fichier de sortie au format COCO. Enfin, la commande annotations = AnnotationSet.from_yolo_v7(label_path, image_folder=image_path) crée un ensemble d’annotations à partir des étiquettes YOLO et des images associées, prêt à être converti au format COCO.\n\nlabel_path = Path(\"/kaggle/input/medleaves-medicinal-plant-leaves-dataset/MedLeaves/MedLeaves/train/labels\")\nimage_path = Path(\"/kaggle/input/medleaves-medicinal-plant-leaves-dataset/MedLeaves/MedLeaves/train/images\") \n\nsave_file = Path(\"/kaggle/working/medleaves-coco.json\")\n\nannotations = AnnotationSet.from_yolo_v7(label_path, image_folder=image_path)\n\nLa commande annotations.show_stats() est utilisée pour afficher des statistiques sur l’ensemble d’annotations créé précédemment. Cette méthode fournit un résumé utile des données annotées, comme le nombre total d’images, d’annotations, et la distribution des catégories d’objets. Cela permet de vérifier rapidement l’état et la qualité des annotations avant de procéder à des opérations de conversion ou d’entraînement de modèles.\n\nannotations.show_stats()\n\n      Database Stats      \n┏━━━━━━━┳━━━━━━━━┳━━━━━━━┓\n┃ Label ┃ Images ┃ Boxes ┃\n┡━━━━━━━╇━━━━━━━━╇━━━━━━━┩\n│ 0     │    415 │  2322 │\n│ 1     │    408 │   498 │\n│ 10    │    416 │   588 │\n│ 11    │    412 │   612 │\n│ 12    │    414 │  2401 │\n│ 13    │    410 │   810 │\n│ 14    │    412 │  2750 │\n│ 15    │    408 │  1605 │\n│ 16    │    411 │  2237 │\n│ 17    │    411 │  2662 │\n│ 18    │    409 │   682 │\n│ 19    │    413 │  5032 │\n│ 2     │    414 │  5830 │\n│ 20    │    405 │   882 │\n│ 21    │    415 │  2892 │\n│ 22    │    409 │   540 │\n│ 23    │    414 │  1275 │\n│ 24    │    411 │   727 │\n│ 25    │    407 │  4778 │\n│ 26    │    413 │  1255 │\n│ 27    │    406 │   997 │\n│ 28    │    411 │   618 │\n│ 29    │    409 │  1143 │\n│ 3     │    411 │  1584 │\n│ 4     │    405 │  3082 │\n│ 5     │    405 │  1275 │\n│ 6     │    416 │   769 │\n│ 7     │    403 │   570 │\n│ 8     │    409 │  1563 │\n│ 9     │    410 │  2475 │\n├───────┼────────┼───────┤\n│ Total │  12312 │ 54454 │\n└───────┴────────┴───────┘\n\n\n\nC’est ici que la magie à lieu ! La commande annotations.save_coco(save_file, auto_ids=True) sauvegarde l’ensemble d’annotations dans un fichier au format COCO, en utilisant le chemin spécifié par save_file. L’option auto_ids=True indique que les identifiants pour les annotations et les images seront générés automatiquement si nécessaire.\n\nannotations.save_coco(save_file, auto_ids=True)\n\nVisualisons ensuite le résultat, mais en chargeant les données au format CocoDetection. Le code ci-dessous fait cela en utilisant la classe CocoDetection de la bibliothèque PyTorch.\nLe paramètre root est défini avec le chemin vers le dossier des images (image_path), tandis que annFile spécifie le chemin du fichier d’annotations au format COCO (save_file).\nEnfin, train_data[0][0] accède à la première image du dataset, afin ainsi de le visualiser.\n\ntrain_data = CocoDetection(root = image_path, annFile = save_file, transform = None)\ntrain_data[0][0]\n\n\n\n\n\n\n\n\nProfitons pour visualiser une image du dataset avec ses annotations (bbox) superposées sur l’image.\n\n\nCode\n# Obtenir la première image et ses annotations\nimage, annotations = train_data[0]\n\n# Convertir l'image PIL en tableau numpy pour l'affichage\nimage_np = np.array(image)\n\n# Créer un graphique\nfig, ax = plt.subplots(1)\nax.imshow(image_np)\n\n# Tracer chaque boîte englobante\nfor ann in annotations:\n    bbox = ann['bbox']\n    # Le format de boîte englobante COCO est [x, y, largeur, hauteur]\n    rect = patches.Rectangle((bbox[0], bbox[1]), bbox[2], bbox[3], linewidth=2, edgecolor='r', facecolor='none')\n    ax.add_patch(rect)\n\n# Afficher le graphique\nplt.show()\n\n\n\n\n\n\n\n\n\nJ’espère que cela vous sera utile. N’hésitez pas à me contacter si vous avez des questions ou des recommendations. À la prochaine ! :-)\n\n\n\n\n Retour au sommet"
-  },
-  {
-    "objectID": "posts/for_you.html",
-    "href": "posts/for_you.html",
-    "title": "Finally, An Introduction: The Story Behind This Blog and What’s Next",
-    "section": "",
-    "text": "Alright, let’s be real. Life happened, right? 😅 I took some time to wrap up a few things in my life and, honestly, to kickstart a new chapter. You know that feeling when you finish one thing and feel like a whole new world opens up? Yeah, that’s where I’m at! 🌟\nPlus, it was the end of the school session, and I needed some well-deserved downtime. Relaxing, de-stressing, and just enjoying life for a bit. But guess what? Now I’m back, energized, and ready to take on the world! 🌍✨\nI’ve realized how much I’ve already accomplished, and let me tell you, I’m super grateful for all of it. 🙏 But I also see how much more there is to do. My blog, my job, my personal life – they all need my attention, and I’m ready to dive in.\nThe possibilities ahead? Endless. I’m seizing every opportunity coming my way, and I can’t wait to share the journey with you! 🚀"
-  },
-  {
-    "objectID": "posts/for_you.html#what-happened-indeed",
-    "href": "posts/for_you.html#what-happened-indeed",
-    "title": "Finally, An Introduction: The Story Behind This Blog and What’s Next",
-    "section": "",
-    "text": "Alright, let’s be real. Life happened, right? 😅 I took some time to wrap up a few things in my life and, honestly, to kickstart a new chapter. You know that feeling when you finish one thing and feel like a whole new world opens up? Yeah, that’s where I’m at! 🌟\nPlus, it was the end of the school session, and I needed some well-deserved downtime. Relaxing, de-stressing, and just enjoying life for a bit. But guess what? Now I’m back, energized, and ready to take on the world! 🌍✨\nI’ve realized how much I’ve already accomplished, and let me tell you, I’m super grateful for all of it. 🙏 But I also see how much more there is to do. My blog, my job, my personal life – they all need my attention, and I’m ready to dive in.\nThe possibilities ahead? Endless. I’m seizing every opportunity coming my way, and I can’t wait to share the journey with you! 🚀"
-  },
-  {
-    "objectID": "posts/for_you.html#whats-next",
-    "href": "posts/for_you.html#whats-next",
-    "title": "Finally, An Introduction: The Story Behind This Blog and What’s Next",
-    "section": "What’s Next? 🎉",
-    "text": "What’s Next? 🎉\nFirst off, a huge shoutout to my brothers and my family. Without them, I wouldn’t be here doing what I love. You guys are the real MVPs! 💪\nNow, onto me. I’m committed to working on myself, becoming the best version of me. I’m just getting started on my journey, my career, my dreams – and I’m 100% ready to make them a reality. Let’s do this! 🙌"
-  },
-  {
-    "objectID": "posts/for_you.html#the-reason-behind-this-blog",
-    "href": "posts/for_you.html#the-reason-behind-this-blog",
-    "title": "Finally, An Introduction: The Story Behind This Blog and What’s Next",
-    "section": "The Reason Behind This Blog 💻",
-    "text": "The Reason Behind This Blog 💻\nSo, why this blog? Well, it’s simple. I want to share what I’ve accomplished in my career, in AI, in software engineering – and maybe some other areas too. 🚀\nBut here’s the thing: this isn’t going to be a blog where I show you how to do things or preach about the future of AI (though, who knows, maybe a little bit of that 😉). Instead, it’s going to be a place where I share what I’m learning, what I’m building, and who I’m building it with. And hey, I’d love to hear your thoughts, comments, and recommendations along the way. Don’t hesitate! 😊"
-  },
-  {
-    "objectID": "posts/for_you.html#why-now",
-    "href": "posts/for_you.html#why-now",
-    "title": "Finally, An Introduction: The Story Behind This Blog and What’s Next",
-    "section": "Why Now? 🤷",
-    "text": "Why Now? 🤷\nYou know, I just realized that I never really took the time to properly introduce this blog or explain what it’s all about. Better late than never, right? 😁 So, here it is! 🎉"
-  },
-  {
-    "objectID": "posts/for_you.html#how-its-built",
-    "href": "posts/for_you.html#how-its-built",
-    "title": "Finally, An Introduction: The Story Behind This Blog and What’s Next",
-    "section": "How It’s Built 🛠️",
-    "text": "How It’s Built 🛠️\nFor all the techies out there, I’m using Quarto, and it’s deployed with GitHub Pages. I wanted to keep things simple but also have the flexibility to share code. Quarto’s been perfect for that – super interesting and easy to get the hang of. 👍"
-  },
-  {
-    "objectID": "posts/for_you.html#what-else",
-    "href": "posts/for_you.html#what-else",
-    "title": "Finally, An Introduction: The Story Behind This Blog and What’s Next",
-    "section": "What Else? 🧐",
-    "text": "What Else? 🧐\nOh, and one more thing – I’ve added a page to showcase all the projects I’m working on, both finished and in progress. I’ll be publishing articles explaining them, sharing why I find them interesting, and how they’re coming along. Stay tuned! 🚧\nGot any comments or ideas on how I can improve? I’m all ears! 👂 I’ll be updating regularly on my progress and any news, so keep an eye out for more.\nAnd hey, I speak French too! Je peux bien parler en français qu’en anglais, permettez-moi ce petit écart 😉."
-  },
-  {
-    "objectID": "posts/for_you.html#ok-time-to-say-goodbye",
-    "href": "posts/for_you.html#ok-time-to-say-goodbye",
-    "title": "Finally, An Introduction: The Story Behind This Blog and What’s Next",
-    "section": "Ok, Time to Say Goodbye 👋",
-    "text": "Ok, Time to Say Goodbye 👋\nThat’s all for now, folks! See you soon, and take care! Love you all! 💖"
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "multiverse",
-    "section": "",
-    "text": "How Much Memory Does Your Model Need on GPU? Let’s Find Out!\n\n\n\n\n\n\nTips & Tricks\n\n\nPersonal Projects\n\n\n\nAn exploration of GPU memory requirements for running models and how to estimate them with a handy tool.\n\n\n\n\n\n24 août 2024\n\n\n\n\n\n\n\n\n\n\n\n\nHow I Built a Tool to Anonymize Text for LLMs (and Why You Might Need It Too!)\n\n\n\n\n\n\nTips & Tricks\n\n\nPersonal Projects\n\n\n\nDiscover a handy tool that anonymizes your text before using it in LLMs, keeping your personal information safe and sound!\n\n\n\n\n\n23 août 2024\n\n\n\n\n\n\n\n\n\n\n\n\nFinally, An Introduction: The Story Behind This Blog and What’s Next\n\n\n\n\n\n\nPersonal Projects\n\n\nUpdates\n\n\n\nIn this post, I finally take the time to properly introduce my blog, explain its purpose, and share why I’ve been away for the past few months. It’s a fresh start and an exciting journey ahead!\n\n\n\n\n\n23 août 2024\n\n\n\n\n\n\n\n\n\n\n\n\nPasser de Yolo à CocoDetection, c’est possible !\n\n\n\n\n\n\nTips & Tricks\n\n\nTutorial\n\n\n\nJe partage dans cet article une méthode simple pour convertir un dataset YOLO au format COCO, ou à un autre, une solution que j’ai trouvée essentielle lors d’un récent projet de segmentation d’instance.\n\n\n\n\n\n30 mai 2024\n\n\n\n\n\n\n\n\n\n\n\n\nPredicting reply under comment with LLM\n\n\n\n\n\n\nTutorial\n\n\n\nFinetuning of Camembert on predicting, using a Le Soleil Facebook post comment as input, whether it will receive a response or not.\n\n\n\n\n\n21 mai 2024\n\n\n\n\n\n\nAucun article correspondant\n\n Retour au sommet",
-    "crumbs": [
-      "Blog"
-    ]
-  },
-  {
-    "objectID": "works.html",
-    "href": "works.html",
-    "title": "Personal works and other stuffs",
-    "section": "",
-    "text": "I want to share what I’ve accomplished as projects, in AI, in software engineering – and maybe some other areas too. 🚀 This is not an exhaustive list, but it’s a start! I’ll be updating this page regularly with new projects and articles, so keep an eye out for more. 🌟 I’m also working on a few projects I won’t be able to share here but I will publish some articles explaining them as soon as possible. Stay tuned! 🚧",
-    "crumbs": [
-      "My works"
-    ]
-  },
-  {
-    "objectID": "works.html#in-progress",
-    "href": "works.html#in-progress",
-    "title": "Personal works and other stuffs",
-    "section": "In Progress",
-    "text": "In Progress\nHere are some of the projects I’m currently working on:\n\nA web tool to anonymize text before feeding it to a large language model (LLM): I’m working on a tool that uses techniques like transfer learning and model quantization to run a large language model directly in the browser. It’s a fun project that I can’t wait to complete and share with you all!\nA tool for kmer base error correction in DNA sequences using DQL: I’m developing a tool that uses Deep Q-Learning to correct errors in DNA sequences. It’s a challenging project, which on I’m working with a friends, student in Bioinformatics.\nFlapEgg: I’m contributing to a project that uses EEG signals to control a game. It’s a project of the AI club of my university, and I’m excited to see where it goes!\n\nAnd there’s more to come! 🚀",
-    "crumbs": [
-      "My works"
-    ]
-  },
-  {
-    "objectID": "works.html#in-ai",
-    "href": "works.html#in-ai",
-    "title": "Personal works and other stuffs",
-    "section": "In AI",
-    "text": "In AI\nIt’s been a while since I started my journey into AI. Here are some of the projects I’ve worked on:\n\nA Tool to Estimate Model Memory Usage on GPU: I built a tool that estimates the memory required to load a model onto a GPU. It’s a handy tool for developers who want to how much resources they need to run a model on their GPU from Hugging Face for example.\nGraphic elements detection using Yolov8: I built a project that detects graphic elements in images using Yolov8. It was a fun class project that helped me learn more about object detection. I’m working on comparing the performances of Yolov8 and DETR on the same task. I will publish an article about it soon. Stay tuned!\nBert vs Falcon on questions answering: I compared the performances of Bert and Falcon on a question-answering task. I used zero-shot promptings to evaluate Falcon on generative tasks and Bert on extractive tasks.\n\nand it’s just the beginning! 🚀",
-    "crumbs": [
-      "My works"
-    ]
-  },
-  {
-    "objectID": "works.html#in-software-engineering",
-    "href": "works.html#in-software-engineering",
-    "title": "Personal works and other stuffs",
-    "section": "In software engineering",
-    "text": "In software engineering\nBefore starting my master’s degree in Artificial Intelligence, I worked on a lot of projects in software engineering. Here are some of them that I found interesting:\n\nA blog using Vue.js: I built a blog using Vue.js, SemanticUi, NodeJs, ExpressJs and MongoDB. It was a fun project that helped me learn more about all these technologies. I built a frontend and a backend for this project.\nI tried to clone Trello 😅: I tried to build a Trello clone using React and Laravel. It was a fun project that I didn’t finish but I learned a lot about React and Laravel and how to setup live messaging between frontend and backend using Laravel Echo.\nLarangular: a Laravel and Angular project: I built an invoice app using Laravel and Angular. The idea is to have a sample app where for an order, you add a list of the articles, and you generate an invoice. You can also export the invoice as a PDF. The backend is built using Laravel and all of them is under same repository. Bad practice, I know, but it was a fun project :D\nmytodoapp: a todo app using React: I built a sample todo app using React. It was my first project on my web development journey. I learned a lot about React, Git and how to deploy a React app on GitHub pages.\n\nand a lot more you can find on my GitHub. 🌟",
-    "crumbs": [
-      "My works"
-    ]
-  },
-  {
-    "objectID": "works.html#found-this-interesting",
-    "href": "works.html#found-this-interesting",
-    "title": "Personal works and other stuffs",
-    "section": "Found this interesting?",
-    "text": "Found this interesting?\nLet me know if you have any comments or ideas on how I can improve. I’m all ears! 👂 I’ll be updating regularly on my progress and any news, so keep an eye out for more. Thank you for reading! 💖",
-    "crumbs": [
-      "My works"
-    ]
   },
   {
     "objectID": "posts/anonymizer_intro.html",
@@ -236,6 +70,172 @@
     "text": "A Tool to Estimate Model Memory Usage on GPU\nHey there, fellow developers and curious minds! 🖖 Ever wondered how much juice you need to run a model on your GPU? Whether you’re knee-deep in code or just dipping your toes into the tech waters, the question of resources has likely crossed your mind.\n\nBuilding a Tool to Estimate GPU Memory Usage\nGuess what? I built a tool for that! 🎉 But hold up, before you get too excited… it only estimates the memory required to load the model onto a GPU. Yep, just that—no more, no less. If you’re itching to test it out, here’s the link.\n\n\nWhy Only Estimate GPU Memory for Loading?\nYou might be asking, “Why just the memory for loading?” Good question! It’s because to really figure out how much resources a model needs to run (whether training or inference), you actually need to run it. Yep, no shortcuts here.\nIt all depends on things like the size of your input/batch, the quality of your data (low-res images vs. high-res by eg), and a whole bunch of other factors. 🤯 Oh, and don’t forget the extra memory needed to store activations during the forward pass and gradients during the backward pass. The bigger the model, the more resources you’ll need. It’s a classic case of go big or go home!\n\n\nSo, How Do I Know How Much Memory My Model Needs?\nHere’s the deal: The memory a model uses for training is not the same as it uses for inference. Training requires more memory because it needs to store activations and gradients for backpropagation. Unfortunately, there’s no one-size-fits-all rule to tell you exactly how much memory you’ll need, but we can make an educated guess.\nYou can start by using my tool to get a minimum memory estimate for loading the model. To estimate training memory, a rough approach is to multiply that number by 10, but keep in mind this is just a ballpark figure. The exact factor can vary depending on your model architecture and batch size. To be safe, always test with different configurations to find the sweet spot.\nDuring inference, models generally require less memory and run faster compared to training, but there are exceptions. Monitoring tools like nvidia-smi can help you keep track of actual GPU usage and avoid surprises. 📊\n\n\nExample Time! 🎮\nLet’s take a practical example. I want to fine-tune the Qwen 2 model (Qwen/Qwen2-0.5B-Instruct) on a GPU P100 with 16GB of memory on Kaggle. For this exemple, I was trying to fine-tune the model on a dataset of 10k samples with a batch size of 2 and a maximum of 800 tokens per input, on a NER task.\nWhen I load the model onto the GPU, it takes up around 2.6GB of memory. Not too bad, right? But when I try to train the model, you see in the image below, it maxes out all the resources. 🚀\n\n\n\nGPU Memory Usage\n\n\nSo, what’s the takeaway here? Even if your model loads fine, it might not run smoothly during training. Always keep an eye on your resources and adjust your model or batch size accordingly.\n\n\nV100 vs. A100 vs. Whatever GPU: What Difference Does It Make?\nSo, you might be wondering, “Does it really matter which GPU I use?” Well, the short answer is: Absolutely! 🏎️\nIt’s like traveling from Canada to France. You could either fly or bike. Pretty obvious which one gets you there faster, right? The same logic applies to GPUs—more powerful ones will get the job done quicker, especially when running large models.\nLet’s break it down:\n\nPowerful GPUs like the A100 not only handle large models better but also have extra features, like mixed-precision training, that can reduce memory usage and speed things up. They’re like the jet engines of the GPU world—fast, efficient, and capable of handling heavy workloads with ease.\nOlder or less powerful GPUs like the V100 can still do the job, but they might struggle with bigger models or more complex tasks. It’s like taking a slower flight—still gets you there, but not as fast or smoothly.\nWhatever GPU you have, just remember: You need both memory and raw power to make your model run efficiently. If your GPU isn’t powerful enough, your model might take longer to run or could even crash. And nobody wants that!\n\nSo, whether you’re eyeing the latest A100 or making do with what you’ve got, the takeaway is clear: A more powerful GPU means faster, more efficient model runs. If you need to go deeper, you can read this article too.\n\n\nAlternatives If Your Model Is Too Big\nGot a huge model with over a billion parameters? No worries, there are alternatives! You can try building a smaller model that uses fewer resources. Techniques like transfer learning, model quantization, or even using a smaller model altogether can help.\nHowever, keep in mind that these approaches might impact accuracy. Sometimes the trade-off isn’t that significant, and you can even set up safeguards for uncertain predictions, allowing the user to choose the most appropriate response. 💡\nFun fact: I’m working on a tool to anonymize text before feeding it to a large language model (LLM), and I use one of these techniques to run the model directly in the browser. Check it out here!\n\n\nTakeaways\nAlright, let’s wrap things up:\n\nEstimating exact memory requirements for your model can be tricky, but my tool can give you a good starting point.\nThe more powerful your GPU, the faster and smoother your model will run—so choose wisely!\nIf your model is too big, consider alternatives like downsizing or using techniques that reduce resource demands, though be mindful of potential accuracy trade-offs.\n\n\n\nGoodbye and Thanks!\nThanks for sticking with me through this post! I hope you found it helpful. If you have any thoughts, suggestions, or just want to say hi, feel free to reach out via email or drop an issue below. I’m always open to learning and would love to hear from you.\nTake care, and happy coding! 🚀\n\n\n\n\n\n Retour au sommet"
   },
   {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "Konrad Tagnon Amen ALAHASSA",
+    "section": "",
+    "text": "AI Developer fluent in machine learning and web technologies, I’m passionate about leveraging AI to tackle real-world problems and create a tangible impact. My primary interests lie in revolutionizing industries such as food production and finance through innovative technological solutions. With a deep commitment to sharing knowledge and fostering collaboration, I actively contribute to open-source projects and engage with the tech community.",
+    "crumbs": [
+      "L'auteur"
+    ]
+  },
+  {
+    "objectID": "about.html#experiences",
+    "href": "about.html#experiences",
+    "title": "Konrad Tagnon Amen ALAHASSA",
+    "section": "Experiences",
+    "text": "Experiences\n\nLead Developer | Sept 2022 - Jul 2023\nAgroSfer | Cotonou, Bénin\nLead development teams in creating a dynamic data aggregation system for enhanced dashboard analytics. Utilized Angular, Laravel, and MongoDB technologies.\n\n\nFront-end Developer | Jun 2021 - Sept 2022\nAgroSfer | Cotonou, Bénin\nStudied advanced software systems, focusing on practical and theoretical aspects of software engineering in Benin.\n\n\nInternship in Web Development | Mars 2021 - Mai 2021\nLa Vedette Media Digital | Cotonou, Bénin\nDesign and development of the architecture for an intranet-based project management web platform for La Vedette Media.\n\n\nInternship in Web Development | June 2020 - Sept 2020\nNAUTILUS TECHNOLOGY | Cotonou, Bénin\nInternship role focusing on web development using JavaScript, Angular, Laravel, and Git, solidifying foundational web development skills.",
+    "crumbs": [
+      "L'auteur"
+    ]
+  },
+  {
+    "objectID": "about.html#education",
+    "href": "about.html#education",
+    "title": "Konrad Tagnon Amen ALAHASSA",
+    "section": "Education",
+    "text": "Education\n\nMaîtrise en informatique - Intelligence Artificielle | Since Sept 2023\nUniversité Laval | Québec, CA\nPursuing a Master’s degree focusing on Artificial Intelligence, enhancing skills in complex AI systems and machine learning implementations.\n\n\nSystèmes informatiques et Logiciels | Oct 2018 - Jul 2021\nLes COURS SONOU | Abomey-Calavi, Bénin\nStudied advanced software systems, focusing on practical and theoretical aspects of software engineering in Benin.\n\n\nBaccalauréat Science Maths | Août 2018\nCEG Application | Porto-Novo, Bénin\nGraduated with a focus on Mathematics and Science, forming a strong analytical foundation.",
+    "crumbs": [
+      "L'auteur"
+    ]
+  },
+  {
+    "objectID": "about.html#skills",
+    "href": "about.html#skills",
+    "title": "Konrad Tagnon Amen ALAHASSA",
+    "section": "Skills",
+    "text": "Skills\n\nArtificial Intelligence\nPython, Pytorch, Tensorflow, Keras\nMatplotlib, Seaborn, Numpy, Pandas, timm, fastai, fastcore, torchvision, Poutyne,\nSPSS Modeler, RStudio\n\n\nSoftware engineering\nPHP, Javascript, C, C++, Java\nAngular, ReactJs, VueJs, Cypress, Web API\nSQL, Mysql, Firebase, MongoDB, Web Services, APIs Rest\n\n\nOthers\nGit, DevOps, CI/CD, UX Design, Scrum, Agile",
+    "crumbs": [
+      "L'auteur"
+    ]
+  },
+  {
+    "objectID": "about.html#online-courses",
+    "href": "about.html#online-courses",
+    "title": "Konrad Tagnon Amen ALAHASSA",
+    "section": "Online courses",
+    "text": "Online courses\n\nFrom Engineer to Technical Manager: A Survival Guide, Sundog Education\nUdemy - 2023",
+    "crumbs": [
+      "L'auteur"
+    ]
+  },
+  {
+    "objectID": "works.html",
+    "href": "works.html",
+    "title": "Personal works and other stuffs",
+    "section": "",
+    "text": "I want to share what I’ve accomplished as projects, in AI, in software engineering – and maybe some other areas too. 🚀 This is not an exhaustive list, but it’s a start! I’ll be updating this page regularly with new projects and articles, so keep an eye out for more. 🌟 I’m also working on a few projects I won’t be able to share here but I will publish some articles explaining them as soon as possible. Stay tuned! 🚧",
+    "crumbs": [
+      "My works"
+    ]
+  },
+  {
+    "objectID": "works.html#in-progress",
+    "href": "works.html#in-progress",
+    "title": "Personal works and other stuffs",
+    "section": "In Progress",
+    "text": "In Progress\nHere are some of the projects I’m currently working on:\n\nA web tool to anonymize text before feeding it to a large language model (LLM): I’m working on a tool that uses techniques like transfer learning and model quantization to run a large language model directly in the browser. It’s a fun project that I can’t wait to complete and share with you all!\nA tool for kmer base error correction in DNA sequences using DQL: I’m developing a tool that uses Deep Q-Learning to correct errors in DNA sequences. It’s a challenging project, which on I’m working with a friends, student in Bioinformatics.\nFlapEgg: I’m contributing to a project that uses EEG signals to control a game. It’s a project of the AI club of my university, and I’m excited to see where it goes!\n\nAnd there’s more to come! 🚀",
+    "crumbs": [
+      "My works"
+    ]
+  },
+  {
+    "objectID": "works.html#in-ai",
+    "href": "works.html#in-ai",
+    "title": "Personal works and other stuffs",
+    "section": "In AI",
+    "text": "In AI\nIt’s been a while since I started my journey into AI. Here are some of the projects I’ve worked on:\n\nA Tool to Estimate Model Memory Usage on GPU: I built a tool that estimates the memory required to load a model onto a GPU. It’s a handy tool for developers who want to how much resources they need to run a model on their GPU from Hugging Face for example.\nGraphic elements detection using Yolov8: I built a project that detects graphic elements in images using Yolov8. It was a fun class project that helped me learn more about object detection. I’m working on comparing the performances of Yolov8 and DETR on the same task. I will publish an article about it soon. Stay tuned!\nBert vs Falcon on questions answering: I compared the performances of Bert and Falcon on a question-answering task. I used zero-shot promptings to evaluate Falcon on generative tasks and Bert on extractive tasks.\n\nand it’s just the beginning! 🚀",
+    "crumbs": [
+      "My works"
+    ]
+  },
+  {
+    "objectID": "works.html#in-software-engineering",
+    "href": "works.html#in-software-engineering",
+    "title": "Personal works and other stuffs",
+    "section": "In software engineering",
+    "text": "In software engineering\nBefore starting my master’s degree in Artificial Intelligence, I worked on a lot of projects in software engineering. Here are some of them that I found interesting:\n\nA blog using Vue.js: I built a blog using Vue.js, SemanticUi, NodeJs, ExpressJs and MongoDB. It was a fun project that helped me learn more about all these technologies. I built a frontend and a backend for this project.\nI tried to clone Trello 😅: I tried to build a Trello clone using React and Laravel. It was a fun project that I didn’t finish but I learned a lot about React and Laravel and how to setup live messaging between frontend and backend using Laravel Echo.\nLarangular: a Laravel and Angular project: I built an invoice app using Laravel and Angular. The idea is to have a sample app where for an order, you add a list of the articles, and you generate an invoice. You can also export the invoice as a PDF. The backend is built using Laravel and all of them is under same repository. Bad practice, I know, but it was a fun project :D\nmytodoapp: a todo app using React: I built a sample todo app using React. It was my first project on my web development journey. I learned a lot about React, Git and how to deploy a React app on GitHub pages.\n\nand a lot more you can find on my GitHub. 🌟",
+    "crumbs": [
+      "My works"
+    ]
+  },
+  {
+    "objectID": "works.html#found-this-interesting",
+    "href": "works.html#found-this-interesting",
+    "title": "Personal works and other stuffs",
+    "section": "Found this interesting?",
+    "text": "Found this interesting?\nLet me know if you have any comments or ideas on how I can improve. I’m all ears! 👂 I’ll be updating regularly on my progress and any news, so keep an eye out for more. Thank you for reading! 💖",
+    "crumbs": [
+      "My works"
+    ]
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "multiverse",
+    "section": "",
+    "text": "What I Learned from Calf Face 😊\n\n\n\n\n\n\nWork Projects\n\n\nTips & Tricks\n\n\n\nIn this post, we dive into the challenges of using deep learning models to detect calf health status from images and videos. Spoiler: We’re not quite there yet, but the journey is full of insights and potential for future improvements!\n\n\n\n\n\n4 oct. 2024\n\n\n\n\n\n\n\n\n\n\n\n\nHow Much Memory Does Your Model Need on GPU? Let’s Find Out!\n\n\n\n\n\n\nTips & Tricks\n\n\nPersonal Projects\n\n\n\nAn exploration of GPU memory requirements for running models and how to estimate them with a handy tool.\n\n\n\n\n\n24 août 2024\n\n\n\n\n\n\n\n\n\n\n\n\nFinally, An Introduction: The Story Behind This Blog and What’s Next\n\n\n\n\n\n\nPersonal Projects\n\n\nUpdates\n\n\n\nIn this post, I finally take the time to properly introduce my blog, explain its purpose, and share why I’ve been away for the past few months. It’s a fresh start and an exciting journey ahead!\n\n\n\n\n\n23 août 2024\n\n\n\n\n\n\n\n\n\n\n\n\nHow I Built a Tool to Anonymize Text for LLMs (and Why You Might Need It Too!)\n\n\n\n\n\n\nTips & Tricks\n\n\nPersonal Projects\n\n\n\nDiscover a handy tool that anonymizes your text before using it in LLMs, keeping your personal information safe and sound!\n\n\n\n\n\n23 août 2024\n\n\n\n\n\n\n\n\n\n\n\n\nPasser de Yolo à CocoDetection, c’est possible !\n\n\n\n\n\n\nTips & Tricks\n\n\nTutorial\n\n\n\nJe partage dans cet article une méthode simple pour convertir un dataset YOLO au format COCO, ou à un autre, une solution que j’ai trouvée essentielle lors d’un récent projet de segmentation d’instance.\n\n\n\n\n\n30 mai 2024\n\n\n\n\n\n\n\n\n\n\n\n\nPredicting reply under comment with LLM\n\n\n\n\n\n\nTutorial\n\n\n\nFinetuning of Camembert on predicting, using a Le Soleil Facebook post comment as input, whether it will receive a response or not.\n\n\n\n\n\n21 mai 2024\n\n\n\n\n\n\nAucun article correspondant\n\n Retour au sommet",
+    "crumbs": [
+      "Blog"
+    ]
+  },
+  {
+    "objectID": "posts/for_you.html",
+    "href": "posts/for_you.html",
+    "title": "Finally, An Introduction: The Story Behind This Blog and What’s Next",
+    "section": "",
+    "text": "Alright, let’s be real. Life happened, right? 😅 I took some time to wrap up a few things in my life and, honestly, to kickstart a new chapter. You know that feeling when you finish one thing and feel like a whole new world opens up? Yeah, that’s where I’m at! 🌟\nPlus, it was the end of the school session, and I needed some well-deserved downtime. Relaxing, de-stressing, and just enjoying life for a bit. But guess what? Now I’m back, energized, and ready to take on the world! 🌍✨\nI’ve realized how much I’ve already accomplished, and let me tell you, I’m super grateful for all of it. 🙏 But I also see how much more there is to do. My blog, my job, my personal life – they all need my attention, and I’m ready to dive in.\nThe possibilities ahead? Endless. I’m seizing every opportunity coming my way, and I can’t wait to share the journey with you! 🚀"
+  },
+  {
+    "objectID": "posts/for_you.html#what-happened-indeed",
+    "href": "posts/for_you.html#what-happened-indeed",
+    "title": "Finally, An Introduction: The Story Behind This Blog and What’s Next",
+    "section": "",
+    "text": "Alright, let’s be real. Life happened, right? 😅 I took some time to wrap up a few things in my life and, honestly, to kickstart a new chapter. You know that feeling when you finish one thing and feel like a whole new world opens up? Yeah, that’s where I’m at! 🌟\nPlus, it was the end of the school session, and I needed some well-deserved downtime. Relaxing, de-stressing, and just enjoying life for a bit. But guess what? Now I’m back, energized, and ready to take on the world! 🌍✨\nI’ve realized how much I’ve already accomplished, and let me tell you, I’m super grateful for all of it. 🙏 But I also see how much more there is to do. My blog, my job, my personal life – they all need my attention, and I’m ready to dive in.\nThe possibilities ahead? Endless. I’m seizing every opportunity coming my way, and I can’t wait to share the journey with you! 🚀"
+  },
+  {
+    "objectID": "posts/for_you.html#whats-next",
+    "href": "posts/for_you.html#whats-next",
+    "title": "Finally, An Introduction: The Story Behind This Blog and What’s Next",
+    "section": "What’s Next? 🎉",
+    "text": "What’s Next? 🎉\nFirst off, a huge shoutout to my brothers and my family. Without them, I wouldn’t be here doing what I love. You guys are the real MVPs! 💪\nNow, onto me. I’m committed to working on myself, becoming the best version of me. I’m just getting started on my journey, my career, my dreams – and I’m 100% ready to make them a reality. Let’s do this! 🙌"
+  },
+  {
+    "objectID": "posts/for_you.html#the-reason-behind-this-blog",
+    "href": "posts/for_you.html#the-reason-behind-this-blog",
+    "title": "Finally, An Introduction: The Story Behind This Blog and What’s Next",
+    "section": "The Reason Behind This Blog 💻",
+    "text": "The Reason Behind This Blog 💻\nSo, why this blog? Well, it’s simple. I want to share what I’ve accomplished in my career, in AI, in software engineering – and maybe some other areas too. 🚀\nBut here’s the thing: this isn’t going to be a blog where I show you how to do things or preach about the future of AI (though, who knows, maybe a little bit of that 😉). Instead, it’s going to be a place where I share what I’m learning, what I’m building, and who I’m building it with. And hey, I’d love to hear your thoughts, comments, and recommendations along the way. Don’t hesitate! 😊"
+  },
+  {
+    "objectID": "posts/for_you.html#why-now",
+    "href": "posts/for_you.html#why-now",
+    "title": "Finally, An Introduction: The Story Behind This Blog and What’s Next",
+    "section": "Why Now? 🤷",
+    "text": "Why Now? 🤷\nYou know, I just realized that I never really took the time to properly introduce this blog or explain what it’s all about. Better late than never, right? 😁 So, here it is! 🎉"
+  },
+  {
+    "objectID": "posts/for_you.html#how-its-built",
+    "href": "posts/for_you.html#how-its-built",
+    "title": "Finally, An Introduction: The Story Behind This Blog and What’s Next",
+    "section": "How It’s Built 🛠️",
+    "text": "How It’s Built 🛠️\nFor all the techies out there, I’m using Quarto, and it’s deployed with GitHub Pages. I wanted to keep things simple but also have the flexibility to share code. Quarto’s been perfect for that – super interesting and easy to get the hang of. 👍"
+  },
+  {
+    "objectID": "posts/for_you.html#what-else",
+    "href": "posts/for_you.html#what-else",
+    "title": "Finally, An Introduction: The Story Behind This Blog and What’s Next",
+    "section": "What Else? 🧐",
+    "text": "What Else? 🧐\nOh, and one more thing – I’ve added a page to showcase all the projects I’m working on, both finished and in progress. I’ll be publishing articles explaining them, sharing why I find them interesting, and how they’re coming along. Stay tuned! 🚧\nGot any comments or ideas on how I can improve? I’m all ears! 👂 I’ll be updating regularly on my progress and any news, so keep an eye out for more.\nAnd hey, I speak French too! Je peux bien parler en français qu’en anglais, permettez-moi ce petit écart 😉."
+  },
+  {
+    "objectID": "posts/for_you.html#ok-time-to-say-goodbye",
+    "href": "posts/for_you.html#ok-time-to-say-goodbye",
+    "title": "Finally, An Introduction: The Story Behind This Blog and What’s Next",
+    "section": "Ok, Time to Say Goodbye 👋",
+    "text": "Ok, Time to Say Goodbye 👋\nThat’s all for now, folks! See you soon, and take care! Love you all! 💖"
+  },
+  {
     "objectID": "posts/predicting_comment_reply_llm.html",
     "href": "posts/predicting_comment_reply_llm.html",
     "title": "Predicting reply under comment with LLM",
@@ -283,5 +283,47 @@
     "title": "Predicting reply under comment with LLM",
     "section": "Takeaways",
     "text": "Takeaways\n\nDataset Analysis is Crucial: Always begin by analyzing your dataset. Understanding the distribution and characteristics of your data helps in making informed decisions about model training and evaluation. In scenarios with limited resources, generating more data for the underrepresented class might not be feasible. Instead, sampling equal numbers of comments from each class for the training set can help reduce bias towards the overrepresented class.\nBalanced Training, Unbalanced Validation: While balancing the training set by equal sampling is important to reduce bias, the validation set should remain unbalanced. This approach ensures that the model’s performance is evaluated in a realistic manner, reflecting its ability to generalize to the true distribution of the data.\nResource-Based Training Strategy: Define your training strategy based on the available resources. When computational power or time is limited, working with a smaller, balanced sample of the dataset is a practical approach. This allows for iterative experimentation and tuning without the overhead of processing the entire dataset.\nProblem-Specific Metrics: Choose evaluation metrics that align with your problem’s objectives. For instance, in this scenario, the F2 score (F2 = tp / (tp + 2 * fn + fp)) is used to evaluate model performance by balancing the detection of the positive class and minimizing errors.\nInitial Model Performance: After the first round of training, the F2 score indicates that the model prioritizes recall over precision. This is evidenced by the high recall but low precision on the test set.\nImpact of False Positives: High false positives can be problematic in real-world applications. They can lead to inefficient use of resources and missed opportunities to engage with truly relevant comments. This highlights the need for a balance between precision and recall.\nTraining Set Size and Generalization: Increasing the size of the training set helps the model generalize better to the test data. A larger training set reduces overfitting and enhances the model’s ability to balance precision and recall effectively. This results in improved overall performance and more reliable predictions.\nChoosing the Right Model: Select a model that is suitable for your specific problem. For instance, since the dataset consists of French text, using CamemBERT, a model specifically designed for the French language, is an appropriate choice.\nHyperparameter Tuning: Finding the optimal hyperparameters for your model is crucial and often involves extensive experimentation. Before finalizing the model, numerous combinations were tested to identify the best-performing configuration. Hyperparameter tuning is more of an art than a strict recipe, requiring intuition and experience to achieve the best results."
+  },
+  {
+    "objectID": "posts/lessons_from_calf_face.html",
+    "href": "posts/lessons_from_calf_face.html",
+    "title": "What I Learned from Calf Face 😊",
+    "section": "",
+    "text": "Alright, let’s be real—when we started, we had a tiny data problem. We’re talking less than 200 images of calf faces (yep, calf faces!). And trust me, that’s nowhere near enough if we want to build a robust detection model. 🐮\nBut no worries, we had a plan! First, we took YOLOv8 and fine-tuned it with some clever data augmentation. We went from a measly 178 images to a whopping 890—thanks to a combo of GaussianBlur, MedianBlur, Sharpen, Flip, and good ol’ rotation (between 10 to 20 degrees, nothing too wild).\nNow, the goal was to keep the transformations realistic. No crazy color changes or outlandish rotations that might produce data that doesn’t even exist in the real world—because that’s how you end up with a model that thinks cows fly. 🐄✈️\nAnd guess what? After this magic data expansion, we saw a small bump in mAP50 (mean Average Precision) and other YOLO metrics. We went from 0.803 with basic data augmentation of YoloV8 to 0.891 on the mAP score after 10 epochs. 📈\nHere’s a quick table showing the before and after, because data geeks love tables:\n\n\n\nMetric\nBefore\nAfter\n\n\n\n\nmAP50\n0.803\n0.891\n\n\nmAP50-90\n0.503\n0.502\n\n\nPrecision\n0.992\n1\n\n\nRecall\n0.778\n0.769\n\n\n\nNow, before anyone screams “Overfitting!”—hold up. Yes, the boost in performance might make it seem like that’s what’s happening, but we’re confident that’s not the case. Why? Because the video data we plan to use for detection closely resembles the training data. In other words, the model’s doing exactly what we need it to do: detect calves in environments that are super similar to the ones it’s been trained on. 🎯\nOh, and by the way—the metrics you see in that table? Those aren’t based on the augmented data. Nope! They’re from a subset of the original 175 images, which we held back specifically as our test set. So, the numbers here reflect real, unaltered images, giving us a more honest assessment of the model’s performance. 💪"
+  },
+  {
+    "objectID": "posts/lessons_from_calf_face.html#small-data-big-dreams",
+    "href": "posts/lessons_from_calf_face.html#small-data-big-dreams",
+    "title": "What I Learned from Calf Face 😊",
+    "section": "",
+    "text": "Alright, let’s be real—when we started, we had a tiny data problem. We’re talking less than 200 images of calf faces (yep, calf faces!). And trust me, that’s nowhere near enough if we want to build a robust detection model. 🐮\nBut no worries, we had a plan! First, we took YOLOv8 and fine-tuned it with some clever data augmentation. We went from a measly 178 images to a whopping 890—thanks to a combo of GaussianBlur, MedianBlur, Sharpen, Flip, and good ol’ rotation (between 10 to 20 degrees, nothing too wild).\nNow, the goal was to keep the transformations realistic. No crazy color changes or outlandish rotations that might produce data that doesn’t even exist in the real world—because that’s how you end up with a model that thinks cows fly. 🐄✈️\nAnd guess what? After this magic data expansion, we saw a small bump in mAP50 (mean Average Precision) and other YOLO metrics. We went from 0.803 with basic data augmentation of YoloV8 to 0.891 on the mAP score after 10 epochs. 📈\nHere’s a quick table showing the before and after, because data geeks love tables:\n\n\n\nMetric\nBefore\nAfter\n\n\n\n\nmAP50\n0.803\n0.891\n\n\nmAP50-90\n0.503\n0.502\n\n\nPrecision\n0.992\n1\n\n\nRecall\n0.778\n0.769\n\n\n\nNow, before anyone screams “Overfitting!”—hold up. Yes, the boost in performance might make it seem like that’s what’s happening, but we’re confident that’s not the case. Why? Because the video data we plan to use for detection closely resembles the training data. In other words, the model’s doing exactly what we need it to do: detect calves in environments that are super similar to the ones it’s been trained on. 🎯\nOh, and by the way—the metrics you see in that table? Those aren’t based on the augmented data. Nope! They’re from a subset of the original 175 images, which we held back specifically as our test set. So, the numbers here reflect real, unaltered images, giving us a more honest assessment of the model’s performance. 💪"
+  },
+  {
+    "objectID": "posts/lessons_from_calf_face.html#choosing-the-right-model-training-where-things-get-real",
+    "href": "posts/lessons_from_calf_face.html#choosing-the-right-model-training-where-things-get-real",
+    "title": "What I Learned from Calf Face 😊",
+    "section": "Choosing the Right Model & Training: Where Things Get Real 🎯",
+    "text": "Choosing the Right Model & Training: Where Things Get Real 🎯\nOkay, so once we had the data sorted, it was time to pick the right model—and honestly, that’s where things got a little complicated. Not only did I need something that would crush the performance side of things, but I also needed to be able to explain why the model made the decisions it did. You know, in case anyone asks the big question: “Why did your model do that?” 😅\n\nThe Model Line-Up 🏆\nFor images, I went through a few options before landing on the right one. I tried DeepLabV3, EfficientNet, InceptionV3, and even Unet (which I ended up abandoning—long story 🫠). I also gave ViT and a LSTM+CNN combo a shot, but, well… let’s just say I didn’t get around to finishing that one. Too much on my plate!\nFor videos, it was another story. I experimented with TimeSformer, ViViT, and VideoMAE to handle the moving pictures. 🎥\n\n\nCracking the Model’s Decisions: Interpretability with OmnixAI 🧠\nWhen it came to understanding why the models made specific predictions, I leaned on some awesome interpretability algorithms from OmnixAI. These tools helped me peek under the hood of the models and get a better sense of their thought process.\nI used a mix of techniques like GradCAM, LIME, Score-CAM, and even SmoothGrad, GuidedBP, and LayerCAM to visualize what parts of the image the model was focusing on. Each one gave me a slightly different view of how the model was processing the data, which made interpreting results a whole lot easier (and way more fun to explain 😎).\nAnd I also even trained INTR, a transformer-based model specifically designed for interpretability. ✨\n\n\nBuilding a Killer Dataset Split 🧩\nNext up, I had to make sure my dataset was split in a way that would allow for a solid comparison between models. Here’s how I did it:\nUsing the YOLO model I mentioned earlier, I went through almost 1 hour of video showing calves approaching a feeder. I grabbed the 10 seconds before each calf started feeding and extracted images where their cute little faces were visible. In the end, I had 1,349 videos and 7,687 images, representing 76 unique calves.\n\n\n\nNumber of videos per calf status\n\n\nTo keep things clean, I handpicked 68 videos where I verified that each calf was actually approaching the feeder (with no noise), and used those videos as my test set. The images from those videos? They became my image test set (283 images in total).\n\n\nTwo Different Training Sets? Why Not? 🤷‍♂️\nI built two separate training sets just for fun (and science, of course):\n\nFull Set: This one included all the remaining images and videos, no holds barred.\nLimited Set: Here’s where things got interesting. I only used one video and two images per calf, per health status—“healthy,” “diarrhea,” or “pneumonia.” My logic? Since some images were super similar (I sampled about 30 images evenly from each 10-second video), I figured the model could easily overfit. I wanted to see how it would perform with less redundant data.\n\nYeah, it’s a pretty naive approach, but it sped up my work and saved some headaches. Plus, even though about 40% of the data was, well, garbage 🗑️, the rest of it more than made up for it. 💪\nI should mentioned that those calf in the test set were not in the training set, so the model never saw them before. 🐄\n\n\nPro Tip: Use MLflow! 🛠️\nOh, one last thing. If you’re planning on doing so much training like this, seriously, do yourself a favor and use MLflow to track your experiments. I didn’t use it for this project (don’t ask, it was a mess, I swear! 🤦‍♂️), but if I had to do it all over again, MLflow would’ve saved me SO much time and effort. Lesson learned!"
+  },
+  {
+    "objectID": "posts/lessons_from_calf_face.html#results-the-good-the-bad-and-the-calves",
+    "href": "posts/lessons_from_calf_face.html#results-the-good-the-bad-and-the-calves",
+    "title": "What I Learned from Calf Face 😊",
+    "section": "Results: The Good, the Bad, and the Calves 🐄",
+    "text": "Results: The Good, the Bad, and the Calves 🐄\nYou can check out all the detailed results and model performances in the dedicated repo for this project (because sharing is caring, right? 📂). But while I didn’t get a chance to completely wrap up the work (classic researcher life 😅), there are a few important highlights that are worth mentioning.\n\nThe Curious Case of the INTR Model 🤔\n\n\n\nHow the INTR model works. From the original paper\n\n\nSo, let’s talk about the INTR model. The original paper boasted that this model could better explain its decisions, which sounded perfect for what I needed. But after fine-tuning it on my dataset? Yeah, not quite the same result. 🤷‍♂️\n\n\n\nHow the INTR performs on my dataset\n\n\nWhy? Well, here’s where the data shift kicked in. The pre-trained model had been trained on images where the object of interest was neatly placed in the center of the frame (picture-perfect). My dataset? Not so much. My calves were sometimes, all over the place, doing their own thing, and not staying center-stage. 😬\n\n\nThe “Same Old Background” Problem 🌾\n\n\n\nFun image of mean calf face. I used all images extracted from the videos to compute it.\n\n\nAnother issue I ran into: background consistency. Since all my training data came from the same farm, the background was pretty much always the same. So, while the model learned to perform decently well on that data, it didn’t generalize well when I tested it with images from a different farm. Different farms = different environments. And as we all know, no two farms are exactly alike, right? 🏡 🐄\nIt’s not the model’s fault—it’s just how things are. If the goal is to have a model that works across various farms, we either need a ton more data from different environments, or maybe we should consider building farm-specific models. Unless, of course, we want to standardize every farm, which, let’s face it, isn’t going to happen. 🤷‍♀️\n\n\nIs the Model Actually Learning the Right Things? 🤨\nHere’s the tricky part: The model performed relatively well. But—big but—it could be learning patterns we don’t want it to focus on. Maybe it’s using the calf’s face color, or maybe the background is playing a bigger role in its decision-making than we’d like to admit. In short, even though the performance metrics look good on paper, I’d recommend handling them with care. 📊\n\n\nWords of Wisdom from My Professor 👨‍🏫\nMy supervisor always says we shouldn’t expect miracles from these models. After all, it’s hard for even a human to just look at a calf and determine its health status purely based on appearance. Add in the fact that we’re working with limited data, and yeah—it was always going to be a challenge.\nBut the whole point of this project was to test, explore, and see how a deep learning approach would hold up, despite those challenges. So, while the results may not be earth-shattering, the insights we’ve gained are super valuable for refining future models. 💡"
+  },
+  {
+    "objectID": "posts/lessons_from_calf_face.html#have-we-answered-the-big-question-can-we-detect-calf-health-status-from-images-or-videos",
+    "href": "posts/lessons_from_calf_face.html#have-we-answered-the-big-question-can-we-detect-calf-health-status-from-images-or-videos",
+    "title": "What I Learned from Calf Face 😊",
+    "section": "Have We Answered the Big Question? Can We Detect Calf Health Status from Images or Videos? 🤔",
+    "text": "Have We Answered the Big Question? Can We Detect Calf Health Status from Images or Videos? 🤔\nShort answer? Not yet. 🛑\nTo be honest, I think we need a better dataset to get the results we’re aiming for. There’s definitely potential—maybe we can identify new features or patterns to help detect diseases more accurately, or perhaps the model can be trained to pick up on the same cues humans use when assessing calf health. But realistically, that’s going to take a lot more work than what I’ve done so far. 🐄💻\nOne major thing I’ve learned is that using pre-trained models (whether they’re foundation models or not) on real-life problems takes way more effort, data, and attention to detail than I ever expected. When you watch those flashy demos where models seem to perform flawlessly, it’s easy to think, “I got this.” But in reality? The process is a bit messier, and it involves a lot more tweaking than the demo might let on. 😅\nMaybe I didn’t make all the right decisions—choosing the best model, or even formulating the right hypotheses—but hey, that’s how we learn, right? If you have thoughts, feedback, or think there’s something I missed, feel free to comment and let me know. Let’s keep the conversation going and figure this out together! 🤝"
+  },
+  {
+    "objectID": "posts/lessons_from_calf_face.html#and-thats-a-wrap",
+    "href": "posts/lessons_from_calf_face.html#and-thats-a-wrap",
+    "title": "What I Learned from Calf Face 😊",
+    "section": "And That’s a Wrap! 🎬",
+    "text": "And That’s a Wrap! 🎬\nUntil next time, keep learning, keep growing, and keep exploring the world of AI. It’s a wild ride, but hey, someone’s gotta do it! 🚀"
   }
 ]

@@ -10,7 +10,159 @@
 <atom:link href="https://amenalahassa.github.io/amenalahassa/index.xml" rel="self" type="application/rss+xml"/>
 <description>A small space in the vast universe of the Internet where I share the ideas and knowledge I&#39;ve gained on my journey into AI and software development.</description>
 <generator>quarto-1.5.37</generator>
-<lastBuildDate>Sat, 24 Aug 2024 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Fri, 04 Oct 2024 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>What I Learned from Calf Face 😊</title>
+  <link>https://amenalahassa.github.io/amenalahassa/posts/lessons_from_calf_face.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<section id="small-data-big-dreams" class="level2">
+<h2 class="anchored" data-anchor-id="small-data-big-dreams">Small Data, Big Dreams</h2>
+<p>Alright, let’s be real—when we started, we had a <em>tiny</em> data problem. We’re talking less than 200 images of calf faces (yep, calf faces!). And trust me, that’s nowhere near enough if we want to build a robust detection model. 🐮</p>
+<p>But no worries, we had a plan! First, we took YOLOv8 and fine-tuned it with some clever data augmentation. We went from a measly 178 images to a whopping 890—thanks to a combo of <strong>GaussianBlur</strong>, <strong>MedianBlur</strong>, <strong>Sharpen</strong>, <strong>Flip</strong>, and good ol’ <strong>rotation</strong> (between 10 to 20 degrees, nothing too wild).</p>
+<p>Now, the goal was to keep the transformations realistic. No crazy color changes or outlandish rotations that might produce data that doesn’t even exist in the real world—because that’s how you end up with a model that thinks cows fly. 🐄✈️</p>
+<p>And guess what? After this magic data expansion, we saw a small bump in mAP50 (mean Average Precision) and other YOLO metrics. We went from 0.803 with basic data augmentation of YoloV8 to 0.891 on the mAP score after 10 epochs. 📈</p>
+<p>Here’s a quick table showing the before and after, because data geeks love tables:</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>Metric</th>
+<th>Before</th>
+<th>After</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>mAP50</td>
+<td>0.803</td>
+<td>0.891</td>
+</tr>
+<tr class="even">
+<td>mAP50-90</td>
+<td>0.503</td>
+<td>0.502</td>
+</tr>
+<tr class="odd">
+<td>Precision</td>
+<td>0.992</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>Recall</td>
+<td>0.778</td>
+<td>0.769</td>
+</tr>
+</tbody>
+</table>
+<p>Now, before anyone screams “Overfitting!”—hold up. Yes, the boost in performance might make it seem like that’s what’s happening, but we’re confident that’s not the case. Why? Because the video data we plan to use for detection closely resembles the training data. In other words, the model’s doing exactly what we need it to do: detect calves in environments that are super similar to the ones it’s been trained on. 🎯</p>
+<p>Oh, and by the way—the metrics you see in that table? Those aren’t based on the augmented data. Nope! They’re from a subset of the original 175 images, which we held back specifically as our test set. So, the numbers here reflect real, unaltered images, giving us a more honest assessment of the model’s performance. 💪</p>
+</section>
+<section id="choosing-the-right-model-training-where-things-get-real" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="choosing-the-right-model-training-where-things-get-real">Choosing the Right Model &amp; Training: Where Things Get Real 🎯</h2>
+<p>Okay, so once we had the data sorted, it was time to pick the right model—and honestly, that’s where things got a little <em>complicated</em>. Not only did I need something that would crush the performance side of things, but I also needed to be able to explain <strong>why</strong> the model made the decisions it did. You know, in case anyone asks the big question: “Why did your model do that?” 😅</p>
+<section id="the-model-line-up" class="level3">
+<h3 class="anchored" data-anchor-id="the-model-line-up">The Model Line-Up 🏆</h3>
+<p>For <strong>images</strong>, I went through a few options before landing on the right one. I tried <strong>DeepLabV3</strong>, <strong>EfficientNet</strong>, <strong>InceptionV3</strong>, and even <strong>Unet</strong> (which I ended up abandoning—long story 🫠). I also gave <strong>ViT</strong> and a <strong>LSTM+CNN combo</strong> a shot, but, well… let’s just say I didn’t get around to finishing that one. Too much on my plate!</p>
+<p>For <strong>videos</strong>, it was another story. I experimented with <strong>TimeSformer</strong>, <strong>ViViT</strong>, and <strong>VideoMAE</strong> to handle the moving pictures. 🎥</p>
+</section>
+<section id="cracking-the-models-decisions-interpretability-with-omnixai" class="level3">
+<h3 class="anchored" data-anchor-id="cracking-the-models-decisions-interpretability-with-omnixai">Cracking the Model’s Decisions: Interpretability with OmnixAI 🧠</h3>
+<p>When it came to understanding why the models made specific predictions, I leaned on some awesome interpretability algorithms from OmnixAI. These tools helped me peek under the hood of the models and get a better sense of their thought process.</p>
+<p>I used a mix of techniques like GradCAM, LIME, Score-CAM, and even SmoothGrad, GuidedBP, and LayerCAM to visualize what parts of the image the model was focusing on. Each one gave me a slightly different view of how the model was processing the data, which made interpreting results a whole lot easier (and way more fun to explain 😎).</p>
+<p>And I also even trained <a href="https://github.com/Imageomics/INTR"><strong>INTR</strong></a>, a transformer-based model specifically designed for interpretability. ✨</p>
+</section>
+<section id="building-a-killer-dataset-split" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="building-a-killer-dataset-split">Building a Killer Dataset Split 🧩</h3>
+<p>Next up, I had to make sure my dataset was split in a way that would allow for a solid comparison between models. Here’s how I did it:</p>
+<p>Using the YOLO model I mentioned earlier, I went through almost 1 hour of video showing calves approaching a feeder. I grabbed the 10 seconds before each calf started feeding and extracted images where their cute little faces were visible. In the end, I had <strong>1,349 videos</strong> and <strong>7,687 images</strong>, representing <strong>76 unique calves</strong>.</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://amenalahassa.github.io/amenalahassa/posts/assets/images/paquetlab_video_dist.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">Number of videos per calf status</figcaption>
+</figure>
+</div>
+<p>To keep things clean, I handpicked <strong>68 videos</strong> where I verified that each calf was actually approaching the feeder (with no noise), and used those videos as my <strong>test set</strong>. The images from those videos? They became my <strong>image test set</strong> (283 images in total).</p>
+</section>
+<section id="two-different-training-sets-why-not" class="level3">
+<h3 class="anchored" data-anchor-id="two-different-training-sets-why-not">Two Different Training Sets? Why Not? 🤷‍♂️</h3>
+<p>I built two separate training sets just for fun (and science, of course):</p>
+<ol type="1">
+<li><strong>Full Set</strong>: This one included all the remaining images and videos, no holds barred.</li>
+<li><strong>Limited Set</strong>: Here’s where things got interesting. I only used one video and two images per calf, per health status—“<strong>healthy</strong>,” “<strong>diarrhea</strong>,” or “<strong>pneumonia</strong>.” My logic? Since some images were super similar (I sampled about 30 images evenly from each 10-second video), I figured the model could easily overfit. I wanted to see how it would perform with less redundant data.</li>
+</ol>
+<p>Yeah, it’s a pretty <em>naive</em> approach, but it sped up my work and saved some headaches. Plus, even though about 40% of the data was, well, garbage 🗑️, the rest of it more than made up for it. 💪</p>
+<p>I should mentioned that those calf in the test set were not in the training set, so the model never saw them before. 🐄</p>
+</section>
+<section id="pro-tip-use-mlflow" class="level3">
+<h3 class="anchored" data-anchor-id="pro-tip-use-mlflow">Pro Tip: Use MLflow! 🛠️</h3>
+<p>Oh, one last thing. If you’re planning on doing so much training like this, seriously, do yourself a favor and use <strong>MLflow</strong> to track your experiments. I didn’t use it for this project (don’t ask, it was a mess, I swear! 🤦‍♂️), but if I had to do it all over again, MLflow would’ve saved me SO much time and effort. Lesson learned!</p>
+</section>
+</section>
+<section id="results-the-good-the-bad-and-the-calves" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="results-the-good-the-bad-and-the-calves">Results: The Good, the Bad, and the Calves 🐄</h2>
+<p>You can check out all the detailed results and model performances in the dedicated repo for this <a href="https://github.com/amenalahassa/paquetlab">project</a> (because sharing is caring, right? 📂). But while I didn’t get a chance to completely wrap up the work (classic researcher life 😅), there are a few important highlights that are worth mentioning.</p>
+<section id="the-curious-case-of-the-intr-model" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="the-curious-case-of-the-intr-model">The Curious Case of the INTR Model 🤔</h3>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://amenalahassa.github.io/amenalahassa/posts/assets/images/intr_teaser.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">How the INTR model works. From the original paper</figcaption>
+</figure>
+</div>
+<p>So, let’s talk about the <strong>INTR</strong> model. The original paper boasted that this model could better explain its decisions, which sounded perfect for what I needed. But after fine-tuning it on my dataset? Yeah, not quite the same result. 🤷‍♂️</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://amenalahassa.github.io/amenalahassa/posts/assets/images/intr_viz.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">How the INTR performs on my dataset</figcaption>
+</figure>
+</div>
+<p>Why? Well, here’s where the <strong>data shift</strong> kicked in. The pre-trained model had been trained on images where the object of interest was neatly placed in the center of the frame (picture-perfect). My dataset? Not so much. My calves were sometimes, all over the place, doing their own thing, and not staying center-stage. 😬</p>
+</section>
+<section id="the-same-old-background-problem" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="the-same-old-background-problem">The “Same Old Background” Problem 🌾</h3>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://amenalahassa.github.io/amenalahassa/posts/assets/images/mean_face.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">Fun image of mean calf face. I used all images extracted from the videos to compute it.</figcaption>
+</figure>
+</div>
+<p>Another issue I ran into: <strong>background consistency</strong>. Since all my training data came from the same farm, the background was pretty much always the same. So, while the model learned to perform decently well on that data, it didn’t generalize well when I tested it with images from a different farm. Different farms = different environments. And as we all know, no two farms are exactly alike, right? 🏡 🐄</p>
+<p>It’s not the model’s fault—it’s just how things are. If the goal is to have a model that works across various farms, we either need a ton more data from different environments, or maybe we should consider building farm-specific models. Unless, of course, we want to standardize every farm, which, let’s face it, isn’t going to happen. 🤷‍♀️</p>
+</section>
+<section id="is-the-model-actually-learning-the-right-things" class="level3">
+<h3 class="anchored" data-anchor-id="is-the-model-actually-learning-the-right-things">Is the Model Actually Learning the Right Things? 🤨</h3>
+<p>Here’s the tricky part: The model performed relatively well. But—big but—it could be learning patterns we don’t want it to focus on. Maybe it’s using the <strong>calf’s face color</strong>, or maybe the <strong>background</strong> is playing a bigger role in its decision-making than we’d like to admit. In short, even though the performance metrics look good on paper, I’d recommend handling them with care. 📊</p>
+</section>
+<section id="words-of-wisdom-from-my-professor" class="level3">
+<h3 class="anchored" data-anchor-id="words-of-wisdom-from-my-professor">Words of Wisdom from My Professor 👨‍🏫</h3>
+<p>My supervisor always says we shouldn’t expect miracles from these models. After all, it’s hard for even a human to just look at a calf and determine its health status purely based on appearance. Add in the fact that we’re working with limited data, and yeah—it was always going to be a challenge.</p>
+<p>But the whole point of this project was to test, explore, and see how a deep learning approach would hold up, despite those challenges. So, while the results may not be earth-shattering, the insights we’ve gained are super valuable for refining future models. 💡</p>
+</section>
+</section>
+<section id="have-we-answered-the-big-question-can-we-detect-calf-health-status-from-images-or-videos" class="level2">
+<h2 class="anchored" data-anchor-id="have-we-answered-the-big-question-can-we-detect-calf-health-status-from-images-or-videos">Have We Answered the Big Question? Can We Detect Calf Health Status from Images or Videos? 🤔</h2>
+<p>Short answer? <strong>Not yet</strong>. 🛑</p>
+<p>To be honest, I think we need a better dataset to get the results we’re aiming for. There’s definitely potential—maybe we can identify new features or patterns to help detect diseases more accurately, or perhaps the model can be trained to pick up on the same cues humans use when assessing calf health. But realistically, that’s going to take a lot more work than what I’ve done so far. 🐄💻</p>
+<p>One major thing I’ve learned is that using pre-trained models (whether they’re foundation models or not) on real-life problems takes way more effort, data, and attention to detail than I ever expected. When you watch those flashy demos where models seem to perform flawlessly, it’s easy to think, “I got this.” But in reality? The process is a bit messier, and it involves a lot more tweaking than the demo might let on. 😅</p>
+<p>Maybe I didn’t make all the right decisions—choosing the best model, or even formulating the right hypotheses—but hey, that’s how we learn, right? If you have thoughts, feedback, or think there’s something I missed, feel free to comment and let me know. Let’s keep the conversation going and figure this out together! 🤝</p>
+</section>
+<section id="and-thats-a-wrap" class="level2">
+<h2 class="anchored" data-anchor-id="and-thats-a-wrap">And That’s a Wrap! 🎬</h2>
+<p>Until next time, keep learning, keep growing, and keep exploring the world of AI. It’s a wild ride, but hey, someone’s gotta do it! 🚀</p>
+
+
+</section>
+
+<a onclick="window.scrollTo(0, 0); return false;" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Retour au sommet</a> ]]></description>
+  <category>Work Projects</category>
+  <category>Tips &amp; Tricks</category>
+  <guid>https://amenalahassa.github.io/amenalahassa/posts/lessons_from_calf_face.html</guid>
+  <pubDate>Fri, 04 Oct 2024 00:00:00 GMT</pubDate>
+  <media:content url="https://amenalahassa.github.io/amenalahassa/posts/assets/images/intr_viz.png" medium="image" type="image/png" height="76" width="144"/>
+</item>
 <item>
   <title>How Much Memory Does Your Model Need on GPU? Let’s Find Out!</title>
   <link>https://amenalahassa.github.io/amenalahassa/posts/model_gpu.html</link>
@@ -91,6 +243,59 @@
   <guid>https://amenalahassa.github.io/amenalahassa/posts/model_gpu.html</guid>
   <pubDate>Sat, 24 Aug 2024 00:00:00 GMT</pubDate>
   <media:content url="https://amenalahassa.github.io/amenalahassa/posts/assets/images/0_1.png" medium="image" type="image/png" height="189" width="144"/>
+</item>
+<item>
+  <title>Finally, An Introduction: The Story Behind This Blog and What’s Next</title>
+  <link>https://amenalahassa.github.io/amenalahassa/posts/for_you.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<section id="what-happened-indeed" class="level2">
+<h2 class="anchored" data-anchor-id="what-happened-indeed">What Happened Indeed? 🤔</h2>
+<p>Alright, let’s be real. Life happened, right? 😅 I took some time to wrap up a few things in my life and, honestly, to kickstart a new chapter. You know that feeling when you finish one thing and feel like a whole new world opens up? Yeah, that’s where I’m at! 🌟</p>
+<p>Plus, it was the end of the school session, and I needed some well-deserved downtime. Relaxing, de-stressing, and just enjoying life for a bit. But guess what? Now I’m back, energized, and ready to take on the world! 🌍✨</p>
+<p>I’ve realized how much I’ve already accomplished, and let me tell you, I’m super grateful for all of it. 🙏 But I also see how much more there is to do. My blog, my job, my personal life – they all need my attention, and I’m ready to dive in.</p>
+<p>The possibilities ahead? Endless. I’m seizing every opportunity coming my way, and I can’t wait to share the journey with you! 🚀</p>
+</section>
+<section id="whats-next" class="level2">
+<h2 class="anchored" data-anchor-id="whats-next">What’s Next? 🎉</h2>
+<p>First off, a huge shoutout to my brothers and my family. Without them, I wouldn’t be here doing what I love. You guys are the real MVPs! 💪</p>
+<p>Now, onto me. I’m committed to working on myself, becoming the best version of me. I’m just getting started on my journey, my career, my dreams – and I’m 100% ready to make them a reality. Let’s do this! 🙌</p>
+</section>
+<section id="the-reason-behind-this-blog" class="level2">
+<h2 class="anchored" data-anchor-id="the-reason-behind-this-blog">The Reason Behind This Blog 💻</h2>
+<p>So, why this blog? Well, it’s simple. I want to share what I’ve accomplished in my career, in AI, in software engineering – and maybe some other areas too. 🚀</p>
+<p>But here’s the thing: this isn’t going to be a blog where I show you how to do things or preach about the future of AI (though, who knows, maybe a little bit of that 😉). Instead, it’s going to be a place where I share what I’m learning, what I’m building, and who I’m building it with. And hey, I’d love to hear your thoughts, comments, and recommendations along the way. Don’t hesitate! 😊</p>
+</section>
+<section id="why-now" class="level2">
+<h2 class="anchored" data-anchor-id="why-now">Why Now? 🤷</h2>
+<p>You know, I just realized that I never really took the time to properly introduce this blog or explain what it’s all about. Better late than never, right? 😁 So, here it is! 🎉</p>
+</section>
+<section id="how-its-built" class="level2">
+<h2 class="anchored" data-anchor-id="how-its-built">How It’s Built 🛠️</h2>
+<p>For all the techies out there, I’m using Quarto, and it’s deployed with GitHub Pages. I wanted to keep things simple but also have the flexibility to share code. Quarto’s been perfect for that – super interesting and easy to get the hang of. 👍</p>
+</section>
+<section id="what-else" class="level2">
+<h2 class="anchored" data-anchor-id="what-else">What Else? 🧐</h2>
+<p>Oh, and one more thing – I’ve added a page to showcase all the projects I’m working on, both finished and in progress. I’ll be publishing articles explaining them, sharing why I find them interesting, and how they’re coming along. Stay tuned! 🚧</p>
+<p>Got any comments or ideas on how I can improve? I’m all ears! 👂 I’ll be updating regularly on my progress and any news, so keep an eye out for more.</p>
+<p>And hey, I speak French too! Je peux bien parler en français qu’en anglais, permettez-moi ce petit écart 😉.</p>
+</section>
+<section id="ok-time-to-say-goodbye" class="level2">
+<h2 class="anchored" data-anchor-id="ok-time-to-say-goodbye">Ok, Time to Say Goodbye 👋</h2>
+<p>That’s all for now, folks! See you soon, and take care! Love you all! 💖</p>
+
+
+</section>
+
+<a onclick="window.scrollTo(0, 0); return false;" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Retour au sommet</a> ]]></description>
+  <category>Personal Projects</category>
+  <category>Updates</category>
+  <guid>https://amenalahassa.github.io/amenalahassa/posts/for_you.html</guid>
+  <pubDate>Fri, 23 Aug 2024 00:00:00 GMT</pubDate>
+  <media:content url="https://amenalahassa.github.io/amenalahassa/posts/assets/images/0_0.png" medium="image" type="image/png" height="165" width="144"/>
 </item>
 <item>
   <title>How I Built a Tool to Anonymize Text for LLMs (and Why You Might Need It Too!)</title>
@@ -185,59 +390,6 @@
   <category>Personal Projects</category>
   <guid>https://amenalahassa.github.io/amenalahassa/posts/anonymizer_intro.html</guid>
   <pubDate>Fri, 23 Aug 2024 00:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Finally, An Introduction: The Story Behind This Blog and What’s Next</title>
-  <link>https://amenalahassa.github.io/amenalahassa/posts/for_you.html</link>
-  <description><![CDATA[ 
-
-
-
-
-<section id="what-happened-indeed" class="level2">
-<h2 class="anchored" data-anchor-id="what-happened-indeed">What Happened Indeed? 🤔</h2>
-<p>Alright, let’s be real. Life happened, right? 😅 I took some time to wrap up a few things in my life and, honestly, to kickstart a new chapter. You know that feeling when you finish one thing and feel like a whole new world opens up? Yeah, that’s where I’m at! 🌟</p>
-<p>Plus, it was the end of the school session, and I needed some well-deserved downtime. Relaxing, de-stressing, and just enjoying life for a bit. But guess what? Now I’m back, energized, and ready to take on the world! 🌍✨</p>
-<p>I’ve realized how much I’ve already accomplished, and let me tell you, I’m super grateful for all of it. 🙏 But I also see how much more there is to do. My blog, my job, my personal life – they all need my attention, and I’m ready to dive in.</p>
-<p>The possibilities ahead? Endless. I’m seizing every opportunity coming my way, and I can’t wait to share the journey with you! 🚀</p>
-</section>
-<section id="whats-next" class="level2">
-<h2 class="anchored" data-anchor-id="whats-next">What’s Next? 🎉</h2>
-<p>First off, a huge shoutout to my brothers and my family. Without them, I wouldn’t be here doing what I love. You guys are the real MVPs! 💪</p>
-<p>Now, onto me. I’m committed to working on myself, becoming the best version of me. I’m just getting started on my journey, my career, my dreams – and I’m 100% ready to make them a reality. Let’s do this! 🙌</p>
-</section>
-<section id="the-reason-behind-this-blog" class="level2">
-<h2 class="anchored" data-anchor-id="the-reason-behind-this-blog">The Reason Behind This Blog 💻</h2>
-<p>So, why this blog? Well, it’s simple. I want to share what I’ve accomplished in my career, in AI, in software engineering – and maybe some other areas too. 🚀</p>
-<p>But here’s the thing: this isn’t going to be a blog where I show you how to do things or preach about the future of AI (though, who knows, maybe a little bit of that 😉). Instead, it’s going to be a place where I share what I’m learning, what I’m building, and who I’m building it with. And hey, I’d love to hear your thoughts, comments, and recommendations along the way. Don’t hesitate! 😊</p>
-</section>
-<section id="why-now" class="level2">
-<h2 class="anchored" data-anchor-id="why-now">Why Now? 🤷</h2>
-<p>You know, I just realized that I never really took the time to properly introduce this blog or explain what it’s all about. Better late than never, right? 😁 So, here it is! 🎉</p>
-</section>
-<section id="how-its-built" class="level2">
-<h2 class="anchored" data-anchor-id="how-its-built">How It’s Built 🛠️</h2>
-<p>For all the techies out there, I’m using Quarto, and it’s deployed with GitHub Pages. I wanted to keep things simple but also have the flexibility to share code. Quarto’s been perfect for that – super interesting and easy to get the hang of. 👍</p>
-</section>
-<section id="what-else" class="level2">
-<h2 class="anchored" data-anchor-id="what-else">What Else? 🧐</h2>
-<p>Oh, and one more thing – I’ve added a page to showcase all the projects I’m working on, both finished and in progress. I’ll be publishing articles explaining them, sharing why I find them interesting, and how they’re coming along. Stay tuned! 🚧</p>
-<p>Got any comments or ideas on how I can improve? I’m all ears! 👂 I’ll be updating regularly on my progress and any news, so keep an eye out for more.</p>
-<p>And hey, I speak French too! Je peux bien parler en français qu’en anglais, permettez-moi ce petit écart 😉.</p>
-</section>
-<section id="ok-time-to-say-goodbye" class="level2">
-<h2 class="anchored" data-anchor-id="ok-time-to-say-goodbye">Ok, Time to Say Goodbye 👋</h2>
-<p>That’s all for now, folks! See you soon, and take care! Love you all! 💖</p>
-
-
-</section>
-
-<a onclick="window.scrollTo(0, 0); return false;" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Retour au sommet</a> ]]></description>
-  <category>Personal Projects</category>
-  <category>Updates</category>
-  <guid>https://amenalahassa.github.io/amenalahassa/posts/for_you.html</guid>
-  <pubDate>Fri, 23 Aug 2024 00:00:00 GMT</pubDate>
-  <media:content url="https://amenalahassa.github.io/amenalahassa/posts/assets/images/0_0.png" medium="image" type="image/png" height="165" width="144"/>
 </item>
 <item>
   <title>Passer de Yolo à CocoDetection, c’est possible !</title>

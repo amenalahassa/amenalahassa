@@ -2,9 +2,10 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/lessons_from_calf_face.html",
       "/posts/model_gpu.html",
-      "/posts/anonymizer_intro.html",
       "/posts/for_you.html",
+      "/posts/anonymizer_intro.html",
       "/posts/dataset-converter.html",
       "/posts/predicting_comment_reply_llm.html"
     ]

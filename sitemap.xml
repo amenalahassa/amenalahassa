@@ -1,35 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://amenalahassa.github.io/amenalahassa/about.html</loc>
-    <lastmod>2024-10-06T14:36:45.666Z</lastmod>
-  </url>
-  <url>
     <loc>https://amenalahassa.github.io/amenalahassa/posts/dataset-converter.html</loc>
-    <lastmod>2024-10-06T14:36:45.719Z</lastmod>
-  </url>
-  <url>
-    <loc>https://amenalahassa.github.io/amenalahassa/posts/for_you.html</loc>
-    <lastmod>2024-10-06T14:36:45.719Z</lastmod>
-  </url>
-  <url>
-    <loc>https://amenalahassa.github.io/amenalahassa/index.html</loc>
-    <lastmod>2024-10-06T14:36:45.666Z</lastmod>
-  </url>
-  <url>
-    <loc>https://amenalahassa.github.io/amenalahassa/works.html</loc>
-    <lastmod>2024-10-06T14:36:45.722Z</lastmod>
+    <lastmod>2024-10-12T20:44:10.057Z</lastmod>
   </url>
   <url>
     <loc>https://amenalahassa.github.io/amenalahassa/posts/anonymizer_intro.html</loc>
-    <lastmod>2024-10-06T14:36:45.666Z</lastmod>
+    <lastmod>2024-10-12T20:44:09.997Z</lastmod>
   </url>
   <url>
     <loc>https://amenalahassa.github.io/amenalahassa/posts/model_gpu.html</loc>
-    <lastmod>2024-10-06T14:36:45.719Z</lastmod>
+    <lastmod>2024-10-12T20:44:10.057Z</lastmod>
+  </url>
+  <url>
+    <loc>https://amenalahassa.github.io/amenalahassa/about.html</loc>
+    <lastmod>2024-10-12T20:44:09.997Z</lastmod>
+  </url>
+  <url>
+    <loc>https://amenalahassa.github.io/amenalahassa/works.html</loc>
+    <lastmod>2024-10-12T20:44:10.061Z</lastmod>
+  </url>
+  <url>
+    <loc>https://amenalahassa.github.io/amenalahassa/index.html</loc>
+    <lastmod>2024-10-12T20:44:09.997Z</lastmod>
+  </url>
+  <url>
+    <loc>https://amenalahassa.github.io/amenalahassa/posts/for_you.html</loc>
+    <lastmod>2024-10-12T20:44:10.057Z</lastmod>
   </url>
   <url>
     <loc>https://amenalahassa.github.io/amenalahassa/posts/predicting_comment_reply_llm.html</loc>
-    <lastmod>2024-10-06T14:36:45.722Z</lastmod>
+    <lastmod>2024-10-12T20:44:10.061Z</lastmod>
+  </url>
+  <url>
+    <loc>https://amenalahassa.github.io/amenalahassa/posts/lessons_from_calf_face.html</loc>
+    <lastmod>2024-10-12T20:44:10.057Z</lastmod>
   </url>
 </urlset>

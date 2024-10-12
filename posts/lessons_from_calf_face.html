@@ -1,2 +1,831 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr"></html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.37">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="description" content="In this post, we dive into the challenges of using deep learning models to detect calf health status from images and videos. Spoiler: We’re not quite there yet, but the journey is full of insights and potential for future improvements!">
+
+<title>multiverse – What I Learned from Calf Face 😊</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/cookie-consent/cookie-consent.js"></script>
+<link href="../site_libs/cookie-consent/cookie-consent.css" rel="stylesheet">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "Pas de résultats",
+    "search-matching-documents-text": "documents trouvés",
+    "search-copy-link-title": "Copier le lien vers la recherche",
+    "search-hide-matches-text": "Cacher les correspondances additionnelles",
+    "search-more-match-text": "correspondance de plus dans ce document",
+    "search-more-matches-text": "correspondances de plus dans ce document",
+    "search-clear-button-title": "Effacer",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Annuler",
+    "search-submit-button-title": "Envoyer",
+    "search-label": "Recherche"
+  }
+}</script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-X5E8KFGB6H"></script>
+
+<script type="text/plain" cookie-consent="tracking">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-X5E8KFGB6H', { 'anonymize_ip': true});
+</script>
+
+<script type="text/javascript" charset="UTF-8">
+document.addEventListener('DOMContentLoaded', function () {
+cookieconsent.run({
+  "notice_banner_type":"simple",
+  "consent_type":"implied",
+  "palette":"light",
+  "language":"en",
+  "page_load_consent_levels":["strictly-necessary","functionality","tracking","targeting"],
+  "notice_banner_reject_button_hide":false,
+  "preferences_center_close_button_hide":false,
+  "website_name":""
+  ,
+"language":"fr"
+  });
+});
+</script> 
+  
+<style>html{ scroll-behavior: smooth; }</style>
+
+
+<link rel="stylesheet" href="assets/styles.css">
+<meta property="og:title" content="multiverse - What I Learned from Calf Face 😊">
+<meta property="og:description" content="In this post, we dive into the challenges of using deep learning models to detect calf health status from images and videos. Spoiler: We’re not quite there yet, but the journey is full of insights and potential for future improvements!">
+<meta property="og:image" content="https://amenalahassa.github.io/amenalahassa/posts/assets/images/intr_viz.png">
+<meta property="og:site_name" content="multiverse">
+<meta property="og:image:height" content="589">
+<meta property="og:image:width" content="1123">
+<meta name="twitter:title" content="multiverse - What I Learned from Calf Face 😊">
+<meta name="twitter:description" content="In this post, we dive into the challenges of using deep learning models to detect calf health status from images and videos. Spoiler: We’re not quite there yet, but the journey is full of insights and potential for future improvements!">
+<meta name="twitter:image" content="https://amenalahassa.github.io/amenalahassa/posts/assets/images/intr_viz.png">
+<meta name="twitter:creator" content="@amenalahassa">
+<meta name="twitter:image-height" content="589">
+<meta name="twitter:image-width" content="1123">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+
+<body class="nav-sidebar floating slimcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Basculer la barre latérale" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">
+      multiverse
+      </li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Basculer la barre latérale" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Recherche" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">multiverse</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://www.linkedin.com/in/alkonrad/" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-linkedin"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Basculer en mode lecteur">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Recherche"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Blog</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../works.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">My works</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../about.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">L’auteur</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Sur cette page</h2>
+   
+  <ul>
+  <li><a href="#small-data-big-dreams" id="toc-small-data-big-dreams" class="nav-link active" data-scroll-target="#small-data-big-dreams">Small Data, Big Dreams</a></li>
+  <li><a href="#choosing-the-right-model-training-where-things-get-real" id="toc-choosing-the-right-model-training-where-things-get-real" class="nav-link" data-scroll-target="#choosing-the-right-model-training-where-things-get-real">Choosing the Right Model &amp; Training: Where Things Get Real 🎯</a>
+  <ul class="collapse">
+  <li><a href="#the-model-line-up" id="toc-the-model-line-up" class="nav-link" data-scroll-target="#the-model-line-up">The Model Line-Up 🏆</a></li>
+  <li><a href="#cracking-the-models-decisions-interpretability-with-omnixai" id="toc-cracking-the-models-decisions-interpretability-with-omnixai" class="nav-link" data-scroll-target="#cracking-the-models-decisions-interpretability-with-omnixai">Cracking the Model’s Decisions: Interpretability with OmnixAI 🧠</a></li>
+  <li><a href="#building-a-killer-dataset-split" id="toc-building-a-killer-dataset-split" class="nav-link" data-scroll-target="#building-a-killer-dataset-split">Building a Killer Dataset Split 🧩</a></li>
+  <li><a href="#two-different-training-sets-why-not" id="toc-two-different-training-sets-why-not" class="nav-link" data-scroll-target="#two-different-training-sets-why-not">Two Different Training Sets? Why Not? 🤷‍♂️</a></li>
+  <li><a href="#pro-tip-use-mlflow" id="toc-pro-tip-use-mlflow" class="nav-link" data-scroll-target="#pro-tip-use-mlflow">Pro Tip: Use MLflow! 🛠️</a></li>
+  </ul></li>
+  <li><a href="#results-the-good-the-bad-and-the-calves" id="toc-results-the-good-the-bad-and-the-calves" class="nav-link" data-scroll-target="#results-the-good-the-bad-and-the-calves">Results: The Good, the Bad, and the Calves 🐄</a>
+  <ul class="collapse">
+  <li><a href="#the-curious-case-of-the-intr-model" id="toc-the-curious-case-of-the-intr-model" class="nav-link" data-scroll-target="#the-curious-case-of-the-intr-model">The Curious Case of the INTR Model 🤔</a></li>
+  <li><a href="#the-same-old-background-problem" id="toc-the-same-old-background-problem" class="nav-link" data-scroll-target="#the-same-old-background-problem">The “Same Old Background” Problem 🌾</a></li>
+  <li><a href="#is-the-model-actually-learning-the-right-things" id="toc-is-the-model-actually-learning-the-right-things" class="nav-link" data-scroll-target="#is-the-model-actually-learning-the-right-things">Is the Model Actually Learning the Right Things? 🤨</a></li>
+  <li><a href="#words-of-wisdom-from-my-professor" id="toc-words-of-wisdom-from-my-professor" class="nav-link" data-scroll-target="#words-of-wisdom-from-my-professor">Words of Wisdom from My Professor 👨‍🏫</a></li>
+  </ul></li>
+  <li><a href="#have-we-answered-the-big-question-can-we-detect-calf-health-status-from-images-or-videos" id="toc-have-we-answered-the-big-question-can-we-detect-calf-health-status-from-images-or-videos" class="nav-link" data-scroll-target="#have-we-answered-the-big-question-can-we-detect-calf-health-status-from-images-or-videos">Have We Answered the Big Question? Can We Detect Calf Health Status from Images or Videos? 🤔</a></li>
+  <li><a href="#and-thats-a-wrap" id="toc-and-thats-a-wrap" class="nav-link" data-scroll-target="#and-thats-a-wrap">And That’s a Wrap! 🎬</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/amenalahassa/amenalahassa/issues/new" class="toc-action"><i class="bi bi-github"></i>Faire part d'un problème</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content page-columns page-full" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">What I Learned from Calf Face 😊</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">Work Projects</div>
+    <div class="quarto-category">Tips &amp; Tricks</div>
+  </div>
+  </div>
+
+<div>
+  <div class="description">
+    In this post, we dive into the challenges of using deep learning models to detect calf health status from images and videos. Spoiler: We’re not quite there yet, but the journey is full of insights and potential for future improvements!
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Date de publication</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">4 octobre 2024</p>
+    </div>
+  </div>
+  
+    <div>
+    <div class="quarto-title-meta-heading">Modifié</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date-modified">12 octobre 2024</p>
+    </div>
+  </div>
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="small-data-big-dreams" class="level2">
+<h2 class="anchored" data-anchor-id="small-data-big-dreams">Small Data, Big Dreams</h2>
+<p>Alright, let’s be real—when we started, we had a <em>tiny</em> data problem. We’re talking less than 200 images of calf faces (yep, calf faces!). And trust me, that’s nowhere near enough if we want to build a robust detection model. 🐮</p>
+<p>But no worries, we had a plan! First, we took YOLOv8 and fine-tuned it with some clever data augmentation. We went from a measly 178 images to a whopping 890—thanks to a combo of <strong>GaussianBlur</strong>, <strong>MedianBlur</strong>, <strong>Sharpen</strong>, <strong>Flip</strong>, and good ol’ <strong>rotation</strong> (between 10 to 20 degrees, nothing too wild).</p>
+<p>Now, the goal was to keep the transformations realistic. No crazy color changes or outlandish rotations that might produce data that doesn’t even exist in the real world—because that’s how you end up with a model that thinks cows fly. 🐄✈️</p>
+<p>And guess what? After this magic data expansion, we saw a small bump in mAP50 (mean Average Precision) and other YOLO metrics. We went from 0.803 with basic data augmentation of YoloV8 to 0.891 on the mAP score after 10 epochs. 📈</p>
+<p>Here’s a quick table showing the before and after, because data geeks love tables:</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>Metric</th>
+<th>Before</th>
+<th>After</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>mAP50</td>
+<td>0.803</td>
+<td>0.891</td>
+</tr>
+<tr class="even">
+<td>mAP50-90</td>
+<td>0.503</td>
+<td>0.502</td>
+</tr>
+<tr class="odd">
+<td>Precision</td>
+<td>0.992</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>Recall</td>
+<td>0.778</td>
+<td>0.769</td>
+</tr>
+</tbody>
+</table>
+<p>Now, before anyone screams “Overfitting!”—hold up. Yes, the boost in performance might make it seem like that’s what’s happening, but we’re confident that’s not the case. Why? Because the video data we plan to use for detection closely resembles the training data. In other words, the model’s doing exactly what we need it to do: detect calves in environments that are super similar to the ones it’s been trained on. 🎯</p>
+<p>Oh, and by the way—the metrics you see in that table? Those aren’t based on the augmented data. Nope! They’re from a subset of the original 175 images, which we held back specifically as our test set. So, the numbers here reflect real, unaltered images, giving us a more honest assessment of the model’s performance. 💪</p>
+</section>
+<section id="choosing-the-right-model-training-where-things-get-real" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="choosing-the-right-model-training-where-things-get-real">Choosing the Right Model &amp; Training: Where Things Get Real 🎯</h2>
+<p>Okay, so once we had the data sorted, it was time to pick the right model—and honestly, that’s where things got a little <em>complicated</em>. Not only did I need something that would crush the performance side of things, but I also needed to be able to explain <strong>why</strong> the model made the decisions it did. You know, in case anyone asks the big question: “Why did your model do that?” 😅</p>
+<section id="the-model-line-up" class="level3">
+<h3 class="anchored" data-anchor-id="the-model-line-up">The Model Line-Up 🏆</h3>
+<p>For <strong>images</strong>, I went through a few options before landing on the right one. I tried <strong>DeepLabV3</strong>, <strong>EfficientNet</strong>, <strong>InceptionV3</strong>, and even <strong>Unet</strong> (which I ended up abandoning—long story 🫠). I also gave <strong>ViT</strong> and a <strong>LSTM+CNN combo</strong> a shot, but, well… let’s just say I didn’t get around to finishing that one. Too much on my plate!</p>
+<p>For <strong>videos</strong>, it was another story. I experimented with <strong>TimeSformer</strong>, <strong>ViViT</strong>, and <strong>VideoMAE</strong> to handle the moving pictures. 🎥</p>
+</section>
+<section id="cracking-the-models-decisions-interpretability-with-omnixai" class="level3">
+<h3 class="anchored" data-anchor-id="cracking-the-models-decisions-interpretability-with-omnixai">Cracking the Model’s Decisions: Interpretability with OmnixAI 🧠</h3>
+<p>When it came to understanding why the models made specific predictions, I leaned on some awesome interpretability algorithms from OmnixAI. These tools helped me peek under the hood of the models and get a better sense of their thought process.</p>
+<p>I used a mix of techniques like GradCAM, LIME, Score-CAM, and even SmoothGrad, GuidedBP, and LayerCAM to visualize what parts of the image the model was focusing on. Each one gave me a slightly different view of how the model was processing the data, which made interpreting results a whole lot easier (and way more fun to explain 😎).</p>
+<p>And I also even trained <a href="https://github.com/Imageomics/INTR"><strong>INTR</strong></a>, a transformer-based model specifically designed for interpretability. ✨</p>
+</section>
+<section id="building-a-killer-dataset-split" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="building-a-killer-dataset-split">Building a Killer Dataset Split 🧩</h3>
+<p>Next up, I had to make sure my dataset was split in a way that would allow for a solid comparison between models. Here’s how I did it:</p>
+<p>Using the YOLO model I mentioned earlier, I went through almost 1 hour of video showing calves approaching a feeder. I grabbed the 10 seconds before each calf started feeding and extracted images where their cute little faces were visible. In the end, I had <strong>1,349 videos</strong> and <strong>7,687 images</strong>, representing <strong>76 unique calves</strong>.</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="assets/images/paquetlab_video_dist.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">Number of videos per calf status</figcaption>
+</figure>
+</div>
+<p>To keep things clean, I handpicked <strong>68 videos</strong> where I verified that each calf was actually approaching the feeder (with no noise), and used those videos as my <strong>test set</strong>. The images from those videos? They became my <strong>image test set</strong> (283 images in total).</p>
+</section>
+<section id="two-different-training-sets-why-not" class="level3">
+<h3 class="anchored" data-anchor-id="two-different-training-sets-why-not">Two Different Training Sets? Why Not? 🤷‍♂️</h3>
+<p>I built two separate training sets just for fun (and science, of course):</p>
+<ol type="1">
+<li><strong>Full Set</strong>: This one included all the remaining images and videos, no holds barred.</li>
+<li><strong>Limited Set</strong>: Here’s where things got interesting. I only used one video and two images per calf, per health status—“<strong>healthy</strong>,” “<strong>diarrhea</strong>,” or “<strong>pneumonia</strong>.” My logic? Since some images were super similar (I sampled about 30 images evenly from each 10-second video), I figured the model could easily overfit. I wanted to see how it would perform with less redundant data.</li>
+</ol>
+<p>Yeah, it’s a pretty <em>naive</em> approach, but it sped up my work and saved some headaches. Plus, even though about 40% of the data was, well, garbage 🗑️, the rest of it more than made up for it. 💪</p>
+<p>I should mentioned that those calf in the test set were not in the training set, so the model never saw them before. 🐄</p>
+</section>
+<section id="pro-tip-use-mlflow" class="level3">
+<h3 class="anchored" data-anchor-id="pro-tip-use-mlflow">Pro Tip: Use MLflow! 🛠️</h3>
+<p>Oh, one last thing. If you’re planning on doing so much training like this, seriously, do yourself a favor and use <strong>MLflow</strong> to track your experiments. I didn’t use it for this project (don’t ask, it was a mess, I swear! 🤦‍♂️), but if I had to do it all over again, MLflow would’ve saved me SO much time and effort. Lesson learned!</p>
+</section>
+</section>
+<section id="results-the-good-the-bad-and-the-calves" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="results-the-good-the-bad-and-the-calves">Results: The Good, the Bad, and the Calves 🐄</h2>
+<p>You can check out all the detailed results and model performances in the dedicated repo for this <a href="https://github.com/amenalahassa/paquetlab">project</a> (because sharing is caring, right? 📂). But while I didn’t get a chance to completely wrap up the work (classic researcher life 😅), there are a few important highlights that are worth mentioning.</p>
+<section id="the-curious-case-of-the-intr-model" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="the-curious-case-of-the-intr-model">The Curious Case of the INTR Model 🤔</h3>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="assets/images/intr_teaser.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">How the INTR model works. From the original paper</figcaption>
+</figure>
+</div>
+<p>So, let’s talk about the <strong>INTR</strong> model. The original paper boasted that this model could better explain its decisions, which sounded perfect for what I needed. But after fine-tuning it on my dataset? Yeah, not quite the same result. 🤷‍♂️</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="assets/images/intr_viz.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">How the INTR performs on my dataset</figcaption>
+</figure>
+</div>
+<p>Why? Well, here’s where the <strong>data shift</strong> kicked in. The pre-trained model had been trained on images where the object of interest was neatly placed in the center of the frame (picture-perfect). My dataset? Not so much. My calves were sometimes, all over the place, doing their own thing, and not staying center-stage. 😬</p>
+</section>
+<section id="the-same-old-background-problem" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="the-same-old-background-problem">The “Same Old Background” Problem 🌾</h3>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="assets/images/mean_face.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">Fun image of mean calf face. I used all images extracted from the videos to compute it.</figcaption>
+</figure>
+</div>
+<p>Another issue I ran into: <strong>background consistency</strong>. Since all my training data came from the same farm, the background was pretty much always the same. So, while the model learned to perform decently well on that data, it didn’t generalize well when I tested it with images from a different farm. Different farms = different environments. And as we all know, no two farms are exactly alike, right? 🏡 🐄</p>
+<p>It’s not the model’s fault—it’s just how things are. If the goal is to have a model that works across various farms, we either need a ton more data from different environments, or maybe we should consider building farm-specific models. Unless, of course, we want to standardize every farm, which, let’s face it, isn’t going to happen. 🤷‍♀️</p>
+</section>
+<section id="is-the-model-actually-learning-the-right-things" class="level3">
+<h3 class="anchored" data-anchor-id="is-the-model-actually-learning-the-right-things">Is the Model Actually Learning the Right Things? 🤨</h3>
+<p>Here’s the tricky part: The model performed relatively well. But—big but—it could be learning patterns we don’t want it to focus on. Maybe it’s using the <strong>calf’s face color</strong>, or maybe the <strong>background</strong> is playing a bigger role in its decision-making than we’d like to admit. In short, even though the performance metrics look good on paper, I’d recommend handling them with care. 📊</p>
+</section>
+<section id="words-of-wisdom-from-my-professor" class="level3">
+<h3 class="anchored" data-anchor-id="words-of-wisdom-from-my-professor">Words of Wisdom from My Professor 👨‍🏫</h3>
+<p>My supervisor always says we shouldn’t expect miracles from these models. After all, it’s hard for even a human to just look at a calf and determine its health status purely based on appearance. Add in the fact that we’re working with limited data, and yeah—it was always going to be a challenge.</p>
+<p>But the whole point of this project was to test, explore, and see how a deep learning approach would hold up, despite those challenges. So, while the results may not be earth-shattering, the insights we’ve gained are super valuable for refining future models. 💡</p>
+</section>
+</section>
+<section id="have-we-answered-the-big-question-can-we-detect-calf-health-status-from-images-or-videos" class="level2">
+<h2 class="anchored" data-anchor-id="have-we-answered-the-big-question-can-we-detect-calf-health-status-from-images-or-videos">Have We Answered the Big Question? Can We Detect Calf Health Status from Images or Videos? 🤔</h2>
+<p>Short answer? <strong>Not yet</strong>. 🛑</p>
+<p>To be honest, I think we need a better dataset to get the results we’re aiming for. There’s definitely potential—maybe we can identify new features or patterns to help detect diseases more accurately, or perhaps the model can be trained to pick up on the same cues humans use when assessing calf health. But realistically, that’s going to take a lot more work than what I’ve done so far. 🐄💻</p>
+<p>One major thing I’ve learned is that using pre-trained models (whether they’re foundation models or not) on real-life problems takes way more effort, data, and attention to detail than I ever expected. When you watch those flashy demos where models seem to perform flawlessly, it’s easy to think, “I got this.” But in reality? The process is a bit messier, and it involves a lot more tweaking than the demo might let on. 😅</p>
+<p>Maybe I didn’t make all the right decisions—choosing the best model, or even formulating the right hypotheses—but hey, that’s how we learn, right? If you have thoughts, feedback, or think there’s something I missed, feel free to comment and let me know. Let’s keep the conversation going and figure this out together! 🤝</p>
+</section>
+<section id="and-thats-a-wrap" class="level2">
+<h2 class="anchored" data-anchor-id="and-thats-a-wrap">And That’s a Wrap! 🎬</h2>
+<p>Until next time, keep learning, keep growing, and keep exploring the world of AI. It’s a wild ride, but hey, someone’s gotta do it! 🚀</p>
+
+
+</section>
+
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Retour au sommet</a></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copié");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copié");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/amenalahassa\.github\.io\/amenalahassa\/");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>Copyright 2024</p>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/amenalahassa/amenalahassa/issues/new" class="toc-action"><i class="bi bi-github"></i>Faire part d'un problème</a></li></ul></div><div class="cookie-consent-footer"><a href="#" id="open_preferences_center">Cookie Preferences</a></div></div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+<script src="../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>
