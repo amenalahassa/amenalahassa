@@ -4,10 +4,9 @@
     "items": [
       "/posts/lessons_from_calf_face.html",
       "/posts/model_gpu.html",
-      "/posts/for_you.html",
       "/posts/anonymizer_intro.html",
-      "/posts/dataset-converter.html",
-      "/posts/predicting_comment_reply_llm.html"
+      "/posts/for_you.html",
+      "/posts/dataset-converter.html"
     ]
   }
 ]
