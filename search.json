@@ -77,7 +77,7 @@
     "href": "about.html#experiences",
     "title": "Konrad Tagnon Amen ALAHASSA",
     "section": "Experiences",
-    "text": "Experiences\n\nLead Developer | Sept 2022 - Jul 2023\nAgroSfer | Cotonou, Bénin\nLead development teams in creating a dynamic data aggregation system for enhanced dashboard analytics. Utilized Angular, Laravel, and MongoDB technologies.\n\n\nFront-end Developer | Jun 2021 - Sept 2022\nAgroSfer | Cotonou, Bénin\nStudied advanced software systems, focusing on practical and theoretical aspects of software engineering in Benin.\n\n\nInternship in Web Development | Mars 2021 - Mai 2021\nLa Vedette Media Digital | Cotonou, Bénin\nDesign and development of the architecture for an intranet-based project management web platform for La Vedette Media.\n\n\nInternship in Web Development | June 2020 - Sept 2020\nNAUTILUS TECHNOLOGY | Cotonou, Bénin\nInternship role focusing on web development using JavaScript, Angular, Laravel, and Git, solidifying foundational web development skills.",
+    "text": "Experiences\n\nLead Developer | Sept 2022 - Jul 2023\nAgroSfer | Cotonou, Bénin\nLead development teams in the creation of a dynamic data aggregation system to feed analytical dashboards.\n\n\nFront-end Developer | Jun 2021 - Sept 2022\nAgroSfer | Cotonou, Bénin\nStudied advanced software systems, focusing on practical and theoretical aspects of software engineering in Benin.\n\n\nInternship in Web Development | Mars 2021 - Mai 2021\nLa Vedette Media Digital | Cotonou, Bénin\nDesign and development of the architecture for an intranet-based project management web platform for La Vedette Media.\n\n\nInternship in Web Development | June 2020 - Sept 2020\nNAUTILUS TECHNOLOGY | Cotonou, Bénin\nInternship role focusing on web development using JavaScript, Angular, Laravel, and Git, solidifying foundational web development skills.",
     "crumbs": [
       "L'auteur"
     ]
@@ -87,7 +87,7 @@
     "href": "about.html#skills",
     "title": "Konrad Tagnon Amen ALAHASSA",
     "section": "Skills",
-    "text": "Skills\n\nArtificial Intelligence\nPython, Pytorch, Tensorflow, Keras\nMatplotlib, Seaborn, Numpy, Pandas, timm, fastai, fastcore, torchvision, Poutyne,\nSPSS Modeler, RStudio\n\n\nSoftware engineering\nPHP, Javascript, C, C++, Java\nAngular, ReactJs, VueJs, Cypress, Web API\nSQL, Mysql, Firebase, MongoDB, Web Services, APIs Rest\n\n\nOthers\nGit, DevOps, CI/CD, UX Design, Scrum, Agile",
+    "text": "Skills\n\nArtificial Intelligence\nPython, Pytorch, Tensorflow, Keras\nMatplotlib, Seaborn, Numpy, Pandas, timm, fastai, torchvision, Poutyne\nSPSS Modeler, RStudio\n\n\nSoftware engineering\nPHP, Javascript, C, C++, Java\nAngular, ReactJs, VueJs, Cypress, Web API\nSQL, Mysql, Firebase, MongoDB\n\n\nOthers\nDevOps, CI/CD, UX Design, Scrum, Agile",
     "crumbs": [
       "L'auteur"
     ]
