@@ -20,11 +20,11 @@ AI Developer fluent in machine learning and web technologies, I'm passionate abo
 
 ##### Lead Developer | Sept 2022 - Jul 2023
 | *AgroSfer | Cotonou, Bénin*
-Lead development teams in creating a dynamic data aggregation system for enhanced dashboard analytics. Utilized Angular, Laravel, and MongoDB technologies.
+Lead development teams in the creation of a dynamic data aggregation system to feed analytical dashboards.
 
 ##### Front-end Developer | Jun 2021 - Sept 2022
 | *AgroSfer | Cotonou, Bénin*
-Studied advanced software systems, focusing on practical and theoretical aspects of software engineering in Benin.
+Client-side component development with JavaScript, Angular, and Web API integration to optimize user interactions.
 
 ##### Internship in Web Development	 | Mars 2021 - Mai 2021
 | *La Vedette Media Digital |  Cotonou, Bénin*
@@ -38,16 +38,16 @@ Internship role focusing on web development using JavaScript, Angular, Laravel, 
 
 ##### *Artificial Intelligence*
 | Python, Pytorch, Tensorflow, Keras
-| Matplotlib, Seaborn, Numpy, Pandas, timm, fastai, fastcore, torchvision, Poutyne,
+| Matplotlib, Seaborn, Numpy, Pandas, timm, fastai, torchvision, Poutyne
 SPSS Modeler, RStudio
 
 ##### *Software engineering*
 | PHP, Javascript, C, C++, Java
 | Angular, ReactJs, VueJs, Cypress, Web API
-SQL, Mysql, Firebase, MongoDB, Web Services, APIs Rest
+SQL, Mysql, Firebase, MongoDB
 
 ##### *Others*
-Git, DevOps, CI/CD, UX Design, Scrum, Agile
+DevOps, CI/CD, UX Design, Scrum, Agile
 
 
 ## Education
