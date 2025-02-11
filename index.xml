@@ -245,6 +245,59 @@
   <media:content url="https://amenalahassa.github.io/amenalahassa/posts/assets/images/0_1.png" medium="image" type="image/png" height="189" width="144"/>
 </item>
 <item>
+  <title>Finally, An Introduction: The Story Behind This Blog and What’s Next</title>
+  <link>https://amenalahassa.github.io/amenalahassa/posts/for_you.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<section id="what-happened-indeed" class="level2">
+<h2 class="anchored" data-anchor-id="what-happened-indeed">What Happened Indeed? 🤔</h2>
+<p>Alright, let’s be real. Life happened, right? 😅 I took some time to wrap up a few things in my life and, honestly, to kickstart a new chapter. You know that feeling when you finish one thing and feel like a whole new world opens up? Yeah, that’s where I’m at! 🌟</p>
+<p>Plus, it was the end of the school session, and I needed some well-deserved downtime. Relaxing, de-stressing, and just enjoying life for a bit. But guess what? Now I’m back, energized, and ready to take on the world! 🌍✨</p>
+<p>I’ve realized how much I’ve already accomplished, and let me tell you, I’m super grateful for all of it. 🙏 But I also see how much more there is to do. My blog, my job, my personal life – they all need my attention, and I’m ready to dive in.</p>
+<p>The possibilities ahead? Endless. I’m seizing every opportunity coming my way, and I can’t wait to share the journey with you! 🚀</p>
+</section>
+<section id="whats-next" class="level2">
+<h2 class="anchored" data-anchor-id="whats-next">What’s Next? 🎉</h2>
+<p>First off, a huge shoutout to my brothers and my family. Without them, I wouldn’t be here doing what I love. You guys are the real MVPs! 💪</p>
+<p>Now, onto me. I’m committed to working on myself, becoming the best version of me. I’m just getting started on my journey, my career, my dreams – and I’m 100% ready to make them a reality. Let’s do this! 🙌</p>
+</section>
+<section id="the-reason-behind-this-blog" class="level2">
+<h2 class="anchored" data-anchor-id="the-reason-behind-this-blog">The Reason Behind This Blog 💻</h2>
+<p>So, why this blog? Well, it’s simple. I want to share what I’ve accomplished in my career, in AI, in software engineering – and maybe some other areas too. 🚀</p>
+<p>But here’s the thing: this isn’t going to be a blog where I show you how to do things or preach about the future of AI (though, who knows, maybe a little bit of that 😉). Instead, it’s going to be a place where I share what I’m learning, what I’m building, and who I’m building it with. And hey, I’d love to hear your thoughts, comments, and recommendations along the way. Don’t hesitate! 😊</p>
+</section>
+<section id="why-now" class="level2">
+<h2 class="anchored" data-anchor-id="why-now">Why Now? 🤷</h2>
+<p>You know, I just realized that I never really took the time to properly introduce this blog or explain what it’s all about. Better late than never, right? 😁 So, here it is! 🎉</p>
+</section>
+<section id="how-its-built" class="level2">
+<h2 class="anchored" data-anchor-id="how-its-built">How It’s Built 🛠️</h2>
+<p>For all the techies out there, I’m using Quarto, and it’s deployed with GitHub Pages. I wanted to keep things simple but also have the flexibility to share code. Quarto’s been perfect for that – super interesting and easy to get the hang of. 👍</p>
+</section>
+<section id="what-else" class="level2">
+<h2 class="anchored" data-anchor-id="what-else">What Else? 🧐</h2>
+<p>Oh, and one more thing – I’ve added a page to showcase all the projects I’m working on, both finished and in progress. I’ll be publishing articles explaining them, sharing why I find them interesting, and how they’re coming along. Stay tuned! 🚧</p>
+<p>Got any comments or ideas on how I can improve? I’m all ears! 👂 I’ll be updating regularly on my progress and any news, so keep an eye out for more.</p>
+<p>And hey, I speak French too! Je peux bien parler en français qu’en anglais, permettez-moi ce petit écart 😉.</p>
+</section>
+<section id="ok-time-to-say-goodbye" class="level2">
+<h2 class="anchored" data-anchor-id="ok-time-to-say-goodbye">Ok, Time to Say Goodbye 👋</h2>
+<p>That’s all for now, folks! See you soon, and take care! Love you all! 💖</p>
+
+
+</section>
+
+<a onclick="window.scrollTo(0, 0); return false;" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Retour au sommet</a> ]]></description>
+  <category>Personal Projects</category>
+  <category>Updates</category>
+  <guid>https://amenalahassa.github.io/amenalahassa/posts/for_you.html</guid>
+  <pubDate>Fri, 23 Aug 2024 00:00:00 GMT</pubDate>
+  <media:content url="https://amenalahassa.github.io/amenalahassa/posts/assets/images/0_0.png" medium="image" type="image/png" height="165" width="144"/>
+</item>
+<item>
   <title>How I Built a Tool to Anonymize Text for LLMs (and Why You Might Need It Too!)</title>
   <link>https://amenalahassa.github.io/amenalahassa/posts/anonymizer_intro.html</link>
   <description><![CDATA[ 
@@ -337,59 +390,6 @@
   <category>Personal Projects</category>
   <guid>https://amenalahassa.github.io/amenalahassa/posts/anonymizer_intro.html</guid>
   <pubDate>Fri, 23 Aug 2024 00:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Finally, An Introduction: The Story Behind This Blog and What’s Next</title>
-  <link>https://amenalahassa.github.io/amenalahassa/posts/for_you.html</link>
-  <description><![CDATA[ 
-
-
-
-
-<section id="what-happened-indeed" class="level2">
-<h2 class="anchored" data-anchor-id="what-happened-indeed">What Happened Indeed? 🤔</h2>
-<p>Alright, let’s be real. Life happened, right? 😅 I took some time to wrap up a few things in my life and, honestly, to kickstart a new chapter. You know that feeling when you finish one thing and feel like a whole new world opens up? Yeah, that’s where I’m at! 🌟</p>
-<p>Plus, it was the end of the school session, and I needed some well-deserved downtime. Relaxing, de-stressing, and just enjoying life for a bit. But guess what? Now I’m back, energized, and ready to take on the world! 🌍✨</p>
-<p>I’ve realized how much I’ve already accomplished, and let me tell you, I’m super grateful for all of it. 🙏 But I also see how much more there is to do. My blog, my job, my personal life – they all need my attention, and I’m ready to dive in.</p>
-<p>The possibilities ahead? Endless. I’m seizing every opportunity coming my way, and I can’t wait to share the journey with you! 🚀</p>
-</section>
-<section id="whats-next" class="level2">
-<h2 class="anchored" data-anchor-id="whats-next">What’s Next? 🎉</h2>
-<p>First off, a huge shoutout to my brothers and my family. Without them, I wouldn’t be here doing what I love. You guys are the real MVPs! 💪</p>
-<p>Now, onto me. I’m committed to working on myself, becoming the best version of me. I’m just getting started on my journey, my career, my dreams – and I’m 100% ready to make them a reality. Let’s do this! 🙌</p>
-</section>
-<section id="the-reason-behind-this-blog" class="level2">
-<h2 class="anchored" data-anchor-id="the-reason-behind-this-blog">The Reason Behind This Blog 💻</h2>
-<p>So, why this blog? Well, it’s simple. I want to share what I’ve accomplished in my career, in AI, in software engineering – and maybe some other areas too. 🚀</p>
-<p>But here’s the thing: this isn’t going to be a blog where I show you how to do things or preach about the future of AI (though, who knows, maybe a little bit of that 😉). Instead, it’s going to be a place where I share what I’m learning, what I’m building, and who I’m building it with. And hey, I’d love to hear your thoughts, comments, and recommendations along the way. Don’t hesitate! 😊</p>
-</section>
-<section id="why-now" class="level2">
-<h2 class="anchored" data-anchor-id="why-now">Why Now? 🤷</h2>
-<p>You know, I just realized that I never really took the time to properly introduce this blog or explain what it’s all about. Better late than never, right? 😁 So, here it is! 🎉</p>
-</section>
-<section id="how-its-built" class="level2">
-<h2 class="anchored" data-anchor-id="how-its-built">How It’s Built 🛠️</h2>
-<p>For all the techies out there, I’m using Quarto, and it’s deployed with GitHub Pages. I wanted to keep things simple but also have the flexibility to share code. Quarto’s been perfect for that – super interesting and easy to get the hang of. 👍</p>
-</section>
-<section id="what-else" class="level2">
-<h2 class="anchored" data-anchor-id="what-else">What Else? 🧐</h2>
-<p>Oh, and one more thing – I’ve added a page to showcase all the projects I’m working on, both finished and in progress. I’ll be publishing articles explaining them, sharing why I find them interesting, and how they’re coming along. Stay tuned! 🚧</p>
-<p>Got any comments or ideas on how I can improve? I’m all ears! 👂 I’ll be updating regularly on my progress and any news, so keep an eye out for more.</p>
-<p>And hey, I speak French too! Je peux bien parler en français qu’en anglais, permettez-moi ce petit écart 😉.</p>
-</section>
-<section id="ok-time-to-say-goodbye" class="level2">
-<h2 class="anchored" data-anchor-id="ok-time-to-say-goodbye">Ok, Time to Say Goodbye 👋</h2>
-<p>That’s all for now, folks! See you soon, and take care! Love you all! 💖</p>
-
-
-</section>
-
-<a onclick="window.scrollTo(0, 0); return false;" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Retour au sommet</a> ]]></description>
-  <category>Personal Projects</category>
-  <category>Updates</category>
-  <guid>https://amenalahassa.github.io/amenalahassa/posts/for_you.html</guid>
-  <pubDate>Fri, 23 Aug 2024 00:00:00 GMT</pubDate>
-  <media:content url="https://amenalahassa.github.io/amenalahassa/posts/assets/images/0_0.png" medium="image" type="image/png" height="165" width="144"/>
 </item>
 <item>
   <title>Passer de Yolo à CocoDetection, c’est possible !</title>
