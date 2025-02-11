@@ -28,6 +28,8 @@ and it's just the beginning! 🚀
 ## In software engineering
 Before starting my master's degree in Artificial Intelligence, I worked on a lot of projects in software engineering. Here are some of them that I found interesting:
 
+- **[Neomarketstore](https://www.neomarketstore.com/home)**: I built for a client a website for selling products online. I built the UI from a template but the whole backend was built from scratch using Laravel.
+
 - **[A blog using Vue.js](https://github.com/amenalahassa/avo-blog-frontend)**: I built a blog using Vue.js, SemanticUi, NodeJs, ExpressJs and MongoDB. It was a fun project that helped me learn more about all these technologies. I built a frontend and a backend for this project.
 
 - **[I tried to clone Trello 😅](https://github.com/amenalahassa/trello-frontend)**: I tried to build a Trello clone using React and Laravel. It was a fun project that I didn't finish but I learned a lot about React and Laravel and how to setup live messaging between frontend and backend using Laravel Echo.
@@ -37,6 +39,29 @@ Before starting my master's degree in Artificial Intelligence, I worked on a lot
 - **[mytodoapp: a todo app using React](https://21amxxx.github.io/mytodosapp/)**: I built a sample todo app using React. It was my first project on my web development journey. I learned a lot about React, Git and how to deploy a React app on GitHub pages.
 
 and a lot more you can find on my GitHub. 🌟
+
+## Academic projects
+
+- **[Graphic elements detection using Yolov8](https://github.com/amenalahassa/graphic-element-detection)**: I built a project that detects graphic elements in images using Yolov8. It was a fun class project that helped me learn more about object detection. I'm working on comparing the performances of Yolov8 and DETR on the same task. I will publish an article about it soon. Stay tuned!
+
+- **[Bert vs Falcon on questions answering](https://github.com/amenalahassa/question-answering-incidents)**: I compared the performances of Bert and Falcon on a question-answering task. I used zero-shot promptings to evaluate Falcon on generative tasks and Bert on extractive tasks.
+
+- **[Incident Classification](https://github.com/amenalahassa/incident-seq-classification)**: This project aims to classify incidents using different machine learning models, including Feedforward Neural Networks, LSTM, and Transformer models (BERT and GPT-2). The project is implemented in Python and uses libraries such as PyTorch, Transformers, and Matplotlib.
+
+- **[FlapEgg](https://github.com/cia-ulaval/EEG_Interface)**: I contribute to a project that uses EEG signals to control a game. It's a project of the AI club of my university.
+
+- **[scratchnet](https://github.com/amenalahassa/scratchnet)**: This project involves implementing the Decision Tree and Neural Net algorithms in Python and we test our implementation on a dataset vs the scikit-learn implementation.
+
+- **[Mnist training with custom variables](https://github.com/amenalahassa/scratchnnetops)**: This project involves implementing the Neural Net algorithms in Python and we test our implementation on the Mnist dataset. We also implement custom variables instead of using Pytorch's autograd and we implement the backpropagation algorithm for each operation.
+
+- **[Docusign](https://github.com/amenalahassa/docusign-php)**: It is an application that implements the DocuSign API to sign a document.
+
+- **[Barcode-Reader](https://github.com/amenalahassa/barcode-reader-app)**: Complete application for reading Codebar, CodeQr and others built with Android Studio.
+
+- **[Scheduling](https://github.com/amenalahassa/scheduling)**: Js script for automatic timetable generation. Can be used for course scheduling.
+
+- **[E-commerce with PHP](https://github.com/amenalahassa/sample-php-mvc-site)**: Draft e-commerce site in php. Using the MVC model and the PDO extension. Technologies used: PHP, MySQL, HTML, CSS, JavaScript.
+
 
 ## Found this interesting?
 Let me know if you have any comments or ideas on how I can improve. I’m all ears! 👂 I’ll be updating regularly on my progress and any news, so keep an eye out for more.

@@ -18,17 +18,29 @@ AI Developer fluent in machine learning and web technologies, I'm passionate abo
 
 ## Experiences
 
+##### Intern in Computer vision | Sept 2024 - Now
+| *Jumine | Québec, Canada*
+Used technologies: Technologies: Pytorch, Ultralytics, MLflow.
+
+##### Research Assistant - Intern in Computer vision | Juin 2024 - Août 2024
+| *PaquetLab | Québec, Canada*
+Detection of calf health status from a frontal image or short video sequence of the calf at the feed trough. Balanced accuracy: 64.3% with ViT, 58.9% with Timesformer.
+Used technologies: Data extraction and analysis, Pytorch, torchvision, transformers, Ultralytics, OmniXAI.
+
 ##### Lead Developer | Sept 2022 - Jul 2023
 | *AgroSfer | Cotonou, Bénin*
 Lead development teams in the creation of a dynamic data aggregation system to feed analytical dashboards.
+Used technologies: DevOps, CI/CD, Cloud Services, Scrum, Agile, UX Design.
 
 ##### Front-end Developer | Jun 2021 - Sept 2022
 | *AgroSfer | Cotonou, Bénin*
 Client-side component development with JavaScript, Angular, and Web API integration to optimize user interactions.
+Used technologies: Angular, Firebase, MongoDB, Cypress.
 
 ##### Internship in Web Development	 | Mars 2021 - Mai 2021
 | *La Vedette Media Digital |  Cotonou, Bénin*
 Design and development of the architecture for an intranet-based project management web platform for La Vedette Media.
+Used technologies: Laravel, Angular, Web API, UX Design.
 
 ##### Internship in Web Development	 | June 2020 - Sept 2020
 | *NAUTILUS TECHNOLOGY  |  Cotonou, Bénin*
@@ -73,4 +85,4 @@ Graduated with a focus on Mathematics and Science, forming a strong analytical f
 | *Udemy - 2023*
 
 ## Interests
-AI, Software Engineering, Web Development, Reading, Traveling, Music, Movies, Animes, Swimming, Hiking, BasketBall, and Learning new things.
+AI, Software Engineering, Web Development, Reading, Traveling, Music, Animes, Swimming, Climbing, BasketBall, and Learning new things.
