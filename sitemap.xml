@@ -1,35 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://amenalahassa.github.io/amenalahassa/works.html</loc>
-    <lastmod>2025-02-11T17:36:45.705Z</lastmod>
-  </url>
-  <url>
-    <loc>https://amenalahassa.github.io/amenalahassa/posts/lessons_from_calf_face.html</loc>
-    <lastmod>2025-02-11T17:36:45.702Z</lastmod>
-  </url>
-  <url>
     <loc>https://amenalahassa.github.io/amenalahassa/posts/anonymizer_intro.html</loc>
-    <lastmod>2025-02-11T17:36:45.649Z</lastmod>
-  </url>
-  <url>
-    <loc>https://amenalahassa.github.io/amenalahassa/posts/model_gpu.html</loc>
-    <lastmod>2025-02-11T17:36:45.702Z</lastmod>
-  </url>
-  <url>
-    <loc>https://amenalahassa.github.io/amenalahassa/about.html</loc>
-    <lastmod>2025-02-11T17:36:45.648Z</lastmod>
-  </url>
-  <url>
-    <loc>https://amenalahassa.github.io/amenalahassa/index.html</loc>
-    <lastmod>2025-02-11T17:36:45.649Z</lastmod>
+    <lastmod>2025-03-29T16:09:32.971Z</lastmod>
   </url>
   <url>
     <loc>https://amenalahassa.github.io/amenalahassa/posts/for_you.html</loc>
-    <lastmod>2025-02-11T17:36:45.702Z</lastmod>
+    <lastmod>2025-03-29T16:09:33.025Z</lastmod>
+  </url>
+  <url>
+    <loc>https://amenalahassa.github.io/amenalahassa/index.html</loc>
+    <lastmod>2025-03-29T16:09:32.971Z</lastmod>
+  </url>
+  <url>
+    <loc>https://amenalahassa.github.io/amenalahassa/works.html</loc>
+    <lastmod>2025-03-29T16:09:33.028Z</lastmod>
+  </url>
+  <url>
+    <loc>https://amenalahassa.github.io/amenalahassa/about.html</loc>
+    <lastmod>2025-03-29T16:09:32.971Z</lastmod>
   </url>
   <url>
     <loc>https://amenalahassa.github.io/amenalahassa/posts/dataset-converter.html</loc>
-    <lastmod>2025-02-11T17:36:45.702Z</lastmod>
+    <lastmod>2025-03-29T16:09:33.025Z</lastmod>
+  </url>
+  <url>
+    <loc>https://amenalahassa.github.io/amenalahassa/posts/lessons_from_calf_face.html</loc>
+    <lastmod>2025-03-29T16:09:33.025Z</lastmod>
+  </url>
+  <url>
+    <loc>https://amenalahassa.github.io/amenalahassa/posts/model_gpu.html</loc>
+    <lastmod>2025-03-29T16:09:33.025Z</lastmod>
   </url>
 </urlset>
