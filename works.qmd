@@ -42,6 +42,8 @@ and a lot more you can find on my GitHub. 🌟
 
 ## Academic projects
 
+- **[International Women's Day Challenge on ZindI](https://github.com/amenalahassa/women_poverty_insight)**:I tried to analyse and visualize the data from the challenge. I also try to predict the target variable using YDF (Yggdrasil DF), TDF and Tensorflow models. I didn't win the challenge but I learned a lot about those tools and how to use them.
+
 - **[Graphic elements detection using Yolov8](https://github.com/amenalahassa/graphic-element-detection)**: I built a project that detects graphic elements in images using Yolov8. It was a fun class project that helped me learn more about object detection. I'm working on comparing the performances of Yolov8 and DETR on the same task. I will publish an article about it soon. Stay tuned!
 
 - **[Bert vs Falcon on questions answering](https://github.com/amenalahassa/question-answering-incidents)**: I compared the performances of Bert and Falcon on a question-answering task. I used zero-shot promptings to evaluate Falcon on generative tasks and Bert on extractive tasks.
