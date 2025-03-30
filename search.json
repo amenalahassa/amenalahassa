@@ -196,7 +196,7 @@
     "href": "about.html#skills",
     "title": "Konrad Tagnon Amen ALAHASSA",
     "section": "Skills",
-    "text": "Skills\n\nArtificial Intelligence\nPython, Pytorch, Tensorflow, Keras\nMatplotlib, Seaborn, Numpy, Pandas, timm, fastai, torchvision, Poutyne\nSPSS Modeler, RStudio\n\n\nSoftware engineering\nPHP, Javascript, C, C++, Java\nAngular, ReactJs, VueJs, Cypress, Web API\nSQL, Mysql, Firebase, MongoDB\n\n\nOthers\nDevOps, CI/CD, UX Design, Scrum, Agile",
+    "text": "Skills\n\nArtificial Intelligence\nPython, Pytorch, Tensorflow, Keras\nMatplotlib, Seaborn, Numpy, Pandas, timm, fastai, torchvision, Poutyne\nSPSS Modeler, RStudio, JASP, Scikit-learn, Hugging Face, OpenCV, Ultralytics\nMETAFLOW, MLflow, PyTorch Lightning, Optuna, Weights & Biases, Tensorboard\n\n\nSoftware engineering\nPHP, Javascript, C, C++, Java\nAngular, ReactJs, VueJs, Cypress, Web API\nSQL, Mysql, Firebase, MongoDB\n\n\nOthers\nDevOps, CI/CD, UX Design, Scrum, Agile",
     "crumbs": [
       "L'auteur"
     ]
