@@ -51,7 +51,8 @@ Internship role focusing on web development using JavaScript, Angular, Laravel, 
 ##### *Artificial Intelligence*
 | Python, Pytorch, Tensorflow, Keras
 | Matplotlib, Seaborn, Numpy, Pandas, timm, fastai, torchvision, Poutyne
-SPSS Modeler, RStudio
+| SPSS Modeler, RStudio, JASP, Scikit-learn, Hugging Face, OpenCV, Ultralytics
+METAFLOW, MLflow, PyTorch Lightning, Optuna, Weights & Biases, Tensorboard
 
 ##### *Software engineering*
 | PHP, Javascript, C, C++, Java
